@@ -5,16 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Formflow Studio – KI-Chatbots für Architekturbüros</title>
   <meta name="description" content="Formflow Studio entwickelt KI-Chatbots für Architekturbüros: Leads sichern, Termine buchen, Routinekommunikation automatisieren.">
-  <link rel="icon" href="./assets/logo.svg"> <!-- geändert: ./assets -->
+  <link rel="icon" href="./assets/logo.svg">
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>.container{max-width:1100px}</style>
+  <style>
+    .container { max-width: 1100px; }
+  </style>
 </head>
 <body class="text-gray-800 antialiased">
 
   <!-- Header -->
   <header class="container mx-auto px-6 py-5 flex items-center justify-between">
-    <a href="./" class="flex items-center gap-2"> <!-- geändert: ./ -->
-      <img src="./assets/logo.svg" alt="Formflow Studio" class="h-6 w-6"><!-- geändert: ./assets -->
+    <a href="./" class="flex items-center gap-2">
+      <img src="./assets/logo.svg" alt="Formflow Studio" class="h-6 w-6">
       <span class="font-semibold tracking-tight">Formflow Studio</span>
     </a>
     <nav class="hidden md:flex items-center gap-6">
@@ -27,8 +29,12 @@
   <!-- Hero -->
   <section class="container mx-auto px-6 py-14 md:py-20">
     <div class="max-w-3xl">
-      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">KI-Chatbots: Die Zukunft für Architekturbüros</h1>
-      <p class="mt-5 text-lg md:text-xl text-gray-600">Automatisieren Sie Kundenanfragen, optimieren Sie Projekte und gewinnen Sie Zeit für kreative Planung.</p>
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+        KI-Chatbots: Die Zukunft für Architekturbüros
+      </h1>
+      <p class="mt-5 text-lg md:text-xl text-gray-600">
+        Automatisieren Sie Kundenanfragen, optimieren Sie Projekte und gewinnen Sie Zeit für kreative Planung.
+      </p>
       <div class="mt-8 flex gap-4">
         <a href="#services" class="px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">Mehr erfahren</a>
         <a href="#contact" class="px-5 py-3 rounded border border-gray-300 hover:border-gray-400">Kostenloses Erstgespräch</a>
@@ -36,11 +42,82 @@
     </div>
   </section>
 
-  <!-- Services (unverändert) -->
-  <!-- ... dein Services-Block wie gepostet ... -->
+  <!-- Services -->
+  <section id="services" class="bg-gray-50">
+    <div class="container mx-auto px-6 py-16">
+      <h2 class="text-3xl md:text-4xl font-bold">Services: Smarte KI-Lösungen für Architekturbüros</h2>
+      <p class="mt-2 text-gray-600">Wähle das Paket, das zu deinem Büro passt.</p>
 
-  <!-- Über uns (unverändert) -->
-  <!-- ... -->
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <!-- LeadBot Starter -->
+        <div class="p-6 bg-white rounded-xl shadow">
+          <h3 class="text-xl font-semibold">LeadBot Starter</h3>
+          <p class="mt-2 text-gray-600">Mehr qualifizierte Anfragen über deine Website.</p>
+          <ul class="mt-3 space-y-2 text-gray-700 list-disc list-inside">
+            <li>5–7 Einstiegsfragen (Budget, Bauphase, Standort)</li>
+            <li>Lead-Scoring (A/B/C)</li>
+            <li>Automatische Terminbuchung</li>
+          </ul>
+          <p class="mt-4 text-sm text-gray-500">Setup: 3–5 Werktage · Ab 690 € + 39 €/Monat</p>
+          <a href="#contact" class="inline-block mt-6 px-4 py-2 rounded bg-blue-700 text-white hover:bg-blue-800">
+            Preis anfragen
+          </a>
+        </div>
+
+        <!-- ProjektBot Support -->
+        <div class="p-6 bg-white rounded-xl shadow">
+          <h3 class="text-xl font-semibold">ProjektBot Support</h3>
+          <p class="mt-2 text-gray-600">Weniger Telefon & E-Mails zu Standardfragen.</p>
+          <ul class="mt-3 space-y-2 text-gray-700 list-disc list-inside">
+            <li>FAQ-Antworten (Leistungen, Kostenrahmen, Ablauf)</li>
+            <li>Status-Updates für laufende Projekte</li>
+            <li>Hand-off an dein Team bei komplexen Fällen</li>
+          </ul>
+          <p class="mt-4 text-sm text-gray-500">Setup: 1–2 Wochen · Ab 1.290 € + 59 €/Monat</p>
+          <a href="#contact" class="inline-block mt-6 px-4 py-2 rounded border border-gray-300 hover:border-gray-400">
+            Jetzt buchen
+          </a>
+        </div>
+
+        <!-- StudioBot Custom -->
+        <div class="p-6 bg-white rounded-xl shadow">
+          <h3 class="text-xl font-semibold">StudioBot Custom</h3>
+          <p class="mt-2 text-gray-600">Individuelle Automatisierung & Integrationen.</p>
+          <ul class="mt-3 space-y-2 text-gray-700 list-disc list-inside">
+            <li>CRM & Kalender-Integration</li>
+            <li>Individuelles Wissens-/Antwortsystem</li>
+            <li>Analytics & kontinuierliches Training</li>
+          </ul>
+          <p class="mt-4 text-sm text-gray-500">Setup: nach Scope · Ab 2.900 €+</p>
+          <a href="#contact" class="inline-block mt-6 px-4 py-2 rounded border border-gray-300 hover:border-gray-400">
+            Rückruf anfordern
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Über uns -->
+  <section id="about" class="container mx-auto px-6 py-16">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-bold">Innovation trifft Architektur</h2>
+        <p class="mt-4 text-gray-600">
+          Formflow Studio entwickelt maßgeschneiderte KI-Lösungen für Architekturbüros.
+          Wir kombinieren Architekturverständnis mit technologischer Exzellenz, um Prozesse smarter,
+          schneller und effizienter zu machen.
+        </p>
+        <ul class="mt-4 space-y-2 text-gray-700">
+          <li>✔ Spezialisierte Architektur-KI</li>
+          <li>✔ Partnerschaftlich & transparent</li>
+          <li>✔ Technologische Exzellenz</li>
+        </ul>
+      </div>
+      <div class="bg-gray-100 rounded-xl h-64 md:h-80 flex items-center justify-center">
+        <span class="text-gray-400">Team/Gründer-Foto</span>
+      </div>
+    </div>
+  </section>
 
   <!-- Kontakt -->
   <section id="contact" class="bg-gray-50">
@@ -48,7 +125,6 @@
       <h2 class="text-3xl md:text-4xl font-bold">Gestalten Sie die Zukunft Ihres Büros mit uns.</h2>
       <p class="mt-2 text-gray-600">Vereinbaren Sie ein unverbindliches Erstgespräch.</p>
 
-      <!-- Formspree: ERSETZE DIE ID -->
       <form action="https://formspree.io/f/DEINE_FORM_ID" method="POST" class="mt-8 grid gap-4">
         <input class="border p-3 rounded" name="name" placeholder="Name" required>
         <input class="border p-3 rounded" type="email" name="email" placeholder="E-Mail" required>
@@ -56,9 +132,11 @@
         <textarea class="border p-3 rounded" name="nachricht" rows="5" placeholder="Nachricht"></textarea>
         <label class="text-sm text-gray-600">
           <input type="checkbox" required>
-          Ich habe die <a href="./datenschutz.html" class="underline">Datenschutzerklärung</a> gelesen. <!-- geändert: ./ -->
+          Ich habe die <a href="./datenschutz.html" class="underline">Datenschutzerklärung</a> gelesen.
         </label>
-        <button class="px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800" type="submit">Gespräch vereinbaren</button>
+        <button class="px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800" type="submit">
+          Gespräch vereinbaren
+        </button>
       </form>
     </div>
   </section>
@@ -68,14 +146,19 @@
     <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
       <div>© <span id="y"></span> Formflow Studio</div>
       <div class="flex gap-6">
-        <a href="./impressum.html" class="hover:underline">Impressum</a>   <!-- relativ belassen -->
-        <a href="./datenschutz.html" class="hover:underline">Datenschutz</a><!-- relativ belassen -->
+        <a href="./impressum.html" class="hover:underline">Impressum</a>
+        <a href="./datenschutz.html" class="hover:underline">Datenschutz</a>
       </div>
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 
-  <!-- Chatbot-Snippet später hier einfügen -->
+  <!-- Chatbot-Platzhalter -->
+  <!-- Beispiel: 
+  <script src="https://www.chatbase.co/embed.min.js" data-id="DEIN_BOT_ID" data-chatbot="true" defer></script>
+  -->
 </body>
 </html>
