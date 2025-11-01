@@ -8,7 +8,8 @@
   <link rel="icon" href="./assets/logo.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .container { max-width: 1100px; }
+    .container{max-width:1100px}
+    html{scroll-behavior:smooth}
   </style>
 </head>
 <body class="text-gray-800 antialiased">
@@ -19,12 +20,28 @@
       <img src="./assets/logo.svg" alt="Formflow Studio" class="h-6 w-6">
       <span class="font-semibold tracking-tight">Formflow Studio</span>
     </a>
+
+    <!-- Desktop-Nav -->
     <nav class="hidden md:flex items-center gap-6">
       <a href="#services" class="hover:underline">Services</a>
       <a href="#about" class="hover:underline">Über uns</a>
       <a href="#contact" class="px-4 py-2 rounded bg-blue-700 text-white hover:bg-blue-800">Kontakt aufnehmen</a>
     </nav>
+
+    <!-- Mobile-Button -->
+    <button id="menuBtn" aria-label="Menü" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded border">
+      ☰
+    </button>
   </header>
+
+  <!-- Mobile-Nav -->
+  <nav id="mobileNav" class="md:hidden hidden container mx-auto px-6">
+    <div class="mt-3 flex flex-col gap-3 pb-4 border-b">
+      <a href="#services" class="py-2">Services</a>
+      <a href="#about" class="py-2">Über uns</a>
+      <a href="#contact" class="py-2 px-4 rounded bg-blue-700 text-white w-max">Kontakt aufnehmen</a>
+    </div>
+  </nav>
 
   <!-- Hero -->
   <section class="container mx-auto px-6 py-14 md:py-20">
@@ -46,11 +63,11 @@
   <section id="services" class="bg-gray-50">
     <div class="container mx-auto px-6 py-16">
       <h2 class="text-3xl md:text-4xl font-bold">Services: Smarte KI-Lösungen für Architekturbüros</h2>
-      <p class="mt-2 text-gray-600">Wähle das Paket, das zu deinem Büro passt.</p>
+      <p class="mt-6 text-gray-600 leading-relaxed">Wähle das Paket, das zu deinem Büro passt.</p>
 
-      <div class="mt-10 grid md:grid-cols-3 gap-6">
+      <div class="mt-10 grid md:grid-cols-3 gap-8">
         <!-- LeadBot Starter -->
-        <div class="p-6 bg-white rounded-xl shadow">
+        <div class="p-7 bg-white rounded-xl shadow">
           <h3 class="text-xl font-semibold">LeadBot Starter</h3>
           <p class="mt-2 text-gray-600">Mehr qualifizierte Anfragen über deine Website.</p>
           <ul class="mt-3 space-y-2 text-gray-700 list-disc list-inside">
@@ -59,13 +76,13 @@
             <li>Automatische Terminbuchung</li>
           </ul>
           <p class="mt-4 text-sm text-gray-500">Setup: 3–5 Werktage · Ab 690 € + 39 €/Monat</p>
-          <a href="#contact" class="inline-block mt-6 px-4 py-2 rounded bg-blue-700 text-white hover:bg-blue-800">
+          <a href="#contact" class="inline-block mt-6 px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">
             Preis anfragen
           </a>
         </div>
 
         <!-- ProjektBot Support -->
-        <div class="p-6 bg-white rounded-xl shadow">
+        <div class="p-7 bg-white rounded-xl shadow">
           <h3 class="text-xl font-semibold">ProjektBot Support</h3>
           <p class="mt-2 text-gray-600">Weniger Telefon & E-Mails zu Standardfragen.</p>
           <ul class="mt-3 space-y-2 text-gray-700 list-disc list-inside">
@@ -74,13 +91,13 @@
             <li>Hand-off an dein Team bei komplexen Fällen</li>
           </ul>
           <p class="mt-4 text-sm text-gray-500">Setup: 1–2 Wochen · Ab 1.290 € + 59 €/Monat</p>
-          <a href="#contact" class="inline-block mt-6 px-4 py-2 rounded border border-gray-300 hover:border-gray-400">
+          <a href="#contact" class="inline-block mt-6 px-5 py-3 rounded border border-gray-300 hover:border-gray-400">
             Jetzt buchen
           </a>
         </div>
 
         <!-- StudioBot Custom -->
-        <div class="p-6 bg-white rounded-xl shadow">
+        <div class="p-7 bg-white rounded-xl shadow">
           <h3 class="text-xl font-semibold">StudioBot Custom</h3>
           <p class="mt-2 text-gray-600">Individuelle Automatisierung & Integrationen.</p>
           <ul class="mt-3 space-y-2 text-gray-700 list-disc list-inside">
@@ -89,7 +106,7 @@
             <li>Analytics & kontinuierliches Training</li>
           </ul>
           <p class="mt-4 text-sm text-gray-500">Setup: nach Scope · Ab 2.900 €+</p>
-          <a href="#contact" class="inline-block mt-6 px-4 py-2 rounded border border-gray-300 hover:border-gray-400">
+          <a href="#contact" class="inline-block mt-6 px-5 py-3 rounded border border-gray-300 hover:border-gray-400">
             Rückruf anfordern
           </a>
         </div>
@@ -99,8 +116,8 @@
 
   <!-- Über uns -->
   <section id="about" class="container mx-auto px-6 py-16">
-    <div class="grid md:grid-cols-2 gap-10 items-center">
-      <div>
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="max-w-prose">
         <h2 class="text-3xl md:text-4xl font-bold">Innovation trifft Architektur</h2>
         <p class="mt-4 text-gray-600">
           Formflow Studio entwickelt maßgeschneiderte KI-Lösungen für Architekturbüros.
@@ -125,7 +142,16 @@
       <h2 class="text-3xl md:text-4xl font-bold">Gestalten Sie die Zukunft Ihres Büros mit uns.</h2>
       <p class="mt-2 text-gray-600">Vereinbaren Sie ein unverbindliches Erstgespräch.</p>
 
-      <form action="https://formspree.io/f/DEINE_FORM_ID" method="POST" class="mt-8 grid gap-4">
+      <!-- Erfolgsmeldung (wird per JS eingeblendet) -->
+      <div id="ok" class="hidden bg-green-100 text-green-800 p-3 rounded mb-4">
+        ✅ Danke! Wir melden uns bald bei Ihnen.
+      </div>
+
+      <form action="https://formspree.io/f/xgvppbvb" method="POST" class="mt-8 grid gap-4">
+        <!-- Redirect + Honeypot -->
+        <input type="hidden" name="_redirect" value="https://hruskarnikola5-cyber.github.io/formflowstudio-site/?success=1">
+        <input type="text" name="_gotcha" style="display:none">
+        <!-- Felder -->
         <input class="border p-3 rounded" name="name" placeholder="Name" required>
         <input class="border p-3 rounded" type="email" name="email" placeholder="E-Mail" required>
         <input class="border p-3 rounded" name="firma" placeholder="Firma">
@@ -152,13 +178,26 @@
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script>
+    // Jahr im Footer
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Mobile-Menü toggle
+    document.getElementById('menuBtn').addEventListener('click',()=>{
+      document.getElementById('mobileNav').classList.toggle('hidden');
+    });
+
+    // Erfolgsmeldung nach Redirect zeigen
+    if (new URLSearchParams(window.location.search).get('success') === '1') {
+      const ok = document.getElementById('ok');
+      if (ok) ok.classList.remove('hidden');
+    }
   </script>
 
-  <!-- Chatbot-Platzhalter -->
-  <!-- Beispiel: 
+  <!-- Chatbot (später einfügen)
   <script src="https://www.chatbase.co/embed.min.js" data-id="DEIN_BOT_ID" data-chatbot="true" defer></script>
   -->
 </body>
 </html>
+
