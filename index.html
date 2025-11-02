@@ -1,209 +1,307 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Formflow Studio – KI-Chatbots für Architekturbüros</title>
-  <meta name="description" content="Formflow Studio entwickelt KI-Chatbots für Architekturbüros: Leads sichern, Termine buchen, Routinekommunikation automatisieren.">
-  <link rel="icon" href="./assets/logo.svg">
+  <meta name="description" content="Formflow Studio entwickelt KI-Systeme und Chatbots für Architekturbüros – Anfragen automatisieren, Termine buchen, Kommunikation beschleunigen." />
+  <link rel="canonical" href="https://hruskarnikola5-cyber.github.io/formflowstudio-site/"/>
+  <link rel="icon" href="./assets/logo.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700..900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: {
+              50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',
+              400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',
+              800:'#3730a3',900:'#312e81'
+            }
+          },
+          boxShadow: {
+            card: '0 6px 20px -8px rgba(15,23,42,.18)',
+            soft: '0 10px 50px -20px rgba(15,23,42,.25)'
+          },
+          keyframes: {
+            floaty: { '0%,100%':{transform:'translateY(0)'}, '50%':{transform:'translateY(-6px)'} },
+            gradient: {
+              '0%':{ 'background-position':'0% 50%' },
+              '50%':{ 'background-position':'100% 50%' },
+              '100%':{ 'background-position':'0% 50%' }
+            }
+          },
+          animation: {
+            floaty:'floaty 6s ease-in-out infinite',
+            gradient:'gradient 12s ease infinite'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Globale Styles + Komponenten -->
   <style>
-    html{scroll-behavior:smooth}
+    html { scroll-behavior:smooth }
   </style>
+  <script>
+    // Komponentenlayer (mit CDN inline)
+    document.addEventListener('DOMContentLoaded', () => {
+      const style = document.createElement('style');
+      style.textContent = `
+      @layer components{
+        .btn{ @apply inline-flex items-center justify-center h-12 px-6 rounded-xl font-medium transition shadow-sm focus:outline-none }
+        .btn-primary{ @apply btn bg-brand-600 text-white hover:bg-brand-700 focus-visible:ring-2 focus-visible:ring-brand-500/50 }
+        .btn-ghost{ @apply btn border border-gray-300 text-gray-900 hover:border-gray-400 hover:bg-white focus-visible:ring-2 focus-visible:ring-gray-300 }
+        .card{ @apply rounded-2xl border border-gray-200 bg-white p-6 shadow-card hover:shadow-soft transition }
+        .eyebrow{ @apply inline-flex items-center gap-2 rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600 }
+        .section{ @apply px-6 py-20 }
+        .container-7xl{ @apply mx-auto max-w-7xl }
+        .container-3xl{ @apply mx-auto max-w-3xl }
+        .reveal{ @apply opacity-0 translate-y-4 transition duration-700 ease-out }
+        .reveal.show{ @apply opacity-100 translate-y-0 }
+      }`;
+      document.head.appendChild(style);
+    });
+  </script>
+
+  <!-- Structured Data (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Formflow Studio",
+    "url":"https://hruskarnikola5-cyber.github.io/formflowstudio-site/",
+    "logo":"https://hruskarnikola5-cyber.github.io/formflowstudio-site/assets/logo.svg",
+    "sameAs":[]
+  }
+  </script>
 </head>
-<body class="text-gray-800 antialiased">
+
+<body class="text-gray-800 antialiased bg-white dark:bg-slate-950">
 
   <!-- NAVBAR -->
-  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
-    <div class="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-50 bg-white/70 dark:bg-slate-950/70 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100 dark:border-white/10">
+    <div class="container-7xl px-6 h-16 flex items-center justify-between">
       <a href="./" class="flex items-center gap-3">
-        <img src="./Photoroom_20251101_214345.png" alt="Formflow Studio Logo" class="h-8 w-8 object-contain">
-        <span class="text-sm md:text-base font-semibold tracking-tight text-gray-900">Formflow Studio</span>
+        <img src="./Photoroom_20251101_214345.png" alt="Formflow Studio Logo" class="h-8 w-8 object-contain" />
+        <span class="hidden sm:block text-sm md:text-base font-semibold tracking-tight text-gray-900 dark:text-white">Formflow Studio</span>
       </a>
 
-      <!-- Desktop -->
-      <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">       
-  <a href="#services" class="hover:text-gray-900 transition">Services</a>
-  <a href="#about" class="hover:text-gray-900 transition">Über uns</a>
-  <a href="#proof" class="hover:text-gray-900 transition">Ergebnisse</a>
-  <a href="#contact" class="inline-flex items-center h-10 px-4 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition shadow-sm">
-    Kontakt aufnehmen
-  </a>
-</nav>
-    <!-- Mobile toggle -->
-      <button id="menuBtn" aria-label="Menü" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 text-gray-700">
-        ☰
-      </button>
-    </div>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600 dark:text-gray-300">
+        <a href="#services" class="hover:text-gray-900 dark:hover:text-white transition">Services</a>
+        <a href="#about" class="hover:text-gray-900 dark:hover:text-white transition">Über uns</a>
+        <a href="#proof" class="hover:text-gray-900 dark:hover:text-white transition">Ergebnisse</a>
+        <button id="themeBtn" class="h-10 w-10 grid place-items-center rounded-lg border border-gray-200 dark:border-white/15 hover:bg-gray-50 dark:hover:bg-white/5" title="Dark/Light umschalten">🌓</button>
+        <a href="#contact" class="btn-primary h-10 px-4">Kontakt aufnehmen</a>
+      </nav>
 
-    <!-- Mobile Nav -->
-    <nav id="mobileNav" class="md:hidden hidden border-t border-gray-100">
-      <div class="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-3">
+      <button id="menuBtn" aria-label="Menü" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 text-gray-700 dark:text-gray-200 dark:border-white/15">☰</button>
+    </div>
+    <nav id="mobileNav" class="md:hidden hidden border-t border-gray-100 dark:border-white/10">
+      <div class="container-7xl px-6 py-4 flex flex-col gap-3">
         <a href="#services" class="py-2">Services</a>
         <a href="#about" class="py-2">Über uns</a>
-         <a href="#proof" class="py-2">Ergebnisse</a>
-        <a href="#contact" class="py-2 px-4 rounded-lg bg-indigo-600 text-white w-max">Kontakt aufnehmen</a>
+        <a href="#proof" class="py-2">Ergebnisse</a>
+        <a href="#contact" class="py-2 px-4 rounded-lg bg-brand-600 text-white w-max">Kontakt aufnehmen</a>
       </div>
     </nav>
   </header>
 
   <!-- HERO -->
-  <section class="relative bg-gradient-to-b from-white to-gray-50">
-    <div class="mx-auto max-w-7xl px-6 py-24 md:py-32">
-      <div class="max-w-2xl">
-        <div class="inline-flex items-center gap-2 rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600">
-          KI für Architekturbüros
-        </div>
+  <section class="relative bg-gradient-to-b from-white to-gray-50 dark:from-slate-950 dark:to-slate-900">
+    <!-- animierter Hintergrund -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div class="absolute -top-24 -right-24 h-[480px] w-[480px] rounded-full bg-gradient-to-tr from-brand-500/30 via-brand-400/20 to-brand-700/20 blur-3xl animate-gradient"></div>
+      <div class="absolute -bottom-24 -left-24 h-[520px] w-[520px] rounded-full bg-gradient-to-tr from-brand-600/25 via-brand-400/15 to-purple-600/20 blur-3xl animate-gradient"></div>
+    </div>
 
-        <h1 class="mt-6 text-5xl md:text-6xl font-semibold tracking-tight text-gray-900">
-          KI-Chatbots: Die Zukunft<br class="hidden md:block"> für Architekturbüros
+    <div class="container-7xl px-6 py-24 md:py-32">
+      <div class="max-w-2xl">
+        <div class="eyebrow reveal">KI für Architekturbüros</div>
+
+        <h1 class="reveal mt-6 text-5xl md:text-6xl font-semibold tracking-tight text-gray-900 dark:text-white">
+          KI-Chatbots: Die Zukunft<br class="hidden md:block" /> für Architekturbüros
         </h1>
-        <p class="mt-6 text-xl leading-relaxed text-gray-600">
+        <p class="reveal mt-6 text-xl leading-relaxed text-gray-600 dark:text-gray-300">
           Automatisieren Sie Kundenanfragen, optimieren Sie Projekte und gewinnen Sie Zeit für kreative Planung.
         </p>
 
-        <div class="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          <a href="#services" class="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-indigo-600 text-white font-medium shadow-sm hover:shadow-md hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition">
-            Mehr erfahren
-          </a>
-          <a href="#contact" class="inline-flex items-center justify-center h-12 px-6 rounded-xl border border-gray-300 text-gray-900 font-medium hover:border-gray-400 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 transition">
-            Kostenloses Erstgespräch
-          </a>
+        <div class="reveal mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <a href="#services" class="btn-primary">Mehr erfahren</a>
+          <a href="#contact" class="btn-ghost">Kostenloses Erstgespräch</a>
         </div>
       </div>
     </div>
-    <div class="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+    <div class="h-px w-full bg-gradient-to-r from-transparent via-gray-200 dark:via-white/10 to-transparent"></div>
   </section>
 
- 
-
   <!-- SERVICES -->
-  <section id="services" class="px-6 py-20 bg-white">
-    <div class="mx-auto max-w-7xl">
-      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">Services: Smarte KI-Lösungen für Architekturbüros</h2>
-      <p class="mt-4 text-gray-600">Wählen Sie das Paket, das zu Ihrem Büro passt.</p>
+  <section id="services" class="section bg-white dark:bg-slate-950">
+    <div class="container-7xl">
+      <h2 class="reveal text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">Services: Smarte KI-Lösungen für Architekturbüros</h2>
+      <p class="reveal mt-4 text-gray-600 dark:text-gray-300">Wählen Sie das Paket, das zu Ihrem Büro passt.</p>
 
       <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Card 1 -->
-        <article class="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-          <h3 class="text-xl font-semibold text-gray-900">LeadBot Starter</h3>
-          <p class="mt-3 text-gray-600">Erfasst Anfragen, qualifiziert Leads und terminiert Erstgespräche.</p>
-          <ul class="mt-4 space-y-2 text-sm text-gray-600">
+        <article class="card reveal">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">LeadBot Starter</h3>
+          <p class="mt-3 text-gray-600 dark:text-gray-300">Erfasst Anfragen, qualifiziert Leads und terminiert Erstgespräche.</p>
+          <ul class="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
             <li>• Einfache Website-Integration</li>
             <li>• DSGVO & Consent-Flow</li>
             <li>• Basis-Branding</li>
           </ul>
-          <a href="#contact" class="mt-6 inline-flex items-center text-indigo-600 font-medium group-hover:underline">Details &rarr;</a>
+          <a href="#contact" class="mt-6 inline-flex items-center text-brand-600 font-medium hover:underline">Details &rarr;</a>
         </article>
 
-        <!-- Card 2 -->
-        <article class="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-          <h3 class="text-xl font-semibold text-gray-900">ProjektBot Support</h3>
-          <p class="mt-3 text-gray-600">Automatisierte Statusmeldungen und Rückfragen für laufende Projekte.</p>
-          <ul class="mt-4 space-y-2 text-sm text-gray-600">
+        <article class="card reveal">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">ProjektBot Support</h3>
+          <p class="mt-3 text-gray-600 dark:text-gray-300">Automatisierte Statusmeldungen und Rückfragen für laufende Projekte.</p>
+          <ul class="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
             <li>• Individuell konfigurierbar</li>
             <li>• Schnittstellen zu Projekttools</li>
             <li>• Erweiterbar mit StudioBot-Features</li>
           </ul>
-          <a href="#contact" class="mt-6 inline-flex items-center text-indigo-600 font-medium group-hover:underline">Details &rarr;</a>
+          <a href="#contact" class="mt-6 inline-flex items-center text-brand-600 font-medium hover:underline">Details &rarr;</a>
         </article>
 
-        <!-- Card 3 -->
-        <article class="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-          <h3 class="text-xl font-semibold text-gray-900">StudioBot Custom</h3>
-          <p class="mt-3 text-gray-600">Maßgeschneiderte KI-Kommunikationslösung für Ihr Architekturbüro.</p>
-          <ul class="mt-4 space-y-2 text-sm text-gray-600">
+        <article class="card reveal">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">StudioBot Custom</h3>
+          <p class="mt-3 text-gray-600 dark:text-gray-300">Maßgeschneiderte KI-Kommunikationslösung für Ihr Architekturbüro.</p>
+          <ul class="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
             <li>• Individuelles Branding & Tonalität</li>
             <li>• API-Integration</li>
             <li>• Persönliche Betreuung</li>
           </ul>
-          <a href="#contact" class="mt-6 inline-flex items-center text-indigo-600 font-medium group-hover:underline">Details &rarr;</a>
+          <a href="#contact" class="mt-6 inline-flex items-center text-brand-600 font-medium hover:underline">Details &rarr;</a>
         </article>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="px-6 py-20">
-    <div class="mx-auto max-w-3xl">
-      <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-200 px-3 py-1 text-xs font-medium tracking-wide text-gray-600">ÜBER UNS</div>
+  <section id="about" class="section">
+    <div class="container-3xl">
+      <div class="reveal eyebrow mb-6">ÜBER UNS</div>
+      <h2 class="reveal text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 dark:text-white">Künstliche Intelligenz trifft Architektur</h2>
+      <p class="reveal mt-7 text-xl leading-relaxed text-gray-600 dark:text-gray-300">Wir gestalten die Zukunft architektonischer Arbeit · dort, wo Kreativität, Effizienz und Technologie verschmelzen.</p>
+      <div class="reveal mt-10 h-px w-full bg-gradient-to-r from-transparent via-gray-200 dark:via-white/10 to-transparent"></div>
 
-      <h2 class="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900">Künstliche Intelligenz trifft Architektur</h2>
-
-      <p class="mt-7 text-xl leading-relaxed text-gray-600">Wir gestalten die Zukunft architektonischer Arbeit · dort, wo Kreativität, Effizienz und Technologie verschmelzen.</p>
-
-      <div class="mt-10 h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
-
-      <div class="mt-10 space-y-6 text-gray-800 leading-relaxed">
-        <p>FormFlow Studio ist aus der Idee entstanden, Architekturbüros mit intelligenter Technologie zu entlasten – ohne das zu ersetzen, was sie besonders macht.</p>
-        <p>Wir entwickeln KI-Systeme, die Routineaufgaben übernehmen und die tägliche Kommunikation einfacher machen. Ob Chatbots für Projektanfragen, Terminorganisation oder Kundenbetreuung – unsere Lösungen denken mit, passen sich an und helfen durch klare Abläufe.</p>
-        <p>Wir verstehen, was es heißt, Projekte zu planen und zu gestalten. Deshalb wissen wir, wie wichtig klare Prozesse, Zuverlässigkeit und gutes Design sind. Jede Lösung entsteht in enger Zusammenarbeit mit dem Büro und wird so individuell, wie die Projekte, die dort entstehen.</p>
-        <p class="font-medium">Unser Ziel: Technologie, die spürbar unterstützt – klar, zuverlässig und durchdacht.</p>
+      <div class="mt-10 space-y-6 text-gray-800 dark:text-gray-200 leading-relaxed">
+        <p class="reveal">FormFlow Studio ist aus der Idee entstanden, Architekturbüros mit intelligenter Technologie zu entlasten – ohne das zu ersetzen, was sie besonders macht.</p>
+        <p class="reveal">Wir entwickeln KI-Systeme, die Routineaufgaben übernehmen und die tägliche Kommunikation einfacher machen. Ob Chatbots für Projektanfragen, Terminorganisation oder Kundenbetreuung – unsere Lösungen denken mit, passen sich an und helfen durch klare Abläufe.</p>
+        <p class="reveal">Wir verstehen, was es heißt, Projekte zu planen und zu gestalten. Deshalb wissen wir, wie wichtig klare Prozesse, Zuverlässigkeit und gutes Design sind. Jede Lösung entsteht in enger Zusammenarbeit mit dem Büro und wird so individuell, wie die Projekte, die dort entstehen.</p>
+        <p class="reveal font-medium">Unser Ziel: Technologie, die spürbar unterstützt – klar, zuverlässig und durchdacht.</p>
       </div>
 
-      <ul class="mt-10 space-y-4 text-gray-900">
-        <li class="flex items-start gap-3"><span class="mt-2 inline-block h-2.5 w-2.5 rounded-full bg-gray-900"></span><span><strong>Architekturverständnis × KI-Kompetenz</strong> · maßgeschneidert für den Büroalltag.</span></li>
-        <li class="flex items-start gap-3"><span class="mt-2 inline-block h-2.5 w-2.5 rounded-full bg-gray-900"></span><span><strong>Effizienz durch Automatisierung</strong> · weniger Routine, mehr Zeit für Entwurf.</span></li>
-        <li class="flex items-start gap-3"><span class="mt-2 inline-block h-2.5 w-2.5 rounded-full bg-gray-900"></span><span><strong>Verlässlich & partnerschaftlich</strong> · wir denken mit, begleiten langfristig und liefern, was funktioniert.</span></li>
+      <ul class="reveal mt-10 space-y-4 text-gray-900 dark:text-white">
+        <li class="flex items-start gap-3"><span class="mt-2 inline-block h-2.5 w-2.5 rounded-full bg-gray-900 dark:bg-white"></span><span><strong>Architekturverständnis × KI-Kompetenz</strong> · maßgeschneidert für den Büroalltag.</span></li>
+        <li class="flex items-start gap-3"><span class="mt-2 inline-block h-2.5 w-2.5 rounded-full bg-gray-900 dark:bg-white"></span><span><strong>Effizienz durch Automatisierung</strong> · weniger Routine, mehr Zeit für Entwurf.</span></li>
+        <li class="flex items-start gap-3"><span class="mt-2 inline-block h-2.5 w-2.5 rounded-full bg-gray-900 dark:bg-white"></span><span><strong>Verlässlich & partnerschaftlich</strong> · wir denken mit, begleiten langfristig und liefern, was funktioniert.</span></li>
       </ul>
 
-      <div class="mt-12 h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+      <div class="reveal mt-12 h-px w-full bg-gradient-to-r from-transparent via-gray-200 dark:via-white/10 to-transparent"></div>
     </div>
   </section>
 
-  <!-- PROOF / IMPACT (kann bleiben, wenn du mehr Tiefgang willst) -->
-  <section id="proof" class="bg-gray-50">
-    <div class="mx-auto max-w-7xl px-6 py-20 text-center">
-      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">Ergebnisse, die überzeugen</h2>
-      <p class="mt-3 text-gray-600 text-lg">So profitieren Architekturbüros von intelligenter Automatisierung – messbar, effizient und praxisnah.</p>
-
-      <div class="mt-12 grid md:grid-cols-3 gap-8">
-        <div class="bg-white rounded-xl shadow p-8 hover:shadow-lg transition">
-          <div class="text-5xl font-extrabold text-indigo-700">−40%</div>
-          <p class="mt-2 text-gray-600 font-medium">Weniger Zeitaufwand für Anfragen & Erstgespräche</p>
-          <p class="mt-4 text-sm text-gray-500">Chatbots übernehmen Vorqualifizierung und Terminbuchung – Ihr Team konzentriert sich auf die Planung.</p>
-        </div>
-        <div class="bg-white rounded-xl shadow p-8 hover:shadow-lg transition">
-          <div class="text-5xl font-extrabold text-indigo-700">+60%</div>
-          <p class="mt-2 text-gray-600 font-medium">Schnellere Kommunikation mit Projektpartnern</p>
-          <p class="mt-4 text-sm text-gray-500">Automatisierte Antworten und Status-Updates reduzieren E-Mail-Flut und Rückfragen.</p>
-        </div>
-        <div class="bg-white rounded-xl shadow p-8 hover:shadow-lg transition">
-          <div class="text-5xl font-extrabold text-indigo-700">24/7</div>
-          <p class="mt-2 text-gray-600 font-medium">Verfügbarkeit für Kund:innen & Interessent:innen</p>
-          <p class="mt-4 text-sm text-gray-500">Ihr Büro bleibt immer erreichbar – auch außerhalb der Öffnungszeiten, mit gleichbleibender Qualität.</p>
+  <!-- CTA Highlight -->
+  <section class="section">
+    <div class="container-7xl">
+      <div class="reveal rounded-3xl bg-gradient-to-tr from-brand-600 to-brand-700 text-white p-10 md:p-14 shadow-soft">
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Bereit, Kommunikation zu vereinfachen?</h2>
+        <p class="mt-3 text-white/90">Wir zeigen Ihnen in 20 Minuten, wie FormFlow in Ihr Büro passt.</p>
+        <div class="mt-6 flex flex-col sm:flex-row gap-4">
+          <a href="#contact" class="btn bg-white text-brand-700 hover:bg-white/90">Kostenloses Erstgespräch</a>
+          <a href="#services" class="btn-ghost bg-transparent border-white/40 text-white hover:bg-white/10">Mehr erfahren</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- PROOF / IMPACT -->
+  <section id="proof" class="section bg-gray-50 dark:bg-slate-900">
+    <div class="container-7xl text-center">
+      <h2 class="reveal text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">Ergebnisse, die überzeugen</h2>
+      <p class="reveal mt-3 text-gray-600 dark:text-gray-300 text-lg">So profitieren Architekturbüros von intelligenter Automatisierung – messbar, effizient und praxisnah.</p>
+
+      <div class="mt-12 grid md:grid-cols-3 gap-8">
+        <div class="card reveal">
+          <div class="text-5xl font-extrabold text-brand-700 dark:text-brand-400">−40%</div>
+          <p class="mt-2 text-gray-700 dark:text-gray-200 font-medium">Weniger Zeitaufwand für Anfragen & Erstgespräche</p>
+          <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">Chatbots übernehmen Vorqualifizierung und Terminbuchung – Ihr Team konzentriert sich auf die Planung.</p>
+        </div>
+        <div class="card reveal">
+          <div class="text-5xl font-extrabold text-brand-700 dark:text-brand-400">+60%</div>
+          <p class="mt-2 text-gray-700 dark:text-gray-200 font-medium">Schnellere Kommunikation mit Projektpartnern</p>
+          <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">Automatisierte Antworten und Status-Updates reduzieren E-Mail-Flut und Rückfragen.</p>
+        </div>
+        <div class="card reveal">
+          <div class="text-5xl font-extrabold text-brand-700 dark:text-brand-400">24/7</div>
+          <p class="mt-2 text-gray-700 dark:text-gray-200 font-medium">Verfügbarkeit für Kund:innen & Interessent:innen</p>
+          <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">Ihr Büro bleibt immer erreichbar – auch außerhalb der Öffnungszeiten, mit gleichbleibender Qualität.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline / Wie es funktioniert -->
+  <section class="section bg-gray-50 dark:bg-slate-900">
+    <div class="container-7xl">
+      <h2 class="reveal text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">So arbeiten wir zusammen</h2>
+      <ol class="mt-10 relative border-l border-gray-200 dark:border-white/10 space-y-10">
+        <li class="reveal ml-6">
+          <div class="absolute -left-2.5 top-0 h-5 w-5 rounded-full bg-brand-600"></div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">1 · Erstgespräch</h3>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">Ziele, Website, Tonalität – wir klären, was wirklich wichtig ist.</p>
+        </li>
+        <li class="reveal ml-6">
+          <div class="absolute -left-2.5 top-0 h-5 w-5 rounded-full bg-brand-600"></div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">2 · Prototyp & Training</h3>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">Datenaufbereitung, Dialog-Design, DSGVO-Flow – im engen Austausch.</p>
+        </li>
+        <li class="reveal ml-6">
+          <div class="absolute -left-2.5 top-0 h-5 w-5 rounded-full bg-brand-600"></div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">3 · Integration & Go-Live</h3>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">Einbau auf der Website, Monitoring, Feintuning. Auf Wunsch SLA.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="bg-gray-50">
-    <div class="mx-auto max-w-3xl px-6 py-16">
-      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">Gestalten Sie die Zukunft Ihres Büros mit uns.</h2>
-      <p class="mt-2 text-gray-600">Vereinbaren Sie ein unverbindliches Erstgespräch.</p>
+  <section id="contact" class="bg-gray-50 dark:bg-slate-900">
+    <div class="container-3xl px-6 py-16">
+      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">Gestalten Sie die Zukunft Ihres Büros mit uns.</h2>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">Vereinbaren Sie ein unverbindliches Erstgespräch.</p>
 
       <div id="ok" class="hidden bg-green-100 text-green-800 p-3 rounded mb-4 mt-4">✅ Danke! Wir melden uns bald bei Ihnen.</div>
 
       <form action="https://formspree.io/f/xgvppbvb" method="POST" class="mt-6 grid gap-4">
         <input type="hidden" name="_redirect" value="https://hruskarnikola5-cyber.github.io/formflowstudio-site/?success=1">
         <input type="text" name="_gotcha" style="display:none">
-        <input class="border p-3 rounded" name="name" placeholder="Name" required>
-        <input class="border p-3 rounded" type="email" name="email" placeholder="E-Mail" required>
-        <input class="border p-3 rounded" name="firma" placeholder="Firma">
-        <textarea class="border p-3 rounded" name="nachricht" rows="5" placeholder="Nachricht"></textarea>
-        <label class="text-sm text-gray-600">
+        <input class="border p-3 rounded bg-white dark:bg-slate-950 dark:border-white/10 dark:text-white" name="name" placeholder="Name" required>
+        <input class="border p-3 rounded bg-white dark:bg-slate-950 dark:border-white/10 dark:text-white" type="email" name="email" placeholder="E-Mail" required>
+        <input class="border p-3 rounded bg-white dark:bg-slate-950 dark:border-white/10 dark:text-white" name="firma" placeholder="Firma">
+        <textarea class="border p-3 rounded bg-white dark:bg-slate-950 dark:border-white/10 dark:text-white" name="nachricht" rows="5" placeholder="Nachricht"></textarea>
+        <label class="text-sm text-gray-600 dark:text-gray-300">
           <input type="checkbox" required> Ich habe die <a href="./datenschutz.html" class="underline">Datenschutzerklärung</a> gelesen.
         </label>
-        <button class="px-5 py-3 rounded bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition" type="submit">
-          Gespräch vereinbaren
-        </button>
+        <button class="btn-primary" type="submit">Gespräch vereinbaren</button>
       </form>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="mx-auto max-w-7xl px-6 py-10 text-sm text-gray-500">
+  <footer class="container-7xl px-6 py-10 text-sm text-gray-500 dark:text-gray-400">
     <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
       <div>© <span id="y"></span> Formflow Studio</div>
       <div class="flex gap-6">
@@ -216,14 +314,51 @@
   <!-- JS -->
   <script>
     // Jahr im Footer
-    document.getElementById('y').textContent = new Date().getFullYear();
+    const y = document.getElementById('y');
+    if (y) y.textContent = new Date().getFullYear();
 
-    // Mobile Menü Toggle (robust)
+    // Mobile Menü
     const menuBtn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
     if (menuBtn && mobileNav) {
-      menuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+      menuBtn.addEventListener('click', ()=> mobileNav.classList.toggle('hidden'));
     }
+
+    // Dark / Light Mode
+    const themeBtn = document.getElementById('themeBtn');
+    const root = document.documentElement;
+    const pref = localStorage.getItem('ff-theme');
+    if (pref === 'dark') root.classList.add('dark');
+    if (themeBtn) themeBtn.addEventListener('click', ()=>{
+      root.classList.toggle('dark');
+      localStorage.setItem('ff-theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // Scroll-Reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+      });
+    }, {threshold: .12, rootMargin:'0px 0px -10% 0px'});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Active Nav on scroll
+    const anchors = ['#services','#about','#proof','#contact'];
+    const navLinks = Array.from(document.querySelectorAll('header nav a[href^="#"]'));
+    const sections = anchors.map(id=> document.querySelector(id)).filter(Boolean);
+    const highlight = ()=>{
+      let current = null;
+      sections.forEach(sec=>{
+        const r = sec.getBoundingClientRect();
+        if(r.top <= 120 && r.bottom > 120) current = '#'+sec.id;
+      });
+      navLinks.forEach(a=>{
+        if(a.getAttribute('href')===current) a.classList.add('text-gray-900','dark:text-white','font-medium');
+        else a.classList.remove('text-gray-900','dark:text-white','font-medium');
+      });
+    };
+    window.addEventListener('scroll', highlight, {passive:true});
+    highlight();
 
     // Erfolgsmeldung nach Formular-Redirect
     if (new URLSearchParams(window.location.search).get('success') === '1') {
@@ -233,5 +368,6 @@
   </script>
 </body>
 </html>
+
 
 
