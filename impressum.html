@@ -1,24 +1,45 @@
-<!doctype html><html lang="de"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Impressum – Formflow Studio</title>
-<link rel="icon" href="/assets/logo.svg">
-<script src="https://cdn.tailwindcss.com"></script>
-</head><body class="text-gray-800 antialiased">
-  <main class="container mx-auto px-6 py-16 max-w-3xl">
-    <h1 class="text-3xl font-bold">Impressum</h1>
-    <p class="mt-6">Angaben gemäß § 5 TMG</p>
-    <p class="mt-2">
-      Formflow Studio<br>
-      Max Mustermann<br>
-      Musterstraße 1<br>
-      12345 Musterstadt, Deutschland
-    </p>
-    <p class="mt-4">Kontakt: <a class="underline" href="mailto:kontakt@formflowstudio.de">kontakt@formflowstudio.de</a></p>
-    <p class="mt-2">Telefon: +49 …</p>
-    <p class="mt-2">USt-IdNr.: DE… (falls vorhanden)</p>
-    <p class="mt-6 text-sm text-gray-600">
-      Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV: Max Mustermann, Anschrift wie oben.
-    </p>
-    <p class="mt-6"><a href="/" class="underline">Zurück zur Startseite</a></p>
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Impressum – Formflow Studio</title>
+  <link rel="icon" href="/formflowstudio-site/assets/logo.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>html{scroll-behavior:smooth} body{font-family:Inter,system-ui,sans-serif}</style>
+</head>
+<body class="text-gray-800 antialiased">
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100">
+    <div class="mx-auto max-w-4xl px-6 h-14 flex items-center justify-between">
+      <a href="/formflowstudio-site/" class="text-gray-700 hover:text-gray-900">← Zurück zur Startseite</a>
+      <button onclick="(history.length>1)?history.back():location.href='/formflowstudio-site/';" class="text-sm text-gray-500 hover:text-gray-800">Zurück</button>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-4xl px-6 py-12">
+    <h1 class="text-3xl font-semibold tracking-tight">Impressum</h1>
+    <p class="mt-6 text-gray-700">Angaben gemäß § 5 TMG</p>
+
+    <div class="mt-6 space-y-2 text-gray-700">
+      <p><strong>Formflow Studio</strong></p>
+      <p>Beispielstraße 1<br>12345 Musterstadt</p>
+      <p>E-Mail: kontakt@example.com</p>
+    </div>
+
+    <h2 class="mt-10 text-xl font-semibold">Haftung für Inhalte</h2>
+    <p class="mt-2 text-gray-700">Inhalte werden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>
+
+    <h2 class="mt-8 text-xl font-semibold">Haftung für Links</h2>
+    <p class="mt-2 text-gray-700">Unser Angebot enthält Links zu externen Websites, auf deren Inhalte wir keinen Einfluss haben.</p>
+
+    <h2 class="mt-8 text-xl font-semibold">Urheberrecht</h2>
+    <p class="mt-2 text-gray-700">Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.</p>
+
+    <div class="mt-12">
+      <a href="/formflowstudio-site/" class="inline-flex h-10 px-4 items-center rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Zur Startseite</a>
+    </div>
   </main>
-</body></html>
+</body>
+</html>
+
