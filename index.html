@@ -44,76 +44,118 @@
   </nav>
 
   <!-- Hero -->
-  <section class="container mx-auto px-6 py-14 md:py-20">
-    <div class="max-w-3xl">
-      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
-        KI-Chatbots: Die Zukunft für Architekturbüros
+ <!-- Navbar (optional verfeinert) -->
+<header class="sticky top-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
+  <div class="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2">
+      <img src="/assets/logo-mark.svg" alt="FormFlow" class="h-7 w-7"/>
+      <span class="sr-only">Formflow Studio</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
+      <a href="#services" class="hover:text-gray-900 transition">Services</a>
+      <a href="#about" class="hover:text-gray-900 transition">Über uns</a>
+      <a href="#contact" class="inline-flex items-center h-10 px-4 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition shadow-sm">
+        Kontakt aufnehmen
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="relative bg-gradient-to-b from-white to-gray-50">
+  <div class="mx-auto max-w-7xl px-6 py-24 md:py-32">
+    <div class="max-w-2xl">
+      <!-- Eyebrow -->
+      <div class="inline-flex items-center gap-2 rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600">
+        KI für Architekturbüros
+      </div>
+
+      <h1 class="mt-6 text-5xl md:text-6xl font-semibold tracking-tight text-gray-900">
+        KI-Chatbots: Die Zukunft<br class="hidden md:block"/> für Architekturbüros
       </h1>
-      <p class="mt-5 text-lg md:text-xl text-gray-600">
+      <p class="mt-6 text-xl leading-relaxed text-gray-600">
         Automatisieren Sie Kundenanfragen, optimieren Sie Projekte und gewinnen Sie Zeit für kreative Planung.
       </p>
-      <div class="mt-8 flex gap-4">
-        <a href="#services" class="px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">Mehr erfahren</a>
-        <a href="#contact" class="px-5 py-3 rounded border border-gray-300 hover:border-gray-400">Kostenloses Erstgespräch</a>
+
+      <!-- CTAs -->
+      <div class="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a href="#services"
+           class="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-indigo-600 text-white font-medium shadow-sm hover:shadow-md hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition">
+          Mehr erfahren
+        </a>
+        <a href="#contact"
+           class="inline-flex items-center justify-center h-12 px-6 rounded-xl border border-gray-300 text-gray-900 font-medium hover:border-gray-400 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 transition">
+          Kostenloses Erstgespräch
+        </a>
       </div>
+
+      <!-- Trust-Signale -->
+      <ul class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-500">
+        <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-gray-400"></span> DSGVO-konform</li>
+        <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-gray-400"></span> Integration in bestehende Website</li>
+        <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-gray-400"></span> In 2–4 Wochen live</li>
+      </ul>
     </div>
-  </section>
+  </div>
+
+  <!-- feine Abschnittslinie -->
+  <div class="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+</section>
+
 
   <!-- Services -->
-  <section id="services" class="bg-gray-50">
-    <div class="container mx-auto px-6 py-16">
-      <h2 class="text-3xl md:text-4xl font-bold">Services: Smarte KI-Lösungen für Architekturbüros</h2>
-      <p class="mt-6 text-gray-600 leading-relaxed">Wähle das Paket, das zu deinem Büro passt.</p>
+ <section id="services" class="px-6 py-20 bg-white">
+  <div class="mx-auto max-w-7xl">
+    <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">
+      Services: Smarte KI-Lösungen für Architekturbüros
+    </h2>
+    <p class="mt-4 text-gray-600">Wählen Sie das Paket, das zu Ihrem Büro passt.</p>
 
-      <div class="mt-10 grid md:grid-cols-3 gap-8">
-        <!-- LeadBot Starter -->
-        <div class="p-7 bg-white rounded-xl shadow">
-          <h3 class="text-xl font-semibold">LeadBot Starter</h3>
-          <p class="mt-2 text-gray-600">Mehr qualifizierte Anfragen über deine Website.</p>
-          <ul class="mt-3 space-y-2 text-gray-700 list-disc list-inside">
-            <li>5–7 Einstiegsfragen (Budget, Bauphase, Standort)</li>
-            <li>Lead-Scoring (A/B/C)</li>
-            <li>Automatische Terminbuchung</li>
-          </ul>
-          <p class="mt-4 text-sm text-gray-500">Setup: 3–5 Werktage · Ab 690 € + 39 €/Monat</p>
-          <a href="#contact" class="inline-block mt-6 px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">
-            Preis anfragen
-          </a>
-        </div>
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <article class="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition">
+        <h3 class="text-xl font-semibold text-gray-900">LeadBot Starter</h3>
+        <p class="mt-3 text-gray-600">Erfasst Anfragen, qualifiziert Leads und terminiert Erstgespräche.</p>
+        <ul class="mt-4 space-y-2 text-sm text-gray-600">
+          <li>• Einfache Website-Integration</li>
+          <li>• DSGVO & Consent-Flow</li>
+          <li>• Basis-Branding</li>
+        </ul>
+        <a href="#contact" class="mt-6 inline-flex items-center text-indigo-600 font-medium group-hover:underline">
+          Details &rarr;
+        </a>
+      </article>
 
-        <!-- ProjektBot Support -->
-        <div class="p-7 bg-white rounded-xl shadow">
-          <h3 class="text-xl font-semibold">ProjektBot Support</h3>
-          <p class="mt-2 text-gray-600">Weniger Telefon & E-Mails zu Standardfragen.</p>
-          <ul class="mt-3 space-y-2 text-gray-700 list-disc list-inside">
-            <li>FAQ-Antworten (Leistungen, Kostenrahmen, Ablauf)</li>
-            <li>Status-Updates für laufende Projekte</li>
-            <li>Hand-off an dein Team bei komplexen Fällen</li>
-          </ul>
-          <p class="mt-4 text-sm text-gray-500">Setup: 1–2 Wochen · Ab 1.290 € + 59 €/Monat</p>
-          <a href="#contact" class="inline-block mt-6 px-5 py-3 rounded border border-gray-300 hover:border-gray-400">
-            Jetzt buchen
-          </a>
-        </div>
+      <!-- Card 2 -->
+      <article class="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition">
+        <h3 class="text-xl font-semibold text-gray-900">ProjektBot Support</h3>
+        <p class="mt-3 text-gray-600">Unterstützt laufende Projekte mit automatisierten Statusmeldungen und Rückfragen.</p>
+        <ul class="mt-4 space-y-2 text-sm text-gray-600">
+          <li>• Individuell konfigurierbar</li>
+          <li>• Schnittstellen zu Projekttools</li>
+          <li>• Erweiterbar mit StudioBot-Features</li>
+        </ul>
+        <a href="#contact" class="mt-6 inline-flex items-center text-indigo-600 font-medium group-hover:underline">
+          Details &rarr;
+        </a>
+      </article>
 
-        <!-- StudioBot Custom -->
-        <div class="p-7 bg-white rounded-xl shadow">
-          <h3 class="text-xl font-semibold">StudioBot Custom</h3>
-          <p class="mt-2 text-gray-600">Individuelle Automatisierung & Integrationen.</p>
-          <ul class="mt-3 space-y-2 text-gray-700 list-disc list-inside">
-            <li>CRM & Kalender-Integration</li>
-            <li>Individuelles Wissens-/Antwortsystem</li>
-            <li>Analytics & kontinuierliches Training</li>
-          </ul>
-          <p class="mt-4 text-sm text-gray-500">Setup: nach Scope · Ab 2.900 €+</p>
-          <a href="#contact" class="inline-block mt-6 px-5 py-3 rounded border border-gray-300 hover:border-gray-400">
-            Rückruf anfordern
-          </a>
-        </div>
-      </div>
+      <!-- Card 3 -->
+      <article class="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition">
+        <h3 class="text-xl font-semibold text-gray-900">StudioBot Custom</h3>
+        <p class="mt-3 text-gray-600">Maßgeschneiderte KI-Kommunikationslösung für Ihr Architekturbüro.</p>
+        <ul class="mt-4 space-y-2 text-sm text-gray-600">
+          <li>• Individuelles Branding & Tonalität</li>
+          <li>• API-Integration</li>
+          <li>• Persönliche Betreuung</li>
+        </ul>
+        <a href="#contact" class="mt-6 inline-flex items-center text-indigo-600 font-medium group-hover:underline">
+          Details &rarr;
+        </a>
+      </article>
     </div>
-  </section>
-
+  </div>
+</section>
 <!-- Über uns -->
 <section id="about" class="px-6 py-20">
   <div class="mx-auto max-w-3xl">
