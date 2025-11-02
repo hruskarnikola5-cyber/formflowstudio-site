@@ -8,24 +8,26 @@
   <link rel="icon" href="./assets/logo.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .container{max-width:1100px}
     html{scroll-behavior:smooth}
   </style>
 </head>
 <body class="text-gray-800 antialiased">
-  <!-- Sticky Navbar -->
+
+  <!-- NAVBAR -->
   <header class="sticky top-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
     <div class="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-      <a href="./" class="flex items-center gap-2">
-        <img src="./assets/logo.svg" alt="Formflow Studio" class="h-7 w-7">
-        <span class="sr-only">Formflow Studio</span>
+      <a href="./" class="flex items-center gap-3">
+        <img src="./Photoroom_20251101_214345.png" alt="Formflow Studio Logo" class="h-8 w-8 object-contain">
+        <span class="text-sm md:text-base font-semibold tracking-tight text-gray-900">Formflow Studio</span>
       </a>
 
       <!-- Desktop -->
       <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
         <a href="#services" class="hover:text-gray-900 transition">Services</a>
         <a href="#about" class="hover:text-gray-900 transition">Über uns</a>
-        <a href="#contact" class="inline-flex items-center h-10 px-4 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition shadow-sm">Kontakt aufnehmen</a>
+        <a href="#contact" class="inline-flex items-center h-10 px-4 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition shadow-sm">
+          Kontakt aufnehmen
+        </a>
       </nav>
 
       <!-- Mobile toggle -->
@@ -67,12 +69,27 @@
             Kostenloses Erstgespräch
           </a>
         </div>
+      </div>
+    </div>
+    <div class="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+  </section>
 
-        <ul class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-500">
-          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-gray-400"></span> DSGVO-konform</li>
-          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-gray-400"></span> Integration in bestehende Website</li>
-          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-gray-400"></span> In 2–4 Wochen live</li>
-        </ul>
+  <!-- ERGEBNISSE (KPI-Leiste) -->
+  <section id="results" class="bg-white">
+    <div class="mx-auto max-w-7xl px-6 py-10">
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-sm">
+          <div class="text-4xl font-extrabold text-gray-900">−40%</div>
+          <p class="mt-2 text-gray-600">weniger Zeitaufwand für Anfragen & Erstgespräche</p>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-sm">
+          <div class="text-4xl font-extrabold text-gray-900">+60%</div>
+          <p class="mt-2 text-gray-600">schnellere Kommunikation mit Projektpartnern</p>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-sm">
+          <div class="text-4xl font-extrabold text-gray-900">24/7</div>
+          <p class="mt-2 text-gray-600">erreichbar für Kund:innen & Interessent:innen</p>
+        </div>
       </div>
     </div>
     <div class="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
@@ -152,7 +169,7 @@
     </div>
   </section>
 
-  <!-- PROOF / IMPACT -->
+  <!-- PROOF / IMPACT (kann bleiben, wenn du mehr Tiefgang willst) -->
   <section id="proof" class="bg-gray-50">
     <div class="mx-auto max-w-7xl px-6 py-20 text-center">
       <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">Ergebnisse, die überzeugen</h2>
@@ -214,24 +231,25 @@
     </div>
   </footer>
 
+  <!-- JS -->
   <script>
     // Jahr im Footer
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Mobile Menu (nur toggeln, wenn vorhanden)
+    // Mobile Menü Toggle (robust)
     const menuBtn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
     if (menuBtn && mobileNav) {
       menuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
     }
 
-    // Erfolgsmeldung nach Redirect
+    // Erfolgsmeldung nach Formular-Redirect
     if (new URLSearchParams(window.location.search).get('success') === '1') {
       const ok = document.getElementById('ok');
       if (ok) ok.classList.remove('hidden');
     }
   </script>
 </body>
-
 </html>
+
 
