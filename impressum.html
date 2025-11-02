@@ -1,48 +1,115 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Impressum – Formflow Studio</title>
-  <link rel="icon" href="/formflowstudio-site/assets/logo.svg">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="description" content="Impressum von Formflow Studio – Angaben gemäß § 5 TMG." />
+  <link rel="icon" href="/formflowstudio-site/assets/logo.svg" />
+
+  <!-- Fonts & Tailwind -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>html{scroll-behavior:smooth} body{font-family:Inter,system-ui,sans-serif}</style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter','system-ui','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    html{scroll-behavior:smooth}
+    .header-shadow{box-shadow:0 10px 20px -20px rgba(0,0,0,.25)}
+  </style>
 </head>
-<body class="text-gray-800 antialiased">
-<header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100">
-  <div class="mx-auto max-w-4xl px-6 h-14 flex items-center">
-    <a href="/formflowstudio-site/" class="text-gray-700 hover:text-gray-900">
-      ← Zurück zur Startseite
-    </a>
-  </div>
-</header>
+<body class="text-gray-800 antialiased font-sans">
 
-
-
-  <main class="mx-auto max-w-4xl px-6 py-12">
-    <h1 class="text-3xl font-semibold tracking-tight">Impressum</h1>
-    <p class="mt-6 text-gray-700">Angaben gemäß § 5 TMG</p>
-
-    <div class="mt-6 space-y-2 text-gray-700">
-      <p><strong>Formflow Studio</strong></p>
-      <p>Beispielstraße 1<br>12345 Musterstadt</p>
-      <p>E-Mail: kontakt@example.com</p>
+  <!-- NAVBAR -->
+  <header id="siteHeader" class="sticky top-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+      <a href="/formflowstudio-site/" class="flex items-center gap-3">
+        <img src="/formflowstudio-site/Photoroom_20251101_214345.png" alt="Formflow Studio Logo" class="h-10 w-10 object-contain md:h-12 md:w-12">
+        <span class="text-base md:text-lg font-semibold tracking-tight text-gray-900">Formflow Studio</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
+        <a href="/formflowstudio-site/#services" class="navlink hover:text-gray-900 transition">Services</a>
+        <a href="/formflowstudio-site/#about" class="navlink hover:text-gray-900 transition">Über uns</a>
+        <a href="/formflowstudio-site/#proof" class="navlink hover:text-gray-900 transition">Ergebnisse</a>
+        <a href="/formflowstudio-site/#contact" class="inline-flex items-center h-10 px-4 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition shadow-sm">
+          Kontakt aufnehmen
+        </a>
+      </nav>
+      <button id="menuBtn" aria-label="Menü" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 text-gray-700">☰</button>
     </div>
+    <nav id="mobileNav" class="md:hidden hidden border-t border-gray-100">
+      <div class="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-3">
+        <a href="/formflowstudio-site/#services" class="py-2">Services</a>
+        <a href="/formflowstudio-site/#about" class="py-2">Über uns</a>
+        <a href="/formflowstudio-site/#proof" class="py-2">Ergebnisse</a>
+        <a href="/formflowstudio-site/#contact" class="py-2 px-4 rounded-lg bg-indigo-600 text-white w-max">Kontakt aufnehmen</a>
+      </div>
+    </nav>
+  </header>
 
-    <h2 class="mt-10 text-xl font-semibold">Haftung für Inhalte</h2>
-    <p class="mt-2 text-gray-700">Inhalte werden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>
+  <!-- CONTENT -->
+  <main class="bg-gray-50">
+    <section class="mx-auto max-w-3xl px-6 py-16">
+      <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">Impressum</h1>
+      <div class="mt-4 h-[2px] w-20 bg-gradient-to-r from-indigo-500 via-blue-500 to-sky-400 rounded-full"></div>
 
-    <h2 class="mt-8 text-xl font-semibold">Haftung für Links</h2>
-    <p class="mt-2 text-gray-700">Unser Angebot enthält Links zu externen Websites, auf deren Inhalte wir keinen Einfluss haben.</p>
+      <div class="mt-8 space-y-6 text-[17px] leading-relaxed">
+        <p><strong>Angaben gemäß § 5 Telemediengesetz (TMG):</strong></p>
+        <p>
+          Formflow Studio<br>
+          Inhaber: Nikola Hruskar<br>
+          An den Rohwiesen 11<br>
+          38446 Wolfsburg<br>
+          Deutschland
+        </p>
 
-    <h2 class="mt-8 text-xl font-semibold">Urheberrecht</h2>
-    <p class="mt-2 text-gray-700">Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.</p>
+        <p><strong>Kontakt:</strong><br>
+          E-Mail: <a class="text-indigo-700 underline" href="mailto:kontakt@formflowstudio.de">kontakt@formflowstudio.de</a>
+        </p>
 
-    <div class="mt-12">
-      <a href="/formflowstudio-site/" class="inline-flex h-10 px-4 items-center rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Zur Startseite</a>
-    </div>
+        <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</strong><br>
+          Nikola Hruskar, An den Rohwiesen 11, 38446 Wolfsburg
+        </p>
+
+        <h2 class="pt-4 text-xl font-semibold">Haftung für Inhalte</h2>
+        <p>Die Inhalte dieser Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte übernehmen wir keine Gewähr. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen. Verpflichtungen zur Entfernung oder Sperrung von Informationen nach den allgemeinen Gesetzen bleiben unberührt.</p>
+
+        <h2 class="pt-2 text-xl font-semibold">Haftung für Links</h2>
+        <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für diese fremden Inhalte übernimmt stets der jeweilige Anbieter oder Betreiber die Verantwortung.</p>
+
+        <h2 class="pt-2 text-xl font-semibold">Urheberrecht</h2>
+        <p>Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung bedürfen der schriftlichen Zustimmung des jeweiligen Autors.</p>
+      </div>
+    </section>
   </main>
+
+  <!-- FOOTER -->
+  <footer class="mx-auto max-w-7xl px-6 py-10 text-sm text-gray-500">
+    <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+      <div>© <span id="y"></span> Formflow Studio</div>
+      <div class="flex gap-6">
+        <a href="/formflowstudio-site/impressum.html" class="hover:underline">Impressum</a>
+        <a href="/formflowstudio-site/datenschutz.html" class="hover:underline">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    const y = document.getElementById('y'); if (y) y.textContent = new Date().getFullYear();
+    const menuBtn = document.getElementById('menuBtn'); const mobileNav = document.getElementById('mobileNav');
+    if (menuBtn && mobileNav) menuBtn.addEventListener('click', ()=> mobileNav.classList.toggle('hidden'));
+    const header = document.getElementById('siteHeader');
+    function shadow(){ if (window.scrollY>6) header.classList.add('header-shadow'); else header.classList.remove('header-shadow'); }
+    window.addEventListener('scroll', shadow, {passive:true}); shadow();
+  </script>
 </body>
 </html>
 
