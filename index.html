@@ -43,40 +43,42 @@
 
 <body class="text-gray-800 antialiased font-sans">
 
-  <!-- NAVBAR -->
-  <header id="siteHeader" class="sticky top-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
-    <div class="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-      <a href="./" class="flex items-center gap-3">
-        <img src="./Photoroom_20251101_214345.png" alt="Formflow Studio Logo" class="h-8 w-8 object-contain">
-        <span class="text-sm md:text-base font-semibold tracking-tight text-gray-900">Formflow Studio</span>
+<!-- NAVBAR -->
+<header id="siteHeader" class="sticky top-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
+  <div class="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+    <a href="./" class="flex items-center gap-3">
+      <!-- Logo ca. 1.75x Schriftgröße -->
+      <img src="./Photoroom_20251101_214345.png" alt="Formflow Studio Logo" class="h-10 w-10 object-contain md:h-12 md:w-12">
+      <span class="text-base md:text-lg font-semibold tracking-tight text-gray-900">Formflow Studio</span>
+    </a>
+
+    <!-- Desktop -->
+    <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
+      <a href="#services" class="navlink hover:text-gray-900 transition">Services</a>
+      <a href="#about" class="navlink hover:text-gray-900 transition">Über uns</a>
+      <a href="#proof" class="navlink hover:text-gray-900 transition">Ergebnisse</a>
+      <a href="#contact" class="inline-flex items-center h-10 px-4 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition shadow-sm">
+        Kontakt aufnehmen
       </a>
-
-      <!-- Desktop -->
-      <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
-        <a href="#services" class="navlink hover:text-gray-900 transition">Services</a>
-        <a href="#about" class="navlink hover:text-gray-900 transition">Über uns</a>
-        <a href="#proof" class="navlink hover:text-gray-900 transition">Ergebnisse</a>
-        <a href="#contact" class="inline-flex items-center h-10 px-4 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition shadow-sm">
-          Kontakt aufnehmen
-        </a>
-      </nav>
-
-      <!-- Mobile toggle -->
-      <button id="menuBtn" aria-label="Menü" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 text-gray-700">
-        ☰
-      </button>
-    </div>
-
-    <!-- Mobile Nav -->
-    <nav id="mobileNav" class="md:hidden hidden border-t border-gray-100">
-      <div class="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-3">
-        <a href="#services" class="py-2">Services</a>
-        <a href="#about" class="py-2">Über uns</a>
-        <a href="#proof" class="py-2">Ergebnisse</a>
-        <a href="#contact" class="py-2 px-4 rounded-lg bg-indigo-600 text-white w-max">Kontakt aufnehmen</a>
-      </div>
     </nav>
-  </header>
+
+    <!-- Mobile toggle -->
+    <button id="menuBtn" aria-label="Menü" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 text-gray-700">
+      ☰
+    </button>
+  </div>
+
+  <!-- Mobile Nav -->
+  <nav id="mobileNav" class="md:hidden hidden border-t border-gray-100">
+    <div class="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-3">
+      <a href="#services" class="py-2">Services</a>
+      <a href="#about" class="py-2">Über uns</a>
+      <a href="#proof" class="py-2">Ergebnisse</a>
+      <a href="#contact" class="py-2 px-4 rounded-lg bg-indigo-600 text-white w-max">Kontakt aufnehmen</a>
+    </div>
+  </nav>
+</header>
+
 
   <!-- HERO (zweizeilig, zentriert) -->
 <section class="relative bg-gradient-to-b from-white to-gray-50">
