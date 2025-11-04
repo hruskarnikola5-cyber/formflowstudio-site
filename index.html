@@ -369,96 +369,164 @@
       if (ok) ok.classList.remove('hidden');
     }
   </script>
+<!-- === KI-Assistent – Floating Launcher mit DSGVO-Zustimmung === -->
+<style>
+  .ff-chat-launcher {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #4f46e5;
+    color: #fff;
+    border-radius: 9999px;
+    padding: 0.8rem 1.2rem;
+    font-weight: 600;
+    box-shadow: 0 8px 28px -10px rgba(79, 70, 229, 0.5);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .ff-chat-launcher:hover {
+    background: #4338ca;
+    transform: translateY(-3px);
+  }
+  .ff-chat-panel {
+    position: fixed;
+    right: 32px;
+    bottom: 100px;
+    z-index: 50;
+    width: 400px;
+    max-width: 92vw;
+    height: 580px;
+    background: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 25px 60px -15px rgba(0,0,0,.35);
+    border: 1px solid rgba(0,0,0,.08);
+    display: none;
+  }
+  .ff-chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    font-weight: 600;
+  }
+  .ff-close { cursor: pointer; font-size: 20px; line-height: 1; }
+  .ff-consent {
+    position: fixed;
+    right: 24px;
+    bottom: 100px;
+    z-index: 60;
+    width: 320px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,.3);
+    font-size: 0.9rem;
+    color: #374151;
+    display: none;
+  }
+  .ff-consent button {
+    margin-top: 0.75rem;
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .ff-consent button:hover {
+    background: #4338ca;
+  }
+  .ff-consent .cancel {
+    background: #e5e7eb;
+    color: #111827;
+    margin-left: 0.5rem;
+  }
+</style>
 
-  <!-- === KI-Assistent – Floating Launcher === -->
-  <style>
-    .ff-chat-launcher {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: #4f46e5;
-      color: #fff;
-      border-radius: 9999px;
-      padding: 0.8rem 1.2rem;
-      font-weight: 600;
-      box-shadow: 0 8px 28px -10px rgba(79, 70, 229, 0.5);
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-    .ff-chat-launcher:hover {
-      background: #4338ca;
-      transform: translateY(-3px);
-      box-shadow: 0 14px 40px -12px rgba(79, 70, 229, 0.55);
-    }
-    .ff-chat-launcher svg { width: 20px; height: 20px; fill: currentColor; }
+<!-- Launcher -->
+<button id="ffOpen" class="ff-chat-launcher">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M12 3C6.48 3 2 6.73 2 11c0 1.87.8 3.58 2.15 4.94L3 21l4.35-1.9C8.44 19.7 10.15 20 12 20c5.52 0 10-3.73 10-9s-4.48-8-10-8zm-1 9H7v-2h4v2zm6 0h-4v-2h4v2z"/>
+  </svg>
+  Chat
+</button>
 
-    .ff-chat-panel {
-      position: fixed;
-      right: 20px;
-      bottom: 96px;
-      z-index: 50;
-      height: 580px;
-      background: #fff;
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 25px 60px -15px rgba(0,0,0,.35);
-      border: 1px solid rgba(0,0,0,.08);
-      display: none;
-    }
-
-    .ff-chat-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.8rem 1rem;
-      background: #f9fafb;
-      border-bottom: 1px solid #e5e7eb;
-      font-weight: 600;
-      color: #1f2937;
-    }
-    .ff-close { cursor: pointer; font-size: 20px; line-height: 1; transition: opacity 0.2s ease; }
-    .ff-close:hover { opacity: .7; }
-  </style>
-
-  <button id="ffOpen" class="ff-chat-launcher">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C6.48 3 2 6.73 2 11c0 1.87.8 3.58 2.15 4.94L3 21l4.35-1.9C8.44 19.7 10.15 20 12 20c5.52 0 10-3.73 10-9s-4.48-8-10-8zm-1 9H7v-2h4v2zm6 0h-4v-2h4v2z"/></svg>
-    Chat
-  </button>
-<p class="text-xs text-gray-500 mt-2 max-w-xs" style="position: fixed; right: 32px; bottom: 16px; z-index: 49;">
-  Durch Klick auf <strong>Chat</strong> werden Inhalte von <a href="https://huggingface.co" target="_blank" rel="noopener" class="underline text-indigo-600">Hugging Face</a> geladen.
-  Dabei können personenbezogene Daten (z. B. IP-Adresse, Chat-Inhalte) an Server in den USA übermittelt werden.
-  Mehr dazu in der <a href="/datenschutz.html" class="underline text-indigo-600">Datenschutzerklärung</a>.
-</p>
-  <div id="ffPanel" class="ff-chat-panel">
-    <div class="ff-chat-header">
-      <span>FormFlow KI-Assistent</span>
-      <span id="ffClose" class="ff-close">✕</span>
-    </div>
-    <iframe id="ffFrame" title="FormFlow KI-Assistent"
-            style="width:100%; height:100%; border:0; background:#fff;"
-            loading="lazy" allow="clipboard-write; clipboard-read"></iframe>
+<!-- Chat Panel -->
+<div id="ffPanel" class="ff-chat-panel">
+  <div class="ff-chat-header">
+    <span>FormFlow KI-Assistent</span>
+    <span id="ffClose" class="ff-close">✕</span>
   </div>
+  <iframe
+    id="ffFrame"
+    title="FormFlow KI-Assistent"
+    style="width:100%; height:100%; border:0; background:#fff;"
+    loading="lazy"
+  ></iframe>
+</div>
 
-  <script>
-    (function(){
-      const SPACE_URL = "https://nihru-formflow-assistant.hf.space/?__theme=light";
-      const openBtn = document.getElementById('ffOpen');
-      const closeBtn = document.getElementById('ffClose');
-      const panel = document.getElementById('ffPanel');
-      const frame = document.getElementById('ffFrame');
+<!-- Consent Popup -->
+<div id="ffConsent" class="ff-consent">
+  <p>
+    Durch Start des Chats werden Inhalte von
+    <a href="https://huggingface.co" target="_blank" rel="noopener" class="text-indigo-600 underline">Hugging Face</a>
+    geladen. Dabei können personenbezogene Daten (z.&nbsp;B. IP-Adresse, Chat-Inhalte) in die USA übertragen werden.
+    Details findest du in unserer
+    <a href="/datenschutz.html" class="text-indigo-600 underline">Datenschutzerklärung</a>.
+  </p>
+  <div>
+    <button id="ffAgree">Zustimmen</button>
+    <button id="ffCancel" class="cancel">Abbrechen</button>
+  </div>
+</div>
 
-      openBtn.addEventListener('click', () => {
+<script>
+  (function(){
+    const SPACE_URL = "https://nihru-formflow-assistant.hf.space/?__theme=light";
+    const openBtn = document.getElementById('ffOpen');
+    const closeBtn = document.getElementById('ffClose');
+    const panel = document.getElementById('ffPanel');
+    const frame = document.getElementById('ffFrame');
+    const consent = document.getElementById('ffConsent');
+    const agree = document.getElementById('ffAgree');
+    const cancel = document.getElementById('ffCancel');
+
+    const hasConsent = localStorage.getItem('chat_consent') === '1';
+
+    openBtn.addEventListener('click', () => {
+      if (hasConsent) {
         if (!frame.src) frame.src = SPACE_URL;
         panel.style.display = 'block';
-      });
-      closeBtn.addEventListener('click', () => {
-        panel.style.display = 'none';
-      });
-    })();
-  </script>
+      } else {
+        consent.style.display = 'block';
+      }
+    });
+
+    agree.addEventListener('click', () => {
+      localStorage.setItem('chat_consent', '1');
+      consent.style.display = 'none';
+      if (!frame.src) frame.src = SPACE_URL;
+      panel.style.display = 'block';
+    });
+
+    cancel.addEventListener('click', () => {
+      consent.style.display = 'none';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      panel.style.display = 'none';
+    });
+  })();
+</script>
+  
 </body>
 </html>
