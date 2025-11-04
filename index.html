@@ -369,7 +369,7 @@
       if (ok) ok.classList.remove('hidden');
     }
   </script>
-<!-- === KI-Assistent – Floating Launcher mit DSGVO-Zustimmung (Popup bei jedem Besuch) === -->
+<!-- === KI-Assistent – Floating Launcher mit DSGVO-Zustimmung (1× pro Besuch) === -->
 <style>
   /* Launcher-Button */
   .ff-chat-launcher {
@@ -383,110 +383,59 @@
     background: #4f46e5;
     color: #fff;
     border-radius: 9999px;
-    padding: 1rem 1.4rem; /* etwas größer */
+    padding: 1rem 1.4rem;
     font-weight: 600;
     font-size: 1rem;
     box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.5);
     cursor: pointer;
     transition: all 0.25s ease;
   }
-  .ff-chat-launcher:hover {
-    background: #4338ca;
-    transform: translateY(-3px);
-    box-shadow: 0 14px 45px -12px rgba(79, 70, 229, 0.55);
-  }
-
-  /* Sprechblasen-Icon */
-  .ff-chat-launcher svg {
-    width: 22px;
-    height: 22px;
-    fill: currentColor;
-  }
+  .ff-chat-launcher:hover { background:#4338ca; transform:translateY(-3px); box-shadow:0 14px 45px -12px rgba(79,70,229,.55); }
+  .ff-chat-launcher svg { width: 22px; height: 22px; fill: currentColor; }
 
   /* Chatfenster */
   .ff-chat-panel {
-    position: fixed;
-    right: 32px;
-    bottom: 110px;
-    z-index: 50;
-    width: 420px;
-    max-width: 92vw;
-    height: 600px;
-    background: #fff;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 25px 60px -15px rgba(0,0,0,.35);
-    border: 1px solid rgba(0,0,0,.08);
-    display: none;
+    position: fixed; right: 32px; bottom: 110px; z-index: 50;
+    width: 420px; max-width: 92vw; height: 600px;
+    background:#fff; border-radius:1rem; overflow:hidden;
+    box-shadow:0 25px 60px -15px rgba(0,0,0,.35); border:1px solid rgba(0,0,0,.08);
+    display:none;
   }
-
   .ff-chat-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.8rem 1rem;
-    background: #f9fafb;
-    border-bottom: 1px solid #e5e7eb;
-    font-weight: 600;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:.8rem 1rem; background:#f9fafb; border-bottom:1px solid #e5e7eb; font-weight:600;
   }
-
-  .ff-close {
-    cursor: pointer;
-    font-size: 20px;
-    line-height: 1;
-  }
+  .ff-close { cursor:pointer; font-size:20px; line-height:1; }
 
   /* DSGVO Consent Popup */
   .ff-consent {
-    position: fixed;
-    right: 32px;
-    bottom: 110px;
-    z-index: 60;
-    width: 340px;
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
-    padding: 1rem 1.2rem;
-    box-shadow: 0 20px 40px -10px rgba(0,0,0,.3);
-    font-size: 0.9rem;
-    color: #374151;
-    display: none;
+    position: fixed; right: 32px; bottom: 110px; z-index: 60;
+    width: 340px; background: #fff; border:1px solid #e5e7eb; border-radius:.75rem;
+    padding:1rem 1.2rem; box-shadow:0 20px 40px -10px rgba(0,0,0,.3);
+    font-size:.9rem; color:#374151; display:none;
   }
-
+  .ff-consent .actions { margin-top:.75rem; display:flex; gap:.5rem; }
   .ff-consent button {
-    margin-top: 0.75rem;
-    background: #4f46e5;
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    font-weight: 600;
+    background:#4f46e5; color:#fff; border:none; border-radius:.5rem; padding:.5rem 1rem; cursor:pointer; font-weight:600;
   }
-  .ff-consent button:hover {
-    background: #4338ca;
-  }
-  .ff-consent .cancel {
-    background: #e5e7eb;
-    color: #111827;
-    margin-left: 0.5rem;
-  }
+  .ff-consent button:hover { background:#4338ca; }
+  .ff-consent .cancel { background:#e5e7eb; color:#111827; }
 </style>
 
 <!-- Launcher -->
-<button id="ffOpen" class="ff-chat-launcher">
+<button id="ffOpen" class="ff-chat-launcher" aria-label="Chat öffnen/schließen">
   <!-- Sprechblasen-Symbol -->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M12 3C6.48 3 2 6.73 2 11c0 1.87.8 3.58 2.15 4.94L3 21l4.35-1.9C8.44 19.7 10.15 20 12 20c5.52 0 10-3.73 10-9s-4.48-8-10-8zm-1 9H7v-2h4v2zm6 0h-4v-2h4v2z"/>
   </svg>
   <span>Chat</span>
 </button>
 
-<!-- Chat Panel -->
-<div id="ffPanel" class="ff-chat-panel">
+<!-- Panel -->
+<div id="ffPanel" class="ff-chat-panel" role="dialog" aria-modal="true" aria-labelledby="ffTitle">
   <div class="ff-chat-header">
-    <span>FormFlow KI-Assistent</span>
-    <span id="ffClose" class="ff-close">✕</span>
+    <span id="ffTitle">FormFlow KI-Assistent</span>
+    <span id="ffClose" class="ff-close" aria-label="Chat schließen">✕</span>
   </div>
   <iframe
     id="ffFrame"
@@ -496,52 +445,104 @@
   ></iframe>
 </div>
 
-<!-- Consent Popup -->
+<!-- DSGVO Consent -->
 <div id="ffConsent" class="ff-consent">
   <p>
     Durch Start des Chats werden Inhalte von
     <a href="https://huggingface.co" target="_blank" rel="noopener" class="text-indigo-600 underline">Hugging Face</a>
     geladen. Dabei können personenbezogene Daten (z.&nbsp;B. IP-Adresse, Chat-Inhalte) in die USA übertragen werden.
     Details findest du in unserer
-    <a href="/datenschutz.html" class="text-indigo-600 underline">Datenschutzerklärung</a>.
+    <a href="/formflowstudio-site/datenschutz.html" class="text-indigo-600 underline">Datenschutzerklärung</a>.
   </p>
-  <div>
+  <div class="actions">
     <button id="ffAgree">Zustimmen</button>
     <button id="ffCancel" class="cancel">Abbrechen</button>
   </div>
 </div>
 
-<!-- Script -->
 <script>
-  (function(){
-    const SPACE_URL = "https://nihru-formflow-assistant.hf.space/?__theme=light";
-    const openBtn = document.getElementById('ffOpen');
-    const closeBtn = document.getElementById('ffClose');
-    const panel = document.getElementById('ffPanel');
-    const frame = document.getElementById('ffFrame');
-    const consent = document.getElementById('ffConsent');
-    const agree = document.getElementById('ffAgree');
-    const cancel = document.getElementById('ffCancel');
+(function(){
+  const SPACE_URL = "https://nihru-formflow-assistant.hf.space/?__theme=light";
+  const openBtn  = document.getElementById('ffOpen');
+  const closeBtn = document.getElementById('ffClose');
+  const panel    = document.getElementById('ffPanel');
+  const frame    = document.getElementById('ffFrame');
+  const consent  = document.getElementById('ffConsent');
+  const agree    = document.getElementById('ffAgree');
+  const cancel   = document.getElementById('ffCancel');
 
-    openBtn.addEventListener('click', () => {
-      // Jedes Mal neu anzeigen
-      consent.style.display = 'block';
-    });
+  // Platzhalter-Inhalt, wenn Nutzer in dieser Session NICHT zustimmt:
+  const PLACEHOLDER = `
+    <!doctype html><html lang="de"><head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+      body{font-family:system-ui,-apple-system,Inter,Segoe UI,Roboto,Arial,sans-serif;
+           margin:0;display:flex;align-items:center;justify-content:center;height:100%;color:#374151;background:#fff}
+      .box{max-width:90%;text-align:center}
+      h2{font-size:18px;margin:0 0 8px}
+      p{font-size:14px;line-height:1.5;margin:0 0 10px}
+      .note{font-size:12px;color:#6b7280}
+    </style></head><body>
+      <div class="box">
+        <h2>Externer Chat blockiert</h2>
+        <p>Du hast die Zustimmung in dieser Sitzung nicht erteilt.</p>
+        <p class="note">Lade die Seite neu, um die Abfrage erneut zu sehen.</p>
+      </div>
+    </body></html>
+  `;
 
-    agree.addEventListener('click', () => {
-      consent.style.display = 'none';
+  // Helpers
+  const hasPrompted  = () => sessionStorage.getItem('ff_prompted') === '1';
+  const setPrompted  = () => sessionStorage.setItem('ff_prompted', '1');
+  const hasConsented = () => sessionStorage.getItem('ff_consented') === '1';
+  const setConsented = () => sessionStorage.setItem('ff_consented', '1');
+
+  function openPanel() {
+    if (!hasConsented()) {
+      // Kein externes Laden – statischer Hinweis
+      if (!frame.src && !frame.srcdoc) frame.srcdoc = PLACEHOLDER;
+    } else {
+      // Externen Space nur einmal lazy laden
       if (!frame.src) frame.src = SPACE_URL;
-      panel.style.display = 'block';
-    });
+    }
+    panel.style.display = 'block';
+  }
+  function closePanel(){ panel.style.display = 'none'; }
 
-    cancel.addEventListener('click', () => {
-      consent.style.display = 'none';
-    });
+  // Klick auf Launcher
+  openBtn.addEventListener('click', () => {
+    if (!hasPrompted()) {
+      // Erstes Mal in dieser Sitzung: Consent zeigen
+      consent.style.display = 'block';
+      setPrompted(); // Ab jetzt in dieser Session nicht erneut fragen
+      return;
+    }
+    // Bereits gefragt: nur toggeln
+    if (panel.style.display === 'block') {
+      closePanel();
+    } else {
+      openPanel();
+    }
+  });
 
-    closeBtn.addEventListener('click', () => {
-      panel.style.display = 'none';
-    });
-  })();
+  // Zustimmung
+  agree.addEventListener('click', () => {
+    consent.style.display = 'none';
+    setConsented();
+    openPanel();
+  });
+
+  // Abbruch
+  cancel.addEventListener('click', () => {
+    consent.style.display = 'none';
+    // Kein Consent gesetzt; beim selben Besuch wird nicht erneut gefragt.
+    // Panel kann dennoch geöffnet/geschlossen werden – aber ohne externen Inhalt.
+    if (panel.style.display !== 'block') openPanel();
+  });
+
+  // Close im Panel
+  closeBtn.addEventListener('click', closePanel);
+})();
 </script>
 </body>
 </html>
