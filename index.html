@@ -2,10 +2,16 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Verhindert horizontales Scrollen, verbessert Mobile-Layout -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Formflow Studio – KI-Chatbots für Architekturbüros</title>
   <meta name="description" content="Formflow Studio entwickelt KI-Chatbots für Architekturbüros: Leads sichern, Termine buchen, Routinekommunikation automatisieren.">
-  <link rel="icon" href="/formflowstudio-site/assets/logo.svg">
+
+  <!-- Favicon: passe ggf. auf eine vorhandene Datei an -->
+  <link rel="icon" href="logo.svg">
+  <!-- Falls kein SVG vorhanden ist, nimm dein PNG:
+  <link rel="icon" href="Photoroom_20251101_214345.png" type="image/png">
+  -->
 
   <!-- Fonts & Tailwind -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +29,15 @@
       }
     }
   </script>
+
   <style>
+    /* --- Global: horizontales Scrollen verhindern --- */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+
     html{scroll-behavior:smooth}
     .section{padding:5rem 0}
     .reveal{opacity:0;transform:translateY(6px);transition:opacity .7s ease,transform .7s ease}
@@ -31,6 +45,28 @@
     .lift{transition:transform .25s ease, box-shadow .25s ease}
     .lift:hover{transform:translateY(-4px); box-shadow:0 22px 60px -30px rgba(15,23,42,.28)}
     .header-shadow{box-shadow:0 10px 20px -20px rgba(0,0,0,.25)}
+
+    /* Bessere Überschrift auf Mobile */
+    .hero-title {
+      text-wrap: balance;
+      hyphens: auto;
+    }
+
+    /* Sicherstellen, dass das Chatpanel auf Mobile nie breiter ist als der Viewport */
+    .ff-chat-panel {
+      width: min(400px, calc(100vw - 40px));
+      right: 20px;
+      bottom: 96px;
+    }
+    .ff-chat-launcher {
+      right: 20px;
+      bottom: 20px;
+    }
+
+    /* Verhindert Layout-Jitter durch iOS Safe Areas */
+    @supports (padding: max(0px)) {
+      body { padding-bottom: max(0px, env(safe-area-inset-bottom)); }
+    }
   </style>
 </head>
 <body class="text-gray-800 antialiased font-sans">
@@ -38,18 +74,19 @@
   <!-- NAVBAR -->
   <header id="siteHeader" class="sticky top-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
     <div class="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-      <a href="/formflowstudio-site/" class="flex items-center gap-3">
-        <!-- Logo ~1.75x Texthöhe -->
-<img src="Photoroom_20251101_214345.png" alt="Formflow Studio Logo" class="h-10 w-10 object-contain md:h-12 md:w-12">
+      <!-- Root-Link statt /formflowstudio-site/ -->
+      <a href="/" class="flex items-center gap-3">
+        <img src="Photoroom_20251101_214345.png" alt="Formflow Studio Logo" class="h-10 w-10 object-contain md:h-12 md:w-12">
         <span class="text-base md:text-lg font-semibold tracking-tight text-gray-900">Formflow Studio</span>
       </a>
 
       <!-- Desktop -->
       <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
-        <a href="/formflowstudio-site/#services" class="navlink hover:text-gray-900 transition">Services</a>
-        <a href="/formflowstudio-site/#about" class="navlink hover:text-gray-900 transition">Über uns</a>
-        <a href="/formflowstudio-site/#proof" class="navlink hover:text-gray-900 transition">Ergebnisse</a>
-        <a href="/formflowstudio-site/#contact" class="inline-flex items-center h-10 px-4 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition shadow-sm">
+        <!-- Saubere Anker-Links ohne Unterordner -->
+        <a href="#services" class="navlink hover:text-gray-900 transition">Services</a>
+        <a href="#about" class="navlink hover:text-gray-900 transition">Über uns</a>
+        <a href="#proof" class="navlink hover:text-gray-900 transition">Ergebnisse</a>
+        <a href="#contact" class="inline-flex items-center h-10 px-4 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition shadow-sm">
           Kontakt aufnehmen
         </a>
       </nav>
@@ -63,31 +100,32 @@
     <!-- Mobile Nav -->
     <nav id="mobileNav" class="md:hidden hidden border-t border-gray-100">
       <div class="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-3">
-        <a href="/formflowstudio-site/#services" class="py-2">Services</a>
-        <a href="/formflowstudio-site/#about" class="py-2">Über uns</a>
-        <a href="/formflowstudio-site/#proof" class="py-2">Ergebnisse</a>
-        <a href="/formflowstudio-site/#contact" class="py-2 px-4 rounded-lg bg-indigo-600 text-white w-max">Kontakt aufnehmen</a>
+        <a href="#services" class="py-2">Services</a>
+        <a href="#about" class="py-2">Über uns</a>
+        <a href="#proof" class="py-2">Ergebnisse</a>
+        <a href="#contact" class="py-2 px-4 rounded-lg bg-indigo-600 text-white w-max">Kontakt aufnehmen</a>
       </div>
     </nav>
   </header>
 
-  <!-- HERO (zweizeilig, zentriert) -->
+  <!-- HERO -->
   <section class="relative bg-gradient-to-b from-white to-gray-50">
     <div class="mx-auto max-w-7xl px-6 py-24 md:py-32">
       <div class="max-w-3xl mx-auto text-center">
-        <h1 class="reveal mt-0 text-5xl md:text-6xl font-semibold tracking-tight text-gray-900 leading-tight">
+        <!-- Kleinere Mobile-Größe + Zentrierung abgesichert -->
+        <h1 class="hero-title reveal mt-0 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-gray-900 leading-tight text-center">
           KI-Chatbots: Die Zukunft für Architekturbüros
         </h1>
 
-        <p class="reveal mt-6 text-xl leading-relaxed text-gray-600 max-w-2xl mx-auto">
+        <p class="reveal mt-6 text-lg sm:text-xl leading-relaxed text-gray-600 max-w-2xl mx-auto">
           Automatisieren Sie Kundenanfragen, optimieren Sie Projekte und gewinnen Sie Zeit für kreative Planung.
         </p>
 
         <div class="reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="/formflowstudio-site/#services" class="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-indigo-600 text-white font-medium shadow-sm hover:shadow-md hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition">
+          <a href="#services" class="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-indigo-600 text-white font-medium shadow-sm hover:shadow-md hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition">
             Mehr erfahren
           </a>
-          <a href="/formflowstudio-site/#contact" class="inline-flex items-center justify-center h-12 px-6 rounded-xl border border-gray-300 text-gray-900 font-medium hover:border-gray-400 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 transition">
+          <a href="#contact" class="inline-flex items-center justify-center h-12 px-6 rounded-xl border border-gray-300 text-gray-900 font-medium hover:border-gray-400 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 transition">
             Kostenloses Erstgespräch
           </a>
         </div>
@@ -97,146 +135,116 @@
   </section>
 
   <!-- SERVICES -->
-<section id="services" class="bg-gray-50">
-  <div class="container mx-auto px-6 py-20">
-    <h2 class="text-3xl md:text-4xl font-bold text-center">
-      Smarte KI-Lösungen für Architekturbüros
-    </h2>
-    <p class="mt-3 text-center text-gray-600 text-lg">
-      Wählen Sie das Paket, das zu Ihrem Büro passt.
-    </p>
+  <section id="services" class="bg-gray-50">
+    <div class="container mx-auto px-6 py-20">
+      <h2 class="text-3xl md:text-4xl font-bold text-center">
+        Smarte KI-Lösungen für Architekturbüros
+      </h2>
+      <p class="mt-3 text-center text-gray-600 text-lg">
+        Wählen Sie das Paket, das zu Ihrem Büro passt.
+      </p>
 
-    <div class="mt-12 grid md:grid-cols-3 gap-8">
-      
-      <!-- LeadBot Starter -->
-      <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
-        <div>
-          <h3 class="text-xl font-semibold text-gray-800">LeadBot Starter</h3>
-          <p class="mt-2 text-gray-600">
-            Für Büros, die neue Anfragen effizienter gewinnen wollen.
-          </p>
-          <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
-            <li>Automatische Erfassung & Qualifizierung von Leads</li>
-            <li>Terminbuchung direkt über den Chat</li>
-            <li>DSGVO-konforme Datenerfassung</li>
-          </ul>
+      <div class="mt-12 grid md:grid-cols-3 gap-8">
+        <!-- LeadBot Starter -->
+        <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-800">LeadBot Starter</h3>
+            <p class="mt-2 text-gray-600">
+              Für Büros, die neue Anfragen effizienter gewinnen wollen.
+            </p>
+            <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
+              <li>Automatische Erfassung & Qualifizierung von Leads</li>
+              <li>Terminbuchung direkt über den Chat</li>
+              <li>DSGVO-konforme Datenerfassung</li>
+            </ul>
+          </div>
+          <div>
+            <a href="#contact" class="block text-center mt-6 px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">
+              Anfrage stellen
+            </a>
+          </div>
         </div>
-        <div>
-         
-          <a href="#contact" class="block text-center mt-6 px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">
-            Anfrage stellen
-          </a>
+
+        <!-- ProjektBot Support -->
+        <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-800">ProjektBot Support</h3>
+            <p class="mt-2 text-gray-600">
+              Für Büros, die Kundenkommunikation im Projektablauf automatisieren wollen.
+            </p>
+            <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
+              <li>Automatische Projekt-Updates & Statusmeldungen</li>
+              <li>Beantwortet Standardfragen Ihrer Kunden</li>
+              <li>Nahtlose Integration in Ihre Projektprozesse</li>
+            </ul>
+          </div>
+          <div>
+            <a href="#contact" class="block text-center mt-6 px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">
+              Anfrage stellen
+            </a>
+          </div>
         </div>
+
+        <!-- StudioBot Custom -->
+        <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-800">StudioBot Custom</h3>
+            <p class="mt-2 text-gray-600">
+              Für Büros, die eine maßgeschneiderte KI-Lösung mit voller Integration suchen.
+            </p>
+            <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
+              <li>Individuelle KI-Strategie & Branding</li>
+              <li>CRM-, Kalender- & API-Integration</li>
+              <li>Analytics, Reporting & fortlaufende Optimierung</li>
+            </ul>
+          </div>
+          <div>
+            <a href="#contact" class="block text-center mt-6 px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">
+              Anfrage stellen
+            </a>
+          </div>
+        </div>
+
       </div>
-
-      <!-- ProjektBot Support -->
-      <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
-        <div>
-          <h3 class="text-xl font-semibold text-gray-800">ProjektBot Support</h3>
-          <p class="mt-2 text-gray-600">
-            Für Büros, die Kundenkommunikation im Projektablauf automatisieren wollen.
-          </p>
-          <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
-            <li>Automatische Projekt-Updates & Statusmeldungen</li>
-            <li>Beantwortet Standardfragen Ihrer Kunden</li>
-            <li>Nahtlose Integration in Ihre Projektprozesse</li>
-          </ul>
-        </div>
-        <div>
-        
-          <a href="#contact" class="block text-center mt-6 px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">
-            Anfrage stellen
-          </a>
-        </div>
-      </div>
-
-      <!-- StudioBot Custom -->
-      <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
-        <div>
-          <h3 class="text-xl font-semibold text-gray-800">StudioBot Custom</h3>
-          <p class="mt-2 text-gray-600">
-            Für Büros, die eine maßgeschneiderte KI-Lösung mit voller Integration suchen.
-          </p>
-          <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
-            <li>Individuelle KI-Strategie & Branding</li>
-            <li>CRM-, Kalender- & API-Integration</li>
-            <li>Analytics, Reporting & fortlaufende Optimierung</li>
-          </ul>
-        </div>
-        <div>
-       
-          
-          <a href="#contact" class="block text-center mt-6 px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">
-            Anfrage stellen
-          </a>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Über uns – mit subtilen Akzenten -->
-<section id="about" class="container mx-auto px-6 py-24 md:py-28 max-w-5xl text-gray-800 relative">
-  <!-- Überschrift -->
-  <div class="text-center mb-12">
-    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900">
-      Künstliche Intelligenz trifft Architektur
-    </h2>
-    <!-- feiner Gradient-Akzent -->
-    <div class="mx-auto mt-4 h-[2px] w-24 bg-gradient-to-r from-indigo-500 via-blue-500 to-sky-400 rounded-full"></div>
-    <p class="mt-6 text-lg text-gray-500 leading-relaxed">
-      Technologie, die Planung spürbar erleichtert – klar, zuverlässig und durchdacht.
-    </p>
-  </div>
-
-  <!-- Textbereich mit vertikalem Akzent -->
-  <div class="relative pl-6 md:pl-10 border-l-[2px] border-gray-200">
-    <div class="space-y-6 text-gray-700 text-[17px] leading-relaxed">
-      <p>
-        Wir gestalten die Zukunft architektonischer Arbeit – dort, wo Kreativität, Effizienz und Technologie verschmelzen.
-      </p>
-      <p>
-        FormFlow Studio ist aus der Idee entstanden, Architekturbüros mit intelligenter Technologie zu entlasten – 
-        ohne das zu ersetzen, was sie besonders macht.
-      </p>
-      <p>
-        Wir entwickeln KI-Systeme, die Routineaufgaben übernehmen und die tägliche Kommunikation einfacher machen. 
-        Ob Chatbots für Projektanfragen, Terminorganisation oder Kundenbetreuung – unsere Lösungen denken mit, 
-        passen sich an und helfen durch klare Abläufe.
-      </p>
-      <p>
-        Wir verstehen, was es heißt, Projekte zu planen und zu gestalten. Deshalb setzen wir auf klare Prozesse, 
-        Zuverlässigkeit und gutes Design. Jede Lösung entsteht in enger Zusammenarbeit mit dem Büro 
-        und wird so individuell wie die Projekte, die dort entstehen.
+  <!-- Über uns – mit subtilen Akzenten -->
+  <section id="about" class="container mx-auto px-6 py-24 md:py-28 max-w-5xl text-gray-800 relative">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900">
+        Künstliche Intelligenz trifft Architektur
+      </h2>
+      <div class="mx-auto mt-4 h-[2px] w-24 bg-gradient-to-r from-indigo-500 via-blue-500 to-sky-400 rounded-full"></div>
+      <p class="mt-6 text-lg text-gray-500 leading-relaxed">
+        Technologie, die Planung spürbar erleichtert – klar, zuverlässig und durchdacht.
       </p>
     </div>
-  </div>
 
-  <!-- Drei Werte -->
-  <ul class="mt-14 grid gap-8 md:grid-cols-3">
-    <li class="p-4 border-t border-gray-200">
-      <h3 class="font-semibold text-gray-900 leading-snug">
-        Architekturverständnis<br><span class="text-gray-600">× KI-Kompetenz</span>
-      </h3>
-      <p class="mt-2 text-sm text-gray-500">Maßgeschneidert für den Büroalltag.</p>
-    </li>
-    <li class="p-4 border-t border-gray-200">
-      <h3 class="font-semibold text-gray-900 leading-snug">
-        Effizienz durch Automatisierung
-      </h3>
-      <p class="mt-2 text-sm text-gray-500">Weniger Routine, mehr Zeit für Entwurf.</p>
-    </li>
-    <li class="p-4 border-t border-gray-200">
-      <h3 class="font-semibold text-gray-900 leading-snug">
-        Verlässlich & partnerschaftlich
-      </h3>
-      <p class="mt-2 text-sm text-gray-500">Wir denken mit, begleiten langfristig und liefern, was funktioniert.</p>
-    </li>
-  </ul>
-</section>
+    <div class="relative pl-6 md:pl-10 border-l-[2px] border-gray-200">
+      <div class="space-y-6 text-gray-700 text-[17px] leading-relaxed">
+        <p>Wir gestalten die Zukunft architektonischer Arbeit – dort, wo Kreativität, Effizienz und Technologie verschmelzen.</p>
+        <p>FormFlow Studio ist aus der Idee entstanden, Architekturbüros mit intelligenter Technologie zu entlasten – ohne das zu ersetzen, was sie besonders macht.</p>
+        <p>Wir entwickeln KI-Systeme, die Routineaufgaben übernehmen und die tägliche Kommunikation einfacher machen. Ob Chatbots für Projektanfragen, Terminorganisation oder Kundenbetreuung – unsere Lösungen denken mit, passen sich an und helfen durch klare Abläufe.</p>
+        <p>Wir verstehen, was es heißt, Projekte zu planen und zu gestalten. Deshalb setzen wir auf klare Prozesse, Zuverlässigkeit und gutes Design. Jede Lösung entsteht in enger Zusammenarbeit mit dem Büro und wird so individuell wie die Projekte, die dort entstehen.</p>
+      </div>
+    </div>
 
-
+    <ul class="mt-14 grid gap-8 md:grid-cols-3">
+      <li class="p-4 border-t border-gray-200">
+        <h3 class="font-semibold text-gray-900 leading-snug">Architekturverständnis<br><span class="text-gray-600">× KI-Kompetenz</span></h3>
+        <p class="mt-2 text-sm text-gray-500">Maßgeschneidert für den Büroalltag.</p>
+      </li>
+      <li class="p-4 border-t border-gray-200">
+        <h3 class="font-semibold text-gray-900 leading-snug">Effizienz durch Automatisierung</h3>
+        <p class="mt-2 text-sm text-gray-500">Weniger Routine, mehr Zeit für Entwurf.</p>
+      </li>
+      <li class="p-4 border-t border-gray-200">
+        <h3 class="font-semibold text-gray-900 leading-snug">Verlässlich & partnerschaftlich</h3>
+        <p class="mt-2 text-sm text-gray-500">Wir denken mit, begleiten langfristig und liefern, was funktioniert.</p>
+      </li>
+    </ul>
+  </section>
 
   <!-- PROOF -->
   <section id="proof" class="bg-gray-50">
@@ -248,25 +256,19 @@
         <div class="reveal lift bg-white rounded-xl shadow p-8 transition">
           <div class="text-5xl font-extrabold text-indigo-700">−40%</div>
           <p class="mt-2 text-gray-600 font-medium">Weniger Zeitaufwand für Anfragen & Erstgespräche</p>
-          <p class="mt-4 text-sm text-gray-500">
-            Chatbots übernehmen Vorqualifizierung und Terminbuchung – Ihr Team konzentriert sich auf die Planung.
-          </p>
+          <p class="mt-4 text-sm text-gray-500">Chatbots übernehmen Vorqualifizierung und Terminbuchung – Ihr Team konzentriert sich auf die Planung.</p>
         </div>
 
         <div class="reveal lift bg-white rounded-xl shadow p-8 transition">
           <div class="text-5xl font-extrabold text-indigo-700">+60%</div>
           <p class="mt-2 text-gray-600 font-medium">Schnellere Kommunikation mit Projektpartnern</p>
-          <p class="mt-4 text-sm text-gray-500">
-            Automatisierte Antworten und Status-Updates reduzieren E-Mail-Flut und Rückfragen.
-          </p>
+          <p class="mt-4 text-sm text-gray-500">Automatisierte Antworten und Status-Updates reduzieren E-Mail-Flut und Rückfragen.</p>
         </div>
 
         <div class="reveal lift bg-white rounded-xl shadow p-8 transition">
           <div class="text-5xl font-extrabold text-indigo-700">24/7</div>
           <p class="mt-2 text-gray-600 font-medium">Verfügbarkeit für Kund:innen & Interessent:innen</p>
-          <p class="mt-4 text-sm text-gray-500">
-            Ihr Büro bleibt immer erreichbar – auch außerhalb der Öffnungszeiten, mit gleichbleibender Qualität.
-          </p>
+          <p class="mt-4 text-sm text-gray-500">Ihr Büro bleibt immer erreichbar – auch außerhalb der Öffnungszeiten, mit gleichbleibender Qualität.</p>
         </div>
       </div>
     </div>
@@ -281,7 +283,8 @@
       <div id="ok" class="hidden bg-green-100 text-green-800 p-3 rounded mb-4 mt-4">✅ Danke! Wir melden uns bald bei Ihnen.</div>
 
       <form action="https://formspree.io/f/xgvppbvb" method="POST" class="mt-6 grid gap-4">
-        <input type="hidden" name="_redirect" value="https://hruskarnikola5-cyber.github.io/formflowstudio-site/?success=1">
+        <!-- Redirect auf deine Domain -->
+        <input type="hidden" name="_redirect" value="https://www.formflowstudio.de/?success=1">
         <input type="text" name="_gotcha" style="display:none">
 
         <input class="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-indigo-200" name="name" placeholder="Name" required>
@@ -291,7 +294,7 @@
 
         <label class="text-sm text-gray-600 flex items-start gap-2">
           <input type="checkbox" required class="mt-1">
-          Ich habe die <a href="/formflowstudio-site/datenschutz.html" class="underline">Datenschutzerklärung</a> gelesen.
+          Ich habe die <a href="/datenschutz.html" class="underline">Datenschutzerklärung</a> gelesen.
         </label>
 
         <button class="px-5 py-3 rounded bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition" type="submit">
@@ -306,9 +309,8 @@
     <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
       <div>© <span id="y"></span> Formflow Studio</div>
       <div class="flex gap-6">
-        <a href="/formflowstudio-site/impressum.html" class="hover:underline">Impressum</a>
-        <a href="/formflowstudio-site/datenschutz.html" class="hover:underline">Datenschutz</a>
-     
+        <a href="/impressum.html" class="hover:underline">Impressum</a>
+        <a href="/datenschutz.html" class="hover:underline">Datenschutz</a>
       </div>
     </div>
   </footer>
@@ -334,10 +336,9 @@
     }, {threshold: .12, rootMargin:'0px 0px -12% 0px'});
     document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
 
-    // Aktive Nav-Links beim Scrollen (nur auf Index sinnvoll)
+    // Aktive Nav-Links beim Scrollen
     const links = Array.from(document.querySelectorAll('.navlink'));
-    const ids = ['#services','#about','#proof'];
-    const secs = ids.map(id => document.querySelector(id)).filter(Boolean);
+    const secs = ['services','about','proof'].map(id => document.getElementById(id)).filter(Boolean);
     function setActive(){
       let cur = null;
       secs.forEach(s=>{
@@ -345,7 +346,7 @@
         if (r.top <= 120 && r.bottom > 120) cur = '#'+s.id;
       });
       links.forEach(a=>{
-        const active = a.getAttribute('href').endsWith(cur || '___');
+        const active = a.getAttribute('href') === (cur || '___');
         a.classList.toggle('text-gray-900', active);
         a.classList.toggle('font-medium', active);
       });
@@ -369,121 +370,91 @@
     }
   </script>
 
-<!-- === KI-Assistent – Floating Launcher (optimiert) === -->
-<style>
-  /* Launcher-Button */
-  .ff-chat-launcher {
-    position: fixed;
-    right: 32px;        /* weiter vom Rand */
-    bottom: 32px;
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: #4f46e5;
-    color: #fff;
-    border-radius: 9999px;
-    padding: 0.8rem 1.2rem;
-    font-weight: 600;
-    box-shadow: 0 8px 28px -10px rgba(79, 70, 229, 0.5);
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
-  .ff-chat-launcher:hover {
-    background: #4338ca;
-    transform: translateY(-3px);
-    box-shadow: 0 14px 40px -12px rgba(79, 70, 229, 0.55);
-  }
+  <!-- === KI-Assistent – Floating Launcher === -->
+  <style>
+    .ff-chat-launcher {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #4f46e5;
+      color: #fff;
+      border-radius: 9999px;
+      padding: 0.8rem 1.2rem;
+      font-weight: 600;
+      box-shadow: 0 8px 28px -10px rgba(79, 70, 229, 0.5);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .ff-chat-launcher:hover {
+      background: #4338ca;
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px -12px rgba(79, 70, 229, 0.55);
+    }
+    .ff-chat-launcher svg { width: 20px; height: 20px; fill: currentColor; }
 
-  /* Sprechblasen-Icon */
-  .ff-chat-launcher svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-  }
+    .ff-chat-panel {
+      position: fixed;
+      right: 20px;
+      bottom: 96px;
+      z-index: 50;
+      height: 580px;
+      background: #fff;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(0,0,0,.35);
+      border: 1px solid rgba(0,0,0,.08);
+      display: none;
+    }
 
-  /* Chatfenster */
-  .ff-chat-panel {
-    position: fixed;
-    right: 32px;
-    bottom: 100px;
-    z-index: 50;
-    width: 400px;
-    max-width: 92vw;
-    height: 580px;
-    background: #fff;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 25px 60px -15px rgba(0,0,0,.35);
-    border: 1px solid rgba(0,0,0,.08);
-    display: none;
-  }
+    .ff-chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1rem;
+      background: #f9fafb;
+      border-bottom: 1px solid #e5e7eb;
+      font-weight: 600;
+      color: #1f2937;
+    }
+    .ff-close { cursor: pointer; font-size: 20px; line-height: 1; transition: opacity 0.2s ease; }
+    .ff-close:hover { opacity: .7; }
+  </style>
 
-  .ff-chat-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.8rem 1rem;
-    background: #f9fafb;
-    border-bottom: 1px solid #e5e7eb;
-    font-weight: 600;
-    color: #1f2937;
-  }
+  <button id="ffOpen" class="ff-chat-launcher">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3C6.48 3 2 6.73 2 11c0 1.87.8 3.58 2.15 4.94L3 21l4.35-1.9C8.44 19.7 10.15 20 12 20c5.52 0 10-3.73 10-9s-4.48-8-10-8zm-1 9H7v-2h4v2zm6 0h-4v-2h4v2z"/></svg>
+    Chat
+  </button>
 
-  .ff-close {
-    cursor: pointer;
-    font-size: 20px;
-    line-height: 1;
-    transition: opacity 0.2s ease;
-  }
-  .ff-close:hover { opacity: 0.7; }
-</style>
-
-<!-- Launcher -->
-<button id="ffOpen" class="ff-chat-launcher">
-  <!-- Sprechblasen-Symbol -->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M12 3C6.48 3 2 6.73 2 11c0 1.87.8 3.58 2.15 4.94L3 21l4.35-1.9C8.44 19.7 10.15 20 12 20c5.52 0 10-3.73 10-9s-4.48-8-10-8zm-1 9H7v-2h4v2zm6 0h-4v-2h4v2z"/>
-  </svg>
-  Chat
-</button>
-
-<!-- Panel -->
-<div id="ffPanel" class="ff-chat-panel">
-  <div class="ff-chat-header">
-    <span>FormFlow KI-Assistent</span>
-    <span id="ffClose" class="ff-close">✕</span>
+  <div id="ffPanel" class="ff-chat-panel">
+    <div class="ff-chat-header">
+      <span>FormFlow KI-Assistent</span>
+      <span id="ffClose" class="ff-close">✕</span>
+    </div>
+    <iframe id="ffFrame" title="FormFlow KI-Assistent"
+            style="width:100%; height:100%; border:0; background:#fff;"
+            loading="lazy" allow="clipboard-write; clipboard-read"></iframe>
   </div>
-  <iframe
-    id="ffFrame"
-    title="FormFlow KI-Assistent"
-    style="width:100%; height:100%; border:0; background:#fff;"
-    loading="lazy"
-    allow="clipboard-write; clipboard-read"
-  ></iframe>
-</div>
 
-<!-- Script -->
-<script>
-  (function(){
-    const SPACE_URL = "https://nihru-formflow-assistant.hf.space/?__theme=light";
-    const openBtn = document.getElementById('ffOpen');
-    const closeBtn = document.getElementById('ffClose');
-    const panel = document.getElementById('ffPanel');
-    const frame = document.getElementById('ffFrame');
+  <script>
+    (function(){
+      const SPACE_URL = "https://nihru-formflow-assistant.hf.space/?__theme=light";
+      const openBtn = document.getElementById('ffOpen');
+      const closeBtn = document.getElementById('ffClose');
+      const panel = document.getElementById('ffPanel');
+      const frame = document.getElementById('ffFrame');
 
-    openBtn.addEventListener('click', () => {
-      if (!frame.src) frame.src = SPACE_URL;
-      panel.style.display = 'block';
-    });
-
-    closeBtn.addEventListener('click', () => {
-      panel.style.display = 'none';
-    });
-  })();
-</script>
-
+      openBtn.addEventListener('click', () => {
+        if (!frame.src) frame.src = SPACE_URL;
+        panel.style.display = 'block';
+      });
+      closeBtn.addEventListener('click', () => {
+        panel.style.display = 'none';
+      });
+    })();
+  </script>
 </body>
 </html>
-
-
