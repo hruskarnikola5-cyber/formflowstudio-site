@@ -2,18 +2,11 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <!-- Verhindert horizontales Scrollen, verbessert Mobile-Layout -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Formflow Studio – KI-Chatbots für Architekturbüros</title>
   <meta name="description" content="Formflow Studio entwickelt KI-Chatbots für Architekturbüros: Leads sichern, Termine buchen, Routinekommunikation automatisieren.">
 
-  <!-- Favicon: passe ggf. auf eine vorhandene Datei an -->
   <link rel="icon" href="logo.svg">
-  <!-- Falls kein SVG vorhanden ist, nimm dein PNG:
-  <link rel="icon" href="Photoroom_20251101_214345.png" type="image/png">
-  -->
-
-  <!-- Fonts & Tailwind -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -71,18 +64,14 @@
 </head>
 <body class="text-gray-800 antialiased font-sans">
 
-  <!-- NAVBAR -->
   <header id="siteHeader" class="sticky top-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
     <div class="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-      <!-- Root-Link statt /formflowstudio-site/ -->
       <a href="/" class="flex items-center gap-3">
         <img src="Photoroom_20251101_214345.png" alt="Formflow Studio Logo" class="h-10 w-10 object-contain md:h-12 md:w-12">
         <span class="text-base md:text-lg font-semibold tracking-tight text-gray-900">Formflow Studio</span>
       </a>
 
-      <!-- Desktop -->
       <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
-        <!-- Saubere Anker-Links ohne Unterordner -->
         <a href="#services" class="navlink hover:text-gray-900 transition">Services</a>
         <a href="#about" class="navlink hover:text-gray-900 transition">Über uns</a>
         <a href="#proof" class="navlink hover:text-gray-900 transition">Ergebnisse</a>
@@ -91,13 +80,11 @@
         </a>
       </nav>
 
-      <!-- Mobile toggle -->
       <button id="menuBtn" aria-label="Menü" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 text-gray-700">
         ☰
       </button>
     </div>
 
-    <!-- Mobile Nav -->
     <nav id="mobileNav" class="md:hidden hidden border-t border-gray-100">
       <div class="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-3">
         <a href="#services" class="py-2">Services</a>
@@ -108,11 +95,9 @@
     </nav>
   </header>
 
-  <!-- HERO -->
   <section class="relative bg-gradient-to-b from-white to-gray-50">
     <div class="mx-auto max-w-7xl px-6 py-24 md:py-32">
       <div class="max-w-3xl mx-auto text-center">
-        <!-- Kleinere Mobile-Größe + Zentrierung abgesichert -->
         <h1 class="hero-title reveal mt-0 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-gray-900 leading-tight text-center">
           KI-Chatbots: Die Zukunft für Architekturbüros
         </h1>
@@ -134,13 +119,6 @@
     <div class="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
   </section>
 
-
-<div class="demo-section">
-  <a href="/demo.html" class="demo-btn">🚀 Demo testen</a>
-</div>
-
-
-  <!-- SERVICES -->
   <section id="services" class="bg-gray-50">
     <div class="container mx-auto px-6 py-20">
       <h2 class="text-3xl md:text-4xl font-bold text-center">
@@ -151,7 +129,6 @@
       </p>
 
       <div class="mt-12 grid md:grid-cols-3 gap-8">
-        <!-- LeadBot Starter -->
         <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
           <div>
             <h3 class="text-xl font-semibold text-gray-800">LeadBot Starter</h3>
@@ -171,7 +148,6 @@
           </div>
         </div>
 
-        <!-- ProjektBot Support -->
         <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
           <div>
             <h3 class="text-xl font-semibold text-gray-800">ProjektBot Support</h3>
@@ -191,7 +167,6 @@
           </div>
         </div>
 
-        <!-- StudioBot Custom -->
         <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
           <div>
             <h3 class="text-xl font-semibold text-gray-800">StudioBot Custom</h3>
@@ -215,7 +190,6 @@
     </div>
   </section>
 
-  <!-- Über uns – mit subtilen Akzenten -->
   <section id="about" class="container mx-auto px-6 py-24 md:py-28 max-w-5xl text-gray-800 relative">
     <div class="text-center mb-12">
       <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900">
@@ -252,7 +226,6 @@
     </ul>
   </section>
 
-  <!-- PROOF -->
   <section id="proof" class="bg-gray-50">
     <div class="mx-auto max-w-7xl px-6 py-20 text-center">
       <h2 class="reveal text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">Ergebnisse, die überzeugen</h2>
@@ -280,7 +253,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact" class="bg-gray-50">
     <div class="mx-auto max-w-3xl px-6 py-16">
       <h2 class="reveal text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">Gestalten Sie die Zukunft Ihres Büros mit uns.</h2>
@@ -289,7 +261,6 @@
       <div id="ok" class="hidden bg-green-100 text-green-800 p-3 rounded mb-4 mt-4">✅ Danke! Wir melden uns bald bei Ihnen.</div>
 
       <form action="https://formspree.io/f/xgvppbvb" method="POST" class="mt-6 grid gap-4">
-        <!-- Redirect auf deine Domain -->
         <input type="hidden" name="_redirect" value="https://www.formflowstudio.de/?success=1">
         <input type="text" name="_gotcha" style="display:none">
 
@@ -310,7 +281,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="mx-auto max-w-7xl px-6 py-10 text-sm text-gray-500">
     <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
       <div>© <span id="y"></span> Formflow Studio</div>
@@ -321,7 +291,6 @@
     </div>
   </footer>
 
-  <!-- JS -->
   <script>
     // Jahr im Footer
     const y = document.getElementById('y');
@@ -375,7 +344,6 @@
       if (ok) ok.classList.remove('hidden');
     }
   </script>
-<!-- === KI-Assistent – Floating Launcher mit DSGVO-Zustimmung (1× pro Besuch) === -->
 <style>
   /* Launcher-Button */
   .ff-chat-launcher {
@@ -428,7 +396,6 @@
   .ff-consent .cancel { background:#e5e7eb; color:#111827; }
 </style>
 
-<!-- Launcher -->
 <button id="ffOpen" class="ff-chat-launcher" aria-label="Chat öffnen/schließen">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
@@ -436,9 +403,6 @@
   <span>Chat</span>
 </button>
 
-
-
-<!-- Panel -->
 <div id="ffPanel" class="ff-chat-panel" role="dialog" aria-modal="true" aria-labelledby="ffTitle">
   <div class="ff-chat-header">
     <span id="ffTitle">FormFlow KI-Assistent</span>
@@ -452,7 +416,6 @@
   ></iframe>
 </div>
 
-<!-- DSGVO Consent -->
 <div id="ffConsent" class="ff-consent">
   <p>
     Durch Start des Chats werden Inhalte von
