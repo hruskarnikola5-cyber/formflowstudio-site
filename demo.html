@@ -1,122 +1,144 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KI-Chatbot Demo | FormFlowStudio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Demo – FormFlowStudio</title>
+
+    <!-- gleiche Schrift wie auf der Website -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
+            font-family: 'Inter', sans-serif;
+            background: #f9fafb;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #222;
+            padding: 0;
+            color: #1f2937;
         }
 
-        header {
-            background: #111;
-            color: white;
-            padding: 20px 30px;
+        /* Header oben */
+        .header {
+            width: 100%;
+            padding: 20px 40px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+        }
+        .header a {
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #111827;
+            transition: 0.2s ease;
+        }
+        .header a:hover {
+            opacity: 0.7;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 26px;
-        }
-
+        /* Main Container */
         .container {
-            max-width: 950px;
-            margin: 40px auto;
-            background: white;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
         }
 
-        h2 {
-            margin-top: 0;
-            font-size: 28px;
-            color: #222;
+        /* Demo Box */
+        .demo-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #111827;
         }
 
         p {
-            line-height: 1.6;
             font-size: 17px;
-        }
-
-        .demo-box {
-            margin-top: 30px;
-            border: 2px solid #eaeaea;
-            border-radius: 14px;
-            overflow: hidden;
-            height: 650px;
-        }
-
-        footer {
-            margin-top: 40px;
-            padding: 20px;
-            text-align: center;
-            color: #777;
-            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.6;
         }
 
         .badge {
             display: inline-block;
-            padding: 6px 12px;
-            background: #e6f3ff;
-            color: #0366d6;
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 6px 14px;
             border-radius: 8px;
             font-size: 14px;
-            margin-bottom: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Zurück Button */
+        .back-btn {
+            margin-top: 30px;
+            display: inline-block;
+            background: #4f46e5;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.25s;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.25);
+        }
+        .back-btn:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        /* Center Chat iframe */
+        .chat-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 16px;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>FormFlowStudio</h1>
-</header>
-
-<div class="container">
-
-    <span class="badge">🔧 Live-Demo</span>
-    <h2>Testen Sie unseren KI-Chatbot für Architekten</h2>
-
-    <p>
-        Dies ist eine öffentliche Demo des Architekten-Chatbots von <strong>FormFlowStudio</strong>.  
-        Der Chatbot beantwortet typische Kundenfragen, gibt Auskunft zu Leistungen, Preisen und  
-        Projektabläufen — genau wie auf einer echten Website.
-    </p>
-
-    <p>
-        💡 <strong>Hinweis:</strong>  
-        Die Demo ist funktional eingeschränkt.  
-        Die Vollversion enthält individuelle Wissensbasis, Branding, API-Integrationen und vollständigen Text-Support.
-    </p>
-
-    <!-- ==============================
-         CHATBOT DEMO
-         ============================== -->
-
-    <div class="demo-box">
-        <!-- Ersetze die SRC-URL unten durch deinen HuggingFace / Hosting Link -->
-        <iframe 
-            src="DEIN_CHATBOT_LINK_HIER" 
-            width="100%" 
-            height="100%" 
-            frameborder="0">
-        </iframe>
+    <!-- Header oben -->
+    <div class="header">
+        <a href="https://formflowstudio.de">FormFlowStudio</a>
     </div>
 
-</div>
+    <!-- Inhalt -->
+    <div class="container">
+        <div class="demo-box">
 
-<footer>
-    © 2025 FormFlowStudio – KI-Automatisierungen für Architekten
-</footer>
+            <div class="badge">🔎 Live-Demo</div>
+
+            <h1>Testen Sie unseren KI-Chatbot für Architekten</h1>
+
+            <p>
+                Dies ist eine öffentliche Demo des Architekten-Chatbots von <strong>FormFlowStudio</strong>.
+                Der Chatbot beantwortet typische Kundenfragen, erklärt Leistungen, Preise und Projektabläufe —
+                so wie er später auf der Website eines Architektur­büros eingesetzt wird.
+            </p>
+
+            <p style="background:#fff7d6; padding:12px 15px; border-radius:10px; margin-top:20px;">
+                💡 <strong>Hinweis:</strong> Die Demo ist eingeschränkt. Die Vollversion enthält individuelle Wissensbasis,
+                Branding, Datenanbindung und komplette API-Integration.
+            </p>
+
+            <!-- Chatbot iframe -->
+            <iframe class="chat-frame" src="https://nihru-formflow-chatbot.hf.space"></iframe>
+
+            <!-- Zurück Button -->
+            <a href="https://formflowstudio.de" class="back-btn">⬅️ Zurück zur Website</a>
+
+        </div>
+    </div>
 
 </body>
 </html>
