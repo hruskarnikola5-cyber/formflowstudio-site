@@ -2,12 +2,18 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
+  <!-- Verhindert horizontales Scrollen, verbessert Mobile-Layout -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Formflow Studio – KI-Chatbots für Architekturbüros</title>
   <meta name="description" content="Formflow Studio entwickelt KI-Chatbots für Architekturbüros: Leads sichern, Termine buchen, Routinekommunikation automatisieren.">
 
+  <!-- Favicon: passe ggf. auf eine vorhandene Datei an -->
   <link rel="icon" href="logo.svg">
+  <!-- Falls kein SVG vorhanden ist, nimm dein PNG:
+  <link rel="icon" href="Photoroom_20251101_214345.png" type="image/png">
+  -->
 
+  <!-- Fonts & Tailwind -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,8 +31,13 @@
   </script>
 
   <style>
-    html, body { overflow-x: hidden; max-width: 100%; }
+    /* --- Global: horizontales Scrollen verhindern --- */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
     *, *::before, *::after { box-sizing: border-box; }
+
     html{scroll-behavior:smooth}
     .section{padding:5rem 0}
     .reveal{opacity:0;transform:translateY(6px);transition:opacity .7s ease,transform .7s ease}
@@ -34,24 +45,44 @@
     .lift{transition:transform .25s ease, box-shadow .25s ease}
     .lift:hover{transform:translateY(-4px); box-shadow:0 22px 60px -30px rgba(15,23,42,.28)}
     .header-shadow{box-shadow:0 10px 20px -20px rgba(0,0,0,.25)}
-    .hero-title { text-wrap: balance; hyphens: auto; }
-    
-    /* Chat Styles */
-    .ff-chat-panel { width: min(400px, calc(100vw - 40px)); right: 20px; bottom: 96px; }
-    .ff-chat-launcher { right: 20px; bottom: 20px; }
-    @supports (padding: max(0px)) { body { padding-bottom: max(0px, env(safe-area-inset-bottom)); } }
+
+    /* Bessere Überschrift auf Mobile */
+    .hero-title {
+      text-wrap: balance;
+      hyphens: auto;
+    }
+
+    /* Sicherstellen, dass das Chatpanel auf Mobile nie breiter ist als der Viewport */
+    .ff-chat-panel {
+      width: min(400px, calc(100vw - 40px));
+      right: 20px;
+      bottom: 96px;
+    }
+    .ff-chat-launcher {
+      right: 20px;
+      bottom: 20px;
+    }
+
+    /* Verhindert Layout-Jitter durch iOS Safe Areas */
+    @supports (padding: max(0px)) {
+      body { padding-bottom: max(0px, env(safe-area-inset-bottom)); }
+    }
   </style>
 </head>
 <body class="text-gray-800 antialiased font-sans">
 
+  <!-- NAVBAR -->
   <header id="siteHeader" class="sticky top-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
     <div class="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+      <!-- Root-Link statt /formflowstudio-site/ -->
       <a href="/" class="flex items-center gap-3">
         <img src="Photoroom_20251101_214345.png" alt="Formflow Studio Logo" class="h-10 w-10 object-contain md:h-12 md:w-12">
         <span class="text-base md:text-lg font-semibold tracking-tight text-gray-900">Formflow Studio</span>
       </a>
 
+      <!-- Desktop -->
       <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
+        <!-- Saubere Anker-Links ohne Unterordner -->
         <a href="#services" class="navlink hover:text-gray-900 transition">Services</a>
         <a href="#about" class="navlink hover:text-gray-900 transition">Über uns</a>
         <a href="#proof" class="navlink hover:text-gray-900 transition">Ergebnisse</a>
@@ -60,9 +91,13 @@
         </a>
       </nav>
 
-      <button id="menuBtn" aria-label="Menü" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 text-gray-700">☰</button>
+      <!-- Mobile toggle -->
+      <button id="menuBtn" aria-label="Menü" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 text-gray-700">
+        ☰
+      </button>
     </div>
 
+    <!-- Mobile Nav -->
     <nav id="mobileNav" class="md:hidden hidden border-t border-gray-100">
       <div class="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-3">
         <a href="#services" class="py-2">Services</a>
@@ -73,9 +108,11 @@
     </nav>
   </header>
 
+  <!-- HERO -->
   <section class="relative bg-gradient-to-b from-white to-gray-50">
     <div class="mx-auto max-w-7xl px-6 py-24 md:py-32">
       <div class="max-w-3xl mx-auto text-center">
+        <!-- Kleinere Mobile-Größe + Zentrierung abgesichert -->
         <h1 class="hero-title reveal mt-0 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-gray-900 leading-tight text-center">
           KI-Chatbots: Die Zukunft für Architekturbüros
         </h1>
@@ -84,89 +121,115 @@
           Automatisieren Sie Kundenanfragen, optimieren Sie Projekte und gewinnen Sie Zeit für kreative Planung.
         </p>
 
-        <div class="reveal mt-10 flex flex-col items-center justify-center gap-6">
-          <div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
-            <a href="#services" class="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-indigo-600 text-white font-medium shadow-sm hover:shadow-md hover:bg-indigo-700 transition w-full sm:w-auto">
-              Mehr erfahren
-            </a>
-            <a href="#contact" class="inline-flex items-center justify-center h-12 px-6 rounded-xl border border-gray-300 text-gray-900 font-medium hover:border-gray-400 hover:bg-white transition w-full sm:w-auto">
-              Kostenloses Erstgespräch
-            </a>
-          </div>
-          
-          <a href="demo.html" class="group inline-flex items-center gap-2 text-indigo-600 font-medium hover:text-indigo-700 transition">
-            <span>🚀</span>
-            <span class="underline decoration-transparent group-hover:decoration-indigo-600 underline-offset-4 transition-all">
-              Live-Demo testen
-            </span>
+        <div class="reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#services" class="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-indigo-600 text-white font-medium shadow-sm hover:shadow-md hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition">
+            Mehr erfahren
+          </a>
+          <a href="#contact" class="inline-flex items-center justify-center h-12 px-6 rounded-xl border border-gray-300 text-gray-900 font-medium hover:border-gray-400 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 transition">
+            Kostenloses Erstgespräch
           </a>
         </div>
-
       </div>
     </div>
     <div class="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
   </section>
 
+  <!-- SERVICES -->
   <section id="services" class="bg-gray-50">
     <div class="container mx-auto px-6 py-20">
-      <h2 class="text-3xl md:text-4xl font-bold text-center">Smarte KI-Lösungen für Architekturbüros</h2>
-      <p class="mt-3 text-center text-gray-600 text-lg">Wählen Sie das Paket, das zu Ihrem Büro passt.</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center">
+        Smarte KI-Lösungen für Architekturbüros
+      </h2>
+      <p class="mt-3 text-center text-gray-600 text-lg">
+        Wählen Sie das Paket, das zu Ihrem Büro passt.
+      </p>
 
       <div class="mt-12 grid md:grid-cols-3 gap-8">
+        <!-- LeadBot Starter -->
         <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
           <div>
             <h3 class="text-xl font-semibold text-gray-800">LeadBot Starter</h3>
-            <p class="mt-2 text-gray-600">Für Büros, die neue Anfragen effizienter gewinnen wollen.</p>
+            <p class="mt-2 text-gray-600">
+              Für Büros, die neue Anfragen effizienter gewinnen wollen.
+            </p>
             <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
               <li>Automatische Erfassung & Qualifizierung von Leads</li>
               <li>Terminbuchung direkt über den Chat</li>
               <li>DSGVO-konforme Datenerfassung</li>
             </ul>
           </div>
-          <div class="mt-6"><a href="#contact" class="block text-center px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">Anfrage stellen</a></div>
+          <div>
+            <a href="#contact" class="block text-center mt-6 px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">
+              Anfrage stellen
+            </a>
+          </div>
         </div>
 
+        <!-- ProjektBot Support -->
         <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
           <div>
             <h3 class="text-xl font-semibold text-gray-800">ProjektBot Support</h3>
-            <p class="mt-2 text-gray-600">Für Büros, die Kundenkommunikation im Projektablauf automatisieren wollen.</p>
+            <p class="mt-2 text-gray-600">
+              Für Büros, die Kundenkommunikation im Projektablauf automatisieren wollen.
+            </p>
             <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
               <li>Automatische Projekt-Updates & Statusmeldungen</li>
               <li>Beantwortet Standardfragen Ihrer Kunden</li>
               <li>Nahtlose Integration in Ihre Projektprozesse</li>
             </ul>
           </div>
-          <div class="mt-6"><a href="#contact" class="block text-center px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">Anfrage stellen</a></div>
+          <div>
+            <a href="#contact" class="block text-center mt-6 px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">
+              Anfrage stellen
+            </a>
+          </div>
         </div>
 
+        <!-- StudioBot Custom -->
         <div class="bg-white rounded-xl shadow p-8 flex flex-col justify-between hover:shadow-lg transition">
           <div>
             <h3 class="text-xl font-semibold text-gray-800">StudioBot Custom</h3>
-            <p class="mt-2 text-gray-600">Für Büros, die eine maßgeschneiderte KI-Lösung mit voller Integration suchen.</p>
+            <p class="mt-2 text-gray-600">
+              Für Büros, die eine maßgeschneiderte KI-Lösung mit voller Integration suchen.
+            </p>
             <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
               <li>Individuelle KI-Strategie & Branding</li>
               <li>CRM-, Kalender- & API-Integration</li>
               <li>Analytics, Reporting & fortlaufende Optimierung</li>
             </ul>
           </div>
-          <div class="mt-6"><a href="#contact" class="block text-center px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">Anfrage stellen</a></div>
+          <div>
+            <a href="#contact" class="block text-center mt-6 px-5 py-3 rounded bg-blue-700 text-white hover:bg-blue-800">
+              Anfrage stellen
+            </a>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
+  <!-- Über uns – mit subtilen Akzenten -->
   <section id="about" class="container mx-auto px-6 py-24 md:py-28 max-w-5xl text-gray-800 relative">
     <div class="text-center mb-12">
-      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900">Künstliche Intelligenz trifft Architektur</h2>
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900">
+        Künstliche Intelligenz trifft Architektur
+      </h2>
       <div class="mx-auto mt-4 h-[2px] w-24 bg-gradient-to-r from-indigo-500 via-blue-500 to-sky-400 rounded-full"></div>
-      <p class="mt-6 text-lg text-gray-500 leading-relaxed">Technologie, die Planung spürbar erleichtert – klar, zuverlässig und durchdacht.</p>
+      <p class="mt-6 text-lg text-gray-500 leading-relaxed">
+        Technologie, die Planung spürbar erleichtert – klar, zuverlässig und durchdacht.
+      </p>
     </div>
-    <div class="relative pl-6 md:pl-10 border-l-[2px] border-gray-200 space-y-6 text-gray-700 text-[17px] leading-relaxed">
-      <p>Wir gestalten die Zukunft architektonischer Arbeit – dort, wo Kreativität, Effizienz und Technologie verschmelzen.</p>
-      <p>FormFlow Studio ist aus der Idee entstanden, Architekturbüros mit intelligenter Technologie zu entlasten – ohne das zu ersetzen, was sie besonders macht.</p>
-      <p>Wir entwickeln KI-Systeme, die Routineaufgaben übernehmen und die tägliche Kommunikation einfacher machen. Ob Chatbots für Projektanfragen, Terminorganisation oder Kundenbetreuung – unsere Lösungen denken mit, passen sich an und helfen durch klare Abläufe.</p>
-      <p>Wir verstehen, was es heißt, Projekte zu planen und zu gestalten. Deshalb setzen wir auf klare Prozesse, Zuverlässigkeit und gutes Design. Jede Lösung entsteht in enger Zusammenarbeit mit dem Büro und wird so individuell wie die Projekte, die dort entstehen.</p>
+
+    <div class="relative pl-6 md:pl-10 border-l-[2px] border-gray-200">
+      <div class="space-y-6 text-gray-700 text-[17px] leading-relaxed">
+        <p>Wir gestalten die Zukunft architektonischer Arbeit – dort, wo Kreativität, Effizienz und Technologie verschmelzen.</p>
+        <p>FormFlow Studio ist aus der Idee entstanden, Architekturbüros mit intelligenter Technologie zu entlasten – ohne das zu ersetzen, was sie besonders macht.</p>
+        <p>Wir entwickeln KI-Systeme, die Routineaufgaben übernehmen und die tägliche Kommunikation einfacher machen. Ob Chatbots für Projektanfragen, Terminorganisation oder Kundenbetreuung – unsere Lösungen denken mit, passen sich an und helfen durch klare Abläufe.</p>
+        <p>Wir verstehen, was es heißt, Projekte zu planen und zu gestalten. Deshalb setzen wir auf klare Prozesse, Zuverlässigkeit und gutes Design. Jede Lösung entsteht in enger Zusammenarbeit mit dem Büro und wird so individuell wie die Projekte, die dort entstehen.</p>
+      </div>
     </div>
+
     <ul class="mt-14 grid gap-8 md:grid-cols-3">
       <li class="p-4 border-t border-gray-200">
         <h3 class="font-semibold text-gray-900 leading-snug">Architekturverständnis<br><span class="text-gray-600">× KI-Kompetenz</span></h3>
@@ -183,21 +246,25 @@
     </ul>
   </section>
 
+  <!-- PROOF -->
   <section id="proof" class="bg-gray-50">
     <div class="mx-auto max-w-7xl px-6 py-20 text-center">
       <h2 class="reveal text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">Ergebnisse, die überzeugen</h2>
       <p class="reveal mt-3 text-gray-600 text-lg">So profitieren Architekturbüros von intelligenter Automatisierung – messbar, effizient und praxisnah.</p>
+
       <div class="mt-12 grid md:grid-cols-3 gap-8">
         <div class="reveal lift bg-white rounded-xl shadow p-8 transition">
           <div class="text-5xl font-extrabold text-indigo-700">−40%</div>
           <p class="mt-2 text-gray-600 font-medium">Weniger Zeitaufwand für Anfragen & Erstgespräche</p>
           <p class="mt-4 text-sm text-gray-500">Chatbots übernehmen Vorqualifizierung und Terminbuchung – Ihr Team konzentriert sich auf die Planung.</p>
         </div>
+
         <div class="reveal lift bg-white rounded-xl shadow p-8 transition">
           <div class="text-5xl font-extrabold text-indigo-700">+60%</div>
           <p class="mt-2 text-gray-600 font-medium">Schnellere Kommunikation mit Projektpartnern</p>
           <p class="mt-4 text-sm text-gray-500">Automatisierte Antworten und Status-Updates reduzieren E-Mail-Flut und Rückfragen.</p>
         </div>
+
         <div class="reveal lift bg-white rounded-xl shadow p-8 transition">
           <div class="text-5xl font-extrabold text-indigo-700">24/7</div>
           <p class="mt-2 text-gray-600 font-medium">Verfügbarkeit für Kund:innen & Interessent:innen</p>
@@ -207,6 +274,7 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact" class="bg-gray-50">
     <div class="mx-auto max-w-3xl px-6 py-16">
       <h2 class="reveal text-3xl md:text-4xl font-semibold tracking-tight text-gray-900">Gestalten Sie die Zukunft Ihres Büros mit uns.</h2>
@@ -215,16 +283,20 @@
       <div id="ok" class="hidden bg-green-100 text-green-800 p-3 rounded mb-4 mt-4">✅ Danke! Wir melden uns bald bei Ihnen.</div>
 
       <form action="https://formspree.io/f/xgvppbvb" method="POST" class="mt-6 grid gap-4">
+        <!-- Redirect auf deine Domain -->
         <input type="hidden" name="_redirect" value="https://www.formflowstudio.de/?success=1">
         <input type="text" name="_gotcha" style="display:none">
+
         <input class="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-indigo-200" name="name" placeholder="Name" required>
         <input class="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-indigo-200" type="email" name="email" placeholder="E-Mail" required>
         <input class="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-indigo-200" name="firma" placeholder="Firma">
         <textarea class="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-indigo-200" name="nachricht" rows="5" placeholder="Nachricht"></textarea>
+
         <label class="text-sm text-gray-600 flex items-start gap-2">
           <input type="checkbox" required class="mt-1">
           Ich habe die <a href="/datenschutz.html" class="underline">Datenschutzerklärung</a> gelesen.
         </label>
+
         <button class="px-5 py-3 rounded bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition" type="submit">
           Gespräch vereinbaren
         </button>
@@ -232,6 +304,7 @@
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="mx-auto max-w-7xl px-6 py-10 text-sm text-gray-500">
     <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
       <div>© <span id="y"></span> Formflow Studio</div>
@@ -242,85 +315,234 @@
     </div>
   </footer>
 
+  <!-- JS -->
   <script>
-    const y = document.getElementById('y'); if (y) y.textContent = new Date().getFullYear();
+    // Jahr im Footer
+    const y = document.getElementById('y');
+    if (y) y.textContent = new Date().getFullYear();
+
+    // Mobile-Menü toggle (robust)
     const menuBtn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
-    if (menuBtn && mobileNav) { menuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden')); }
+    if (menuBtn && mobileNav) {
+      menuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+    }
+
+    // Reveal on scroll
     const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+      });
     }, {threshold: .12, rootMargin:'0px 0px -12% 0px'});
     document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Aktive Nav-Links beim Scrollen
     const links = Array.from(document.querySelectorAll('.navlink'));
     const secs = ['services','about','proof'].map(id => document.getElementById(id)).filter(Boolean);
     function setActive(){
       let cur = null;
-      secs.forEach(s=>{ const r = s.getBoundingClientRect(); if (r.top <= 120 && r.bottom > 120) cur = '#'+s.id; });
+      secs.forEach(s=>{
+        const r = s.getBoundingClientRect();
+        if (r.top <= 120 && r.bottom > 120) cur = '#'+s.id;
+      });
       links.forEach(a=>{
         const active = a.getAttribute('href') === (cur || '___');
         a.classList.toggle('text-gray-900', active);
         a.classList.toggle('font-medium', active);
       });
     }
-    window.addEventListener('scroll', setActive, {passive:true}); setActive();
+    window.addEventListener('scroll', setActive, {passive:true});
+    setActive();
+
+    // Header-Schatten
     const header = document.getElementById('siteHeader');
-    function shadow(){ if (window.scrollY > 6) header.classList.add('header-shadow'); else header.classList.remove('header-shadow'); }
-    window.addEventListener('scroll', shadow, {passive:true}); shadow();
+    function shadow(){
+      if (window.scrollY > 6) header.classList.add('header-shadow');
+      else header.classList.remove('header-shadow');
+    }
+    window.addEventListener('scroll', shadow, {passive:true});
+    shadow();
+
+    // Erfolgsmeldung nach Redirect
     if (new URLSearchParams(window.location.search).get('success') === '1') {
-      const ok = document.getElementById('ok'); if (ok) ok.classList.remove('hidden');
+      const ok = document.getElementById('ok');
+      if (ok) ok.classList.remove('hidden');
     }
   </script>
+<!-- === KI-Assistent – Floating Launcher mit DSGVO-Zustimmung (1× pro Besuch) === -->
+<style>
+  /* Launcher-Button */
+  .ff-chat-launcher {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: #4f46e5;
+    color: #fff;
+    border-radius: 9999px;
+    padding: 1rem 1.4rem;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.5);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .ff-chat-launcher:hover { background:#4338ca; transform:translateY(-3px); box-shadow:0 14px 45px -12px rgba(79,70,229,.55); }
+  .ff-chat-launcher svg { width: 22px; height: 22px; fill: currentColor; }
 
-  <style>
-    .ff-chat-launcher { position: fixed; right: 32px; bottom: 32px; z-index: 50; display: flex; align-items: center; gap: 0.7rem; background: #4f46e5; color: #fff; border-radius: 9999px; padding: 1rem 1.4rem; font-weight: 600; font-size: 1rem; box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.5); cursor: pointer; transition: all 0.25s ease; }
-    .ff-chat-launcher:hover { background:#4338ca; transform:translateY(-3px); box-shadow:0 14px 45px -12px rgba(79,70,229,.55); }
-    .ff-chat-launcher svg { width: 22px; height: 22px; fill: currentColor; }
-    .ff-chat-panel { position: fixed; right: 32px; bottom: 110px; z-index: 50; width: 420px; max-width: 92vw; height: 600px; background:#fff; border-radius:1rem; overflow:hidden; box-shadow:0 25px 60px -15px rgba(0,0,0,.35); border:1px solid rgba(0,0,0,.08); display:none; }
-    .ff-chat-header { display:flex; align-items:center; justify-content:space-between; padding:.8rem 1rem; background:#f9fafb; border-bottom:1px solid #e5e7eb; font-weight:600; }
-    .ff-close { cursor:pointer; font-size:20px; line-height:1; }
-    .ff-consent { position: fixed; right: 32px; bottom: 110px; z-index: 60; width: 340px; background: #fff; border:1px solid #e5e7eb; border-radius:.75rem; padding:1rem 1.2rem; box-shadow:0 20px 40px -10px rgba(0,0,0,.3); font-size:.9rem; color:#374151; display:none; }
-    .ff-consent .actions { margin-top:.75rem; display:flex; gap:.5rem; }
-    .ff-consent button { background:#4f46e5; color:#fff; border:none; border-radius:.5rem; padding:.5rem 1rem; cursor:pointer; font-weight:600; }
-    .ff-consent button:hover { background:#4338ca; }
-    .ff-consent .cancel { background:#e5e7eb; color:#111827; }
-  </style>
+  /* Chatfenster */
+  .ff-chat-panel {
+    position: fixed; right: 32px; bottom: 110px; z-index: 50;
+    width: 420px; max-width: 92vw; height: 600px;
+    background:#fff; border-radius:1rem; overflow:hidden;
+    box-shadow:0 25px 60px -15px rgba(0,0,0,.35); border:1px solid rgba(0,0,0,.08);
+    display:none;
+  }
+  .ff-chat-header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:.8rem 1rem; background:#f9fafb; border-bottom:1px solid #e5e7eb; font-weight:600;
+  }
+  .ff-close { cursor:pointer; font-size:20px; line-height:1; }
 
-  <button id="ffOpen" class="ff-chat-launcher" aria-label="Chat öffnen/schließen">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
-    </svg>
-    <span>Chat</span>
-  </button>
+  /* DSGVO Consent Popup */
+  .ff-consent {
+    position: fixed; right: 32px; bottom: 110px; z-index: 60;
+    width: 340px; background: #fff; border:1px solid #e5e7eb; border-radius:.75rem;
+    padding:1rem 1.2rem; box-shadow:0 20px 40px -10px rgba(0,0,0,.3);
+    font-size:.9rem; color:#374151; display:none;
+  }
+  .ff-consent .actions { margin-top:.75rem; display:flex; gap:.5rem; }
+  .ff-consent button {
+    background:#4f46e5; color:#fff; border:none; border-radius:.5rem; padding:.5rem 1rem; cursor:pointer; font-weight:600;
+  }
+  .ff-consent button:hover { background:#4338ca; }
+  .ff-consent .cancel { background:#e5e7eb; color:#111827; }
+</style>
 
-  <div id="ffPanel" class="ff-chat-panel" role="dialog" aria-modal="true" aria-labelledby="ffTitle">
-    <div class="ff-chat-header">
-      <span id="ffTitle">FormFlow KI-Assistent</span>
-      <span id="ffClose" class="ff-close" aria-label="Chat schließen">✕</span>
-    </div>
-    <iframe id="ffFrame" title="FormFlow KI-Assistent" style="width:100%; height:100%; border:0; background:#fff;" loading="lazy"></iframe>
+<!-- Launcher -->
+<button id="ffOpen" class="ff-chat-launcher" aria-label="Chat öffnen/schließen">
+  <!-- Sprechblasen-Symbol -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 3C6.48 3 2 6.73 2 11c0 1.87.8 3.58 2.15 4.94L3 21l4.35-1.9C8.44 19.7 10.15 20 12 20c5.52 0 10-3.73 10-9s-4.48-8-10-8zm-1 9H7v-2h4v2zm6 0h-4v-2h4v2z"/>
+  </svg>
+  <span>Chat</span>
+</button>
+
+<!-- Panel -->
+<div id="ffPanel" class="ff-chat-panel" role="dialog" aria-modal="true" aria-labelledby="ffTitle">
+  <div class="ff-chat-header">
+    <span id="ffTitle">FormFlow KI-Assistent</span>
+    <span id="ffClose" class="ff-close" aria-label="Chat schließen">✕</span>
   </div>
+  <iframe
+    id="ffFrame"
+    title="FormFlow KI-Assistent"
+    style="width:100%; height:100%; border:0; background:#fff;"
+    loading="lazy"
+  ></iframe>
+</div>
 
-  <div id="ffConsent" class="ff-consent">
-    <p>Durch Start des Chats werden Inhalte von <a href="https://huggingface.co" target="_blank" rel="noopener" class="text-indigo-600 underline">Hugging Face</a> geladen. Details: <a href="/datenschutz.html" class="text-indigo-600 underline">Datenschutzerklärung</a>.</p>
-    <div class="actions">
-      <button id="ffAgree">Zustimmen</button>
-      <button id="ffCancel" class="cancel">Abbrechen</button>
-    </div>
+<!-- DSGVO Consent -->
+<div id="ffConsent" class="ff-consent">
+  <p>
+    Durch Start des Chats werden Inhalte von
+    <a href="https://huggingface.co" target="_blank" rel="noopener" class="text-indigo-600 underline">Hugging Face</a>
+    geladen. Dabei können personenbezogene Daten (z.&nbsp;B. IP-Adresse, Chat-Inhalte) in die USA übertragen werden.
+    Details findest du in unserer
+    <a href="/formflowstudio-site/datenschutz.html" class="text-indigo-600 underline">Datenschutzerklärung</a>.
+  </p>
+  <div class="actions">
+    <button id="ffAgree">Zustimmen</button>
+    <button id="ffCancel" class="cancel">Abbrechen</button>
   </div>
+</div>
 
-  <script>
-  (function(){
-    const SPACE_URL = "https://nihru-formflow-assistant.hf.space/?__theme=light";
-    const openBtn = document.getElementById('ffOpen'), closeBtn = document.getElementById('ffClose'), panel = document.getElementById('ffPanel'), frame = document.getElementById('ffFrame'), consent = document.getElementById('ffConsent'), agree = document.getElementById('ffAgree'), cancel = document.getElementById('ffCancel');
-    const PLACEHOLDER = `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:system-ui,sans-serif;margin:0;display:flex;align-items:center;justify-content:center;height:100%;color:#374151;background:#fff}.box{text-align:center}h2{font-size:18px}p{font-size:14px;color:#6b7280}</style></head><body><div class="box"><h2>Chat inaktiv</h2><p>Bitte Seite neu laden für Zustimmung.</p></div></body></html>`;
-    const hasPrompted = () => sessionStorage.getItem('ff_prompted') === '1', setPrompted = () => sessionStorage.setItem('ff_prompted', '1'), hasConsented = () => sessionStorage.getItem('ff_consented') === '1', setConsented = () => sessionStorage.setItem('ff_consented', '1');
-    function openPanel() { if (!hasConsented()) { if (!frame.src && !frame.srcdoc) frame.srcdoc = PLACEHOLDER; } else { if (!frame.src) frame.src = SPACE_URL; } panel.style.display = 'block'; }
-    function closePanel(){ panel.style.display = 'none'; }
-    openBtn.addEventListener('click', () => { if (!hasPrompted()) { consent.style.display = 'block'; setPrompted(); return; } if (panel.style.display === 'block') closePanel(); else openPanel(); });
-    agree.addEventListener('click', () => { consent.style.display = 'none'; setConsented(); openPanel(); });
-    cancel.addEventListener('click', () => { consent.style.display = 'none'; if (panel.style.display !== 'block') openPanel(); });
-    closeBtn.addEventListener('click', closePanel);
-  })();
-  </script>
+<script>
+(function(){
+  const SPACE_URL = "https://nihru-formflow-assistant.hf.space/?__theme=light";
+  const openBtn  = document.getElementById('ffOpen');
+  const closeBtn = document.getElementById('ffClose');
+  const panel    = document.getElementById('ffPanel');
+  const frame    = document.getElementById('ffFrame');
+  const consent  = document.getElementById('ffConsent');
+  const agree    = document.getElementById('ffAgree');
+  const cancel   = document.getElementById('ffCancel');
+
+  // Platzhalter-Inhalt, wenn Nutzer in dieser Session NICHT zustimmt:
+  const PLACEHOLDER = `
+    <!doctype html><html lang="de"><head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+      body{font-family:system-ui,-apple-system,Inter,Segoe UI,Roboto,Arial,sans-serif;
+           margin:0;display:flex;align-items:center;justify-content:center;height:100%;color:#374151;background:#fff}
+      .box{max-width:90%;text-align:center}
+      h2{font-size:18px;margin:0 0 8px}
+      p{font-size:14px;line-height:1.5;margin:0 0 10px}
+      .note{font-size:12px;color:#6b7280}
+    </style></head><body>
+      <div class="box">
+        <h2>Externer Chat blockiert</h2>
+        <p>Du hast die Zustimmung in dieser Sitzung nicht erteilt.</p>
+        <p class="note">Lade die Seite neu, um die Abfrage erneut zu sehen.</p>
+      </div>
+    </body></html>
+  `;
+
+  // Helpers
+  const hasPrompted  = () => sessionStorage.getItem('ff_prompted') === '1';
+  const setPrompted  = () => sessionStorage.setItem('ff_prompted', '1');
+  const hasConsented = () => sessionStorage.getItem('ff_consented') === '1';
+  const setConsented = () => sessionStorage.setItem('ff_consented', '1');
+
+  function openPanel() {
+    if (!hasConsented()) {
+      // Kein externes Laden – statischer Hinweis
+      if (!frame.src && !frame.srcdoc) frame.srcdoc = PLACEHOLDER;
+    } else {
+      // Externen Space nur einmal lazy laden
+      if (!frame.src) frame.src = SPACE_URL;
+    }
+    panel.style.display = 'block';
+  }
+  function closePanel(){ panel.style.display = 'none'; }
+
+  // Klick auf Launcher
+  openBtn.addEventListener('click', () => {
+    if (!hasPrompted()) {
+      // Erstes Mal in dieser Sitzung: Consent zeigen
+      consent.style.display = 'block';
+      setPrompted(); // Ab jetzt in dieser Session nicht erneut fragen
+      return;
+    }
+    // Bereits gefragt: nur toggeln
+    if (panel.style.display === 'block') {
+      closePanel();
+    } else {
+      openPanel();
+    }
+  });
+
+  // Zustimmung
+  agree.addEventListener('click', () => {
+    consent.style.display = 'none';
+    setConsented();
+    openPanel();
+  });
+
+  // Abbruch
+  cancel.addEventListener('click', () => {
+    consent.style.display = 'none';
+    // Kein Consent gesetzt; beim selben Besuch wird nicht erneut gefragt.
+    // Panel kann dennoch geöffnet/geschlossen werden – aber ohne externen Inhalt.
+    if (panel.style.display !== 'block') openPanel();
+  });
+
+  // Close im Panel
+  closeBtn.addEventListener('click', closePanel);
+})();
+</script>
 </body>
 </html>
