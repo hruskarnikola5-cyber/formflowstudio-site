@@ -1,188 +1,147 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="scroll-smooth">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Impressum – Formflow Studio</title>
-  <meta name="description" content="Impressum von Formflow Studio." />
-  <link rel="icon" href="/Photoroom_20251101_214345.png" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Impressum – FormFlow Studio</title>
+  <meta name="robots" content="noindex"> 
 
-  <!-- Fonts & Tailwind -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: { sans: ['Inter','system-ui','sans-serif'] }
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          },
+          boxShadow: {
+            'card': '0 10px 40px -10px rgba(0, 0, 0, 0.08)'
+          }
         }
       }
     }
   </script>
-  <style>
-    html{scroll-behavior:smooth}
-    .header-shadow{box-shadow:0 10px 20px -20px rgba(0,0,0,.25)}
-  </style>
 </head>
-<body class="text-gray-800 antialiased font-sans">
+<body class="text-slate-800 antialiased bg-slate-50 flex flex-col min-h-screen">
 
-  <!-- NAVBAR -->
-  <header id="siteHeader" class="sticky top-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-100">
-    <div class="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <img src="/Photoroom_20251101_214345.png" alt="Formflow Studio Logo" class="h-10 w-10 object-contain md:h-12 md:w-12">
-        <span class="text-base md:text-lg font-semibold tracking-tight text-gray-900">Formflow Studio</span>
+  <header class="fixed w-full top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100" id="navbar">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 group">
+        <div class="h-9 w-9 bg-brand-600 rounded-lg flex items-center justify-center text-white shadow-md group-hover:bg-brand-700 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-slate-900">FormFlow Studio</span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
-        <a href="/#services" class="navlink hover:text-gray-900 transition">Services</a>
-        <a href="/#about" class="navlink hover:text-gray-900 transition">Über uns</a>
-        <a href="/#proof" class="navlink hover:text-gray-900 transition">Ergebnisse</a>
-        <a href="/#contact" class="inline-flex items-center h-10 px-4 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 transition shadow-sm">
-          Kontakt aufnehmen
-        </a>
-      </nav>
-      <button id="menuBtn" aria-label="Menü" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 text-gray-700">☰</button>
+
+      <a href="/" class="text-sm font-medium text-slate-500 hover:text-brand-600 flex items-center gap-1 transition">
+        <span>Zur Startseite</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+      </a>
     </div>
-    <nav id="mobileNav" class="md:hidden hidden border-t border-gray-100">
-      <div class="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-3">
-        <a href="/#services" class="py-2">Services</a>
-        <a href="/#about" class="py-2">Über uns</a>
-        <a href="/#proof" class="py-2">Ergebnisse</a>
-        <a href="/#contact" class="py-2 px-4 rounded-lg bg-indigo-600 text-white w-max">Kontakt aufnehmen</a>
-      </div>
-    </nav>
   </header>
 
-  <!-- CONTENT -->
-  <main class="bg-gray-50">
-    <section class="mx-auto max-w-3xl px-6 py-16">
-      <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">Impressum</h1>
-      <div class="mt-4 h-[2px] w-20 bg-gradient-to-r from-indigo-500 via-blue-500 to-sky-400 rounded-full"></div>
+  <main class="flex-grow pt-32 pb-20 px-6">
+    <div class="max-w-3xl mx-auto">
+      
+      <a href="/" class="md:hidden inline-flex items-center text-sm text-slate-500 mb-6 hover:text-brand-600">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Zurück zur Startseite
+      </a>
 
-      <div class="mt-8 space-y-8 text-[17px] leading-relaxed">
+      <div class="bg-white rounded-2xl shadow-card border border-slate-100 p-8 md:p-12">
+        <h1 class="text-3xl font-bold text-slate-900 mb-2">Impressum</h1>
+        <div class="h-1 w-20 bg-brand-600 rounded-full mb-8"></div>
 
-        <section>
-          <h2 class="text-xl font-semibold">Angaben gemäß § 5 TMG</h2>
-          <p>
-            <strong>Formflow Studio</strong><br>
-            Inhaber: Nikola Hruskar<br>
-            An den Rohwiesen 11<br>
-            38446 Wolfsburg<br>
-            Deutschland
-          </p>
-        </section>
+        <div class="space-y-8 text-slate-600 leading-relaxed">
+          
+          <section>
+            <h2 class="text-lg font-bold text-slate-900 mb-2">Angaben gemäß § 5 TMG</h2>
+            <p>
+              <strong>FormFlow Studio</strong><br>
+              Nikola Hruskar<br>
+              An den Rohwiesen 11<br>
+              38446 Wolfsburg<br>
+              Deutschland
+            </p>
+          </section>
 
-        <section>
-          <h2 class="text-xl font-semibold">Kontakt</h2>
-          <p>
-            E-Mail: <a class="text-indigo-700 underline" href="mailto:kontakt@formflowstudio.de">kontakt@formflowstudio.de</a>
-          </p>
-        </section>
+          <section>
+            <h2 class="text-lg font-bold text-slate-900 mb-2">Kontakt</h2>
+            <p>
+              E-Mail: <a class="text-brand-600 hover:underline" href="mailto:kontakt@formflowstudio.de">kontakt@formflowstudio.de</a>
+            </p>
+          </section>
 
-        <section>
-          <h2 class="text-xl font-semibold">Umsatzsteuer</h2>
-          <p>
-            Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: <em>nicht vorhanden</em>.<br>
-            (Kleinunternehmerregelung gem. § 19 UStG – sofern zutreffend)
-          </p>
-        </section>
+          <section>
+            <h2 class="text-lg font-bold text-slate-900 mb-2">Umsatzsteuer-ID</h2>
+            <p>
+              Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br>
+              <em>Aktuell nicht vorhanden (Kleinunternehmerregelung gem. § 19 UStG).</em>
+            </p>
+          </section>
 
-        <section>
-          <h2 class="text-xl font-semibold">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
-          <p>
-            Nikola Hruskar, An den Rohwiesen 11, 38446 Wolfsburg, Deutschland
-          </p>
-        </section>
+          <section>
+            <h2 class="text-lg font-bold text-slate-900 mb-2">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+            <p>
+              Nikola Hruskar<br>
+              An den Rohwiesen 11<br>
+              38446 Wolfsburg
+            </p>
+          </section>
 
-        <section>
-          <h2 class="text-xl font-semibold">Haftung für Inhalte</h2>
-          <p>
-            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
-            Nach §§ 8–10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen
-            oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung
-            von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der
-            Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden entsprechender Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
-          </p>
-        </section>
+          <section class="text-sm border-t border-slate-100 pt-8 mt-8">
+            <h3 class="font-bold text-slate-900 mb-2">Haftung für Inhalte</h3>
+            <p class="mb-4">
+              Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Wir sind jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+            </p>
 
-        <section>
-          <h2 class="text-xl font-semibold">Haftung für Links</h2>
-          <p>
-            Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte
-            auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
-            Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt
-            der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer
-            Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
-          </p>
-        </section>
+            <h3 class="font-bold text-slate-900 mb-2">Haftung für Links</h3>
+            <p class="mb-4">
+              Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.
+            </p>
 
-        <section>
-          <h2 class="text-xl font-semibold">Urheberrecht</h2>
-          <p>
-            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung,
-            Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen
-            Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
-            Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet und entsprechende Inhalte
-            gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis.
-            Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
-          </p>
-        </section>
+            <h3 class="font-bold text-slate-900 mb-2">Tech-Stack & Hosting</h3>
+            <p>
+              Diese Website wird gehostet via <strong>GitHub Pages</strong>. Formulare werden verarbeitet durch <strong>Formspree</strong>.
+            </p>
+          </section>
 
-        <section>
-          <h2 class="text-xl font-semibold">Hinweis zur Verbraucherstreitbeilegung</h2>
-          <p>
-            Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
-            Plattform der EU-Kommission zur Online-Streitbeilegung (OS): 
-            <a class="text-indigo-700 underline" href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.
-          </p>
-        </section>
-
-        <section>
-          <h2 class="text-xl font-semibold">Hosting / verwendete Dienste</h2>
-          <p>
-            Diese Website wird über <strong>GitHub Pages</strong> bereitgestellt. Für Kontaktformulare nutzen wir <strong>Formspree</strong>.
-            Details zur Datenverarbeitung findest du in unserer 
-            <a class="text-indigo-700 underline" href="/datenschutz.html">Datenschutzerklärung</a>.
-          </p>
-        </section>
-
-        <section>
-          <h2 class="text-xl font-semibold">Bild-/Markenhinweise</h2>
-          <p>
-            Logos/Grafiken: Eigenes Material (Formflow Studio). Schriften: Google Fonts (Inter).
-          </p>
-        </section>
-
-        <p class="text-sm text-gray-500">Stand: <script>document.write(new Date().toLocaleDateString('de-DE'))</script></p>
+        </div>
       </div>
-    </section>
+    </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="mx-auto max-w-7xl px-6 py-10 text-sm text-gray-500">
-    <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
-      <div>© <span id="y"></span> Formflow Studio</div>
-      <div class="flex gap-6">
-        <a href="/impressum.html" class="hover:underline">Impressum</a>
-        <a href="/datenschutz.html" class="hover:underline">Datenschutz</a>
+  <footer class="bg-white border-t border-slate-100 py-12 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-2">
+        <div class="h-6 w-6 bg-slate-900 rounded flex items-center justify-center text-white text-xs">F</div>
+        <span class="text-slate-900 font-semibold">FormFlow Studio</span>
+        <span class="text-slate-400 text-sm ml-2">© <span id="year">2025</span></span>
+      </div>
+      <div class="flex gap-8 text-sm text-slate-500 font-medium">
+        <a href="/impressum.html" class="text-brand-600">Impressum</a>
+        <a href="/datenschutz.html" class="hover:text-brand-600">Datenschutz</a>
       </div>
     </div>
   </footer>
 
-  <!-- JS -->
   <script>
-    const y = document.getElementById('y'); if (y) y.textContent = new Date().getFullYear();
-
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileNav = document.getElementById('mobileNav');
-    if (menuBtn && mobileNav) menuBtn.addEventListener('click', ()=> mobileNav.classList.toggle('hidden'));
-
-    const header = document.getElementById('siteHeader');
-    function shadow(){ if (window.scrollY>6) header.classList.add('header-shadow'); else header.classList.remove('header-shadow'); }
-    window.addEventListener('scroll', shadow, {passive:true}); shadow();
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
-
-
