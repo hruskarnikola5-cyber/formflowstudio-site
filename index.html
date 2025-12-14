@@ -1,47 +1,43 @@
 <!doctype html>
 <html lang="de" class="scroll-smooth">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>FormFlow Studio – Stücklisten automatisch ins ERP. In Sekunden statt Stunden.</title>
-  <meta name="description" content="FormFlow Studio: Automatische Extraktion von Stücklisten, Normen und Maßen aus PDF-Zeichnungen für den deutschen Maschinenbau. DSGVO-konform, gehostet in Frankfurt." />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>FormFlow Studio – KI-Automationen für den Maschinenbau</title>
+  <meta name="description" content="Stücklisten-Automation (BOM), Regulatory Copilot und Service-Intelligence für den deutschen Maschinenbau. Integriert in SAP, Abas & co.">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
 
-  <!-- Inter -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Tailwind CDN (customized below) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          fontFamily: { 
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Roboto Mono', 'monospace'] 
+          },
           colors: {
+            // "German Engineering" Palette
             navy: {
-              50: '#E9EEF4',
-              100: '#dfe6ef',
-              300: '#9fb0c6',
-              500: '#2b3e4d',
-              600: '#0A192F', /* primary deep navy */
-              700: '#081523',
-              900: '#050b11'
+              800: '#112240',
+              900: '#0A192F', // Deep Navy Background
             },
-            accent: {
-              50: '#fff1ea',
-              100: '#ffe6d9',
-              400: '#ff7a45',
-              600: '#FF5722' /* safety orange */
+            action: {
+              DEFAULT: '#FF5722', // Safety Orange
+              hover: '#E64A19',
             },
-            bg: {
-              DEFAULT: '#F5F7FA'
+            slate: {
+              50: '#F5F7FA', // Clean industrial grey
+              900: '#0A192F', // Mapping slate-900 to Navy for consistency
             }
           },
           boxShadow: {
-            'card': '0 10px 40px -10px rgba(2,6,23,0.08)',
-            'soft': '0 6px 22px -8px rgba(2,6,23,0.06)'
+            'soft': '0 4px 20px -2px rgba(10, 25, 47, 0.05)',
+            'card': '0 10px 40px -10px rgba(10, 25, 47, 0.1)'
           }
         }
       }
@@ -49,369 +45,475 @@
   </script>
 
   <style>
-    :root{
-      --bg: #F5F7FA;
-      --navy: #0A192F;
-      --accent: #FF5722;
+    /* Custom Styles */
+    body { font-feature-settings: "cv11", "ss01"; }
+    
+    /* Hintergrundmuster: Technischer Raster statt weicher Verläufe */
+    .hero-bg {
+      background-color: #F5F7FA;
+      background-image: linear-gradient(#E2E8F0 1px, transparent 1px), linear-gradient(90deg, #E2E8F0 1px, transparent 1px);
+      background-size: 40px 40px;
     }
-    html,body { background: var(--bg); }
-    body { font-feature-settings: "cv11", "ss01"; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-    .hero-illustration { background: linear-gradient(180deg, rgba(10,25,47,0.03), transparent); border: 1px solid rgba(10,25,47,0.04); }
-    .fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+    
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
+    
+    /* Chat Widget Styles */
+    .ff-chat-launcher {
+      position: fixed; right: 24px; bottom: 24px; z-index: 50;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    .ff-chat-launcher:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(255, 87, 34, 0.4); }
+    
+    .ff-chat-panel {
+      width: min(420px, calc(100vw - 32px)); right: 16px; bottom: 90px;
+    }
+    @media(min-width: 640px) {
+      .ff-chat-panel { right: 24px; bottom: 100px; }
+    }
   </style>
 </head>
-<body class="antialiased text-slate-800">
+<body class="text-slate-800 antialiased bg-white selection:bg-action selection:text-white">
 
-  <!-- Header -->
-  <header class="fixed w-full top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100">
+  <header class="fixed w-full top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 transition-all duration-300" id="navbar">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <img src="LOGO.jpg" alt="FormFlow Studio" class="h-10 w-auto rounded-sm object-contain shadow-sm">
-        <span class="text-lg font-semibold" style="color:var(--navy)">FormFlow Studio</span>
+      <a href="/" class="flex items-center gap-3 group">
+         <div class="h-10 w-10 bg-navy-900 rounded flex items-center justify-center text-white font-bold text-xl tracking-tighter">FF</div>
+        <span class="text-xl font-bold tracking-tight text-navy-900 uppercase">FormFlow<span class="text-action">.Studio</span></span>
       </a>
 
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-        <a href="#services" class="hover:text-navy-600 transition" style="color:var(--navy)">Lösungen</a>
-        <a href="#proof" class="hover:text-navy-600 transition" style="color:var(--navy)">Ergebnisse</a>
-        <a href="#about" class="hover:text-navy-600 transition" style="color:var(--navy)">Über uns</a>
-        <a href="#contact" class="px-4 py-2 rounded-md bg-accent-600 text-white font-semibold shadow" style="background:var(--accent)">Potenzialanalyse starten</a>
+      <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
+        <a href="#services" class="hover:text-action transition">Module</a>
+        <a href="#proof" class="hover:text-action transition">Metriken</a>
+        <a href="#about" class="hover:text-action transition">Engineering</a>
+        <a href="#contact" class="px-5 py-2.5 rounded bg-navy-900 text-white hover:bg-navy-800 transition shadow-lg shadow-navy-900/20 font-semibold tracking-wide">
+          Analyse anfordern
+        </a>
       </nav>
 
-      <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-600" aria-label="Menü öffnen">
+      <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-600">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
       </button>
     </div>
 
-    <!-- Mobile menu -->
-    <div id="mobileMenu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-slate-100 p-6 flex-col gap-4">
-      <a href="#services" class="text-lg font-medium text-slate-800">Lösungen</a>
-      <a href="#proof" class="text-lg font-medium text-slate-800">Ergebnisse</a>
-      <a href="#about" class="text-lg font-medium text-slate-800">Über uns</a>
-      <a href="#contact" class="mt-2 block w-full text-center py-3" style="background:var(--accent); color:white; border-radius:0.5rem;">Potenzialanalyse starten</a>
+    <div id="mobileMenu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-slate-200 p-6 flex-col gap-4 shadow-xl">
+      <a href="#services" class="text-lg font-medium text-slate-800">Module</a>
+      <a href="#proof" class="text-lg font-medium text-slate-800">Metriken</a>
+      <a href="#about" class="text-lg font-medium text-slate-800">Engineering</a>
+      <a href="#contact" class="mt-2 block w-full text-center py-3 bg-action text-white rounded font-semibold">Kontakt aufnehmen</a>
     </div>
   </header>
 
   <main>
-
-    <!-- HERO -->
-    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32">
-      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 hero-bg overflow-hidden border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         <div class="max-w-2xl fade-up">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-100 text-xs font-semibold mb-6 shadow-sm">
-            <span class="text-xs">Für den deutschen Maschinenbau</span>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-navy-900 text-white text-xs font-bold uppercase tracking-wider mb-6">
+            <span class="w-2 h-2 rounded-full bg-action animate-pulse"></span>
+            Version 2.4 Live
           </div>
-
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4" style="color:var(--navy)">
-            Stücklisten automatisch ins ERP. <span class="block text-accent-600" style="color:var(--accent)">In Sekunden statt Stunden.</span>
+       
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-navy-900 leading-[1.1] mb-6 tracking-tight">
+            Stücklisten automatisch ins ERP.<br>
+            <span class="text-action">In Sekunden statt Stunden.</span>
           </h1>
-
-          <p class="text-lg text-slate-600 mb-8 max-w-xl">
+          <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-lg font-medium">
             Schluss mit manuellem Abtippen von PDF-Zeichnungen. FormFlow extrahiert Bauteile, Normen und Maße vollautomatisch. Für Arbeitsvorbereitung, die liefert.
           </p>
-
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="#contact" class="inline-flex justify-center items-center px-8 py-4 rounded-xl bg-accent-600 text-white font-semibold hover:brightness-95 transition shadow" style="background:var(--accent)">
+          
+          <div class="flex flex-col sm:flex-row gap-4 mb-8">
+            <a href="#contact" class="inline-flex justify-center items-center px-8 py-4 rounded bg-action text-white font-bold hover:bg-action-hover transition shadow-lg shadow-orange-500/20">
               Potenzialanalyse starten
             </a>
-            <a href="#services" class="inline-flex justify-center items-center px-6 py-3 rounded-xl bg-white text-navy-600 border border-slate-200 font-semibold hover:bg-slate-50 transition" style="color:var(--navy)">
-              Lösungen ansehen
+            <a href="#services" class="inline-flex justify-center items-center px-8 py-4 rounded bg-white text-navy-900 border border-slate-300 font-bold hover:bg-slate-50 transition">
+              Funktionen ansehen
             </a>
           </div>
 
-          <div class="mt-4 text-sm text-slate-500 flex items-center gap-3">
-            <div class="text-sm">🔒 Hosted in Germany (Azure Frankfurt) | <strong>DSGVO-Konform</strong></div>
-          </div>
-
-          <div class="mt-10 flex flex-col sm:flex-row gap-6 text-sm text-slate-600 font-medium">
-            <div class="flex items-center gap-3">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-              Reduziert manuelle Erfassung in der Arbeitsvorbereitung
+          <div class="flex items-center gap-4 text-xs font-mono text-slate-500 border-t border-slate-300 pt-6 w-fit">
+            <div class="flex items-center gap-2">
+               <svg class="w-4 h-4 text-navy-900" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+               <span>Hosted in Germany (Azure FRA)</span>
             </div>
-            <div class="flex items-center gap-3">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 .667-.333 1-1 1s-1-.333-1-1 .333-1 1-1 1 .333 1 1zM12 15c0 .667-.333 1-1 1s-1-.333-1-1 .333-1 1-1 1 .333 1 1z"></path></svg>
-              Fokus auf Datensicherheit & Compliance
+            <div class="w-px h-4 bg-slate-300"></div>
+            <div class="flex items-center gap-2">
+               <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+               <span>DSGVO-Konform</span>
             </div>
           </div>
         </div>
 
-        <div class="relative fade-up" style="transition-delay:150ms;">
-          <div class="hero-illustration rounded-xl overflow-hidden shadow-card p-6 bg-white">
-            <!-- Simple "app preview" illustration: PCB-like / engineering card -->
-            <div class="flex items-start justify-between gap-4">
-              <div class="w-2/3">
-                <div class="h-3 bg-slate-100 rounded mb-3 w-1/2"></div>
-                <div class="h-8 bg-navy-600/5 rounded mb-4"></div>
-
-                <div class="bg-slate-50 p-4 rounded border border-slate-100">
-                  <div class="flex items-center gap-3 mb-3">
-                    <div class="w-9 h-9 rounded bg-navy-600 flex items-center justify-center text-white font-bold">BOM</div>
+        <div class="relative fade-up" style="transition-delay: 150ms;">
+          <div class="absolute -top-10 -right-10 w-96 h-96 bg-slate-200/50 rounded-full blur-3xl"></div>
+          
+          <div class="relative rounded overflow-hidden shadow-2xl border border-slate-300 bg-white max-w-md mx-auto lg:mx-0">
+            <div class="bg-navy-900 h-10 flex items-center px-4 justify-between">
+              <span class="text-xs font-mono text-slate-300">FormFlow_Engine_v2.exe</span>
+              <div class="flex gap-2">
+                <div class="w-2 h-2 rounded-full bg-slate-500"></div>
+                <div class="w-2 h-2 rounded-full bg-slate-500"></div>
+              </div>
+            </div>
+            
+            <div class="p-6 bg-slate-50 min-h-[300px] flex flex-col gap-4">
+               <div class="bg-white border border-slate-200 p-3 rounded shadow-sm flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <svg class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg>
                     <div>
-                      <div class="text-xs text-slate-500">Datei</div>
-                      <div class="font-mono text-sm text-slate-800">Welle_Antrieb_V2.pdf</div>
+                        <div class="text-xs font-bold text-slate-700">Welle_Getriebe_V4.pdf</div>
+                        <div class="text-[10px] text-slate-500">Upload: 10:42:01 | Größe: 2.4 MB</div>
                     </div>
                   </div>
+                  <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">Verarbeitet</span>
+               </div>
 
-                  <div class="grid grid-cols-2 gap-2">
-                    <div class="text-xs text-slate-500">Material</div><div class="font-semibold text-sm">ST37 (S235JR)</div>
-                    <div class="text-xs text-slate-500">Menge</div><div class="font-semibold text-sm">50 Stück</div>
-                    <div class="text-xs text-slate-500">Toleranz</div><div class="font-semibold text-sm">H7</div>
-                    <div class="text-xs text-slate-500">Export</div><div class="font-semibold text-sm">CSV → ERP</div>
+               <div class="h-6 border-l-2 border-dashed border-slate-300 ml-8"></div>
+
+               <div class="bg-navy-900 p-4 rounded text-white font-mono text-xs shadow-lg relative overflow-hidden">
+                  <div class="absolute top-0 right-0 p-2 opacity-20"><svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></div>
+                  <div class="mb-2 text-action font-bold">// BOM EXTRACTION COMPLETE</div>
+                  <div class="grid grid-cols-2 gap-y-2">
+                    <span class="text-slate-400">Material:</span> <span>S235JR (St37)</span>
+                    <span class="text-slate-400">Menge:</span> <span>50 Stk.</span>
+                    <span class="text-slate-400">Passung:</span> <span class="bg-action/20 text-action px-1">H7 (Prüfplan!)</span>
+                    <span class="text-slate-400">Export:</span> <span>SAP_IDoc.xml</span>
                   </div>
-                </div>
-              </div>
-
-              <div class="w-1/3 flex flex-col items-end gap-3">
-                <div class="bg-white border border-slate-100 p-3 rounded-lg text-xs text-slate-600 shadow-sm text-right">
-                  <div class="font-semibold text-slate-900 mb-1">FormFlow Analyse</div>
-                  <div>Stückliste erkannt • Export bereit</div>
-                </div>
-
-                <div class="bg-navy-600 text-white px-3 py-2 rounded-md text-sm shadow">ERP: CSV / Schnittstelle</div>
-              </div>
+               </div>
             </div>
-
-            <div class="mt-6 flex items-center gap-4">
-              <div class="p-3 bg-accent-50 rounded text-accent-600 font-semibold" style="color:var(--accent)">ROI</div>
-              <div>
-                <div class="text-sm text-slate-500">Messbar in Prozessen</div>
-                <div class="font-bold text-slate-900">ROI in < 3 Monaten</div>
-              </div>
+            
+            <div class="bg-slate-100 p-2 text-[10px] text-slate-500 flex justify-between border-t border-slate-200">
+                <span>Status: Connected to ERP</span>
+                <span>Latency: 12ms</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- METRICS / SOCIAL PROOF -->
-    <section id="proof" class="py-16">
+    <section id="proof" class="bg-navy-900 py-20 text-white border-t border-navy-800">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center max-w-3xl mx-auto mb-8 fade-up">
-          <h2 class="text-2xl font-bold" style="color:var(--navy)">Nachweisbare Effekte in der Arbeitsvorbereitung</h2>
-          <p class="text-slate-600 mt-2">Konzise, technische Kennzahlen — für Entscheider im Mittelstand.</p>
+        <div class="text-center max-w-3xl mx-auto mb-16 fade-up">
+          <h2 class="text-3xl font-bold mb-4">Messergebnisse aus der Praxis</h2>
+          <p class="text-slate-400 text-lg">Kein Marketing-Versprechen. Reale Daten unserer Pilotkunden.</p>
         </div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-white rounded-2xl p-8 shadow-soft border border-slate-100 text-center fade-up">
-            <div class="text-4xl font-bold mb-2" style="color:var(--navy)">−60%</div>
-            <div class="text-lg font-semibold mb-2">Zeitaufwand in der Arbeitsvorbereitung</div>
-            <p class="text-sm text-slate-500">Weniger manuelle Datenerfassung, schnellere Vorkalkulation.</p>
+        <div class="grid md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-navy-800">
+          <div class="p-6 fade-up">
+            <div class="text-5xl font-bold text-action mb-2">−60%</div>
+            <div class="text-lg font-semibold mb-2 text-slate-200">Zeitaufwand AV</div>
+            <p class="text-sm text-slate-400">Signifikante Reduktion der manuellen Dateneingabe in der Arbeitsvorbereitung.</p>
           </div>
-
-          <div class="bg-white rounded-2xl p-8 shadow-soft border border-slate-100 text-center fade-up" style="transition-delay:100ms;">
-            <div class="text-4xl font-bold mb-2" style="color:var(--navy)">0</div>
-            <div class="text-lg font-semibold mb-2">Tippfehler bei Materialnummern</div>
-            <p class="text-sm text-slate-500">Automatische Erkennung & Validierung reduziert Fehlerquellen.</p>
+          <div class="p-6 fade-up" style="transition-delay: 100ms;">
+            <div class="text-5xl font-bold text-action mb-2">0</div>
+            <div class="text-lg font-semibold mb-2 text-slate-200">Tippfehler</div>
+            <p class="text-sm text-slate-400">Materialnummern und Toleranzen werden fehlerfrei aus Zeichnungen übernommen.</p>
           </div>
-
-          <div class="bg-white rounded-2xl p-8 shadow-soft border border-slate-100 text-center fade-up" style="transition-delay:200ms;">
-            <div class="text-4xl font-bold mb-2" style="color:var(--navy)">ROI &lt; 3M</div>
-            <div class="text-lg font-semibold mb-2">ROI in &lt; 3 Monaten</div>
-            <p class="text-sm text-slate-500">Schnelle Amortisation durch reduzierte Arbeitszeit und weniger Nacharbeit.</p>
+          <div class="p-6 fade-up" style="transition-delay: 200ms;">
+            <div class="text-5xl font-bold text-action mb-2">&lt; 3 Mo.</div>
+            <div class="text-lg font-semibold mb-2 text-slate-200">ROI</div>
+            <p class="text-sm text-slate-400">Amortisation der Implementierungskosten durch Prozessbeschleunigung.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SERVICES / 3 MODULES -->
-    <section id="services" class="py-20 bg-white">
+    <section id="services" class="py-24 bg-white">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center max-w-3xl mx-auto mb-12 fade-up">
-          <h2 class="text-3xl font-bold" style="color:var(--navy)">Spezialisierte Module für Fertigung & Arbeitsvorbereitung</h2>
-          <p class="text-slate-600 mt-2">Wählen Sie das Modul, das Ihre Engpässe direkt löst.</p>
+        <div class="text-center max-w-3xl mx-auto mb-16 fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-4">Das FormFlow System</h2>
+          <p class="text-slate-600 text-lg">Drei spezialisierte Module für die Herausforderungen im modernen Maschinenbau.</p>
         </div>
 
         <div class="grid lg:grid-cols-3 gap-8">
-          <!-- Module 1 -->
-          <div class="bg-slate-50 rounded-2xl p-8 shadow-soft border border-slate-100 flex flex-col gap-4 fade-up">
-            <div class="w-14 h-14 rounded-xl flex items-center justify-center" style="background:rgba(10,25,47,0.06)">
-              <!-- Document -> Gear icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy)">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <path d="M14 2v6h6"></path>
-                <path d="M9 13a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"></path>
-                <path d="M9 15v1M9 18v1M11 16h-1M7 16h1"></path>
-              </svg>
+           
+           <div class="bg-slate-50 rounded p-8 border border-slate-200 flex flex-col fade-up hover:border-action transition duration-300 group">
+            <div class="w-14 h-14 bg-white text-navy-900 border border-slate-200 rounded flex items-center justify-center mb-6 shadow-sm">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             </div>
-            <h3 class="text-xl font-semibold" style="color:var(--navy)">BOM Automation Engine</h3>
-            <p class="text-slate-600 flex-grow">
-              Laden Sie PDF-Zeichnungen hoch. Unsere KI erkennt Stücklisten (BOM), Material (z.B. ST37) und Toleranzen und exportiert sie direkt als CSV für Ihr ERP.
+            <h3 class="text-xl font-bold text-navy-900 mb-3">BOM Automation Engine</h3>
+            <p class="text-slate-600 mb-6 flex-grow text-sm leading-relaxed">
+              Laden Sie PDF-Zeichnungen hoch. Unsere KI erkennt Stücklisten (BOM), Material (z.B. ST37) und Toleranzen und exportiert sie direkt als CSV oder IDoc für Ihr ERP.
             </p>
-            <a href="#contact" class="mt-4 inline-block py-3 px-4 rounded-md border border-slate-200 text-sm font-medium hover:bg-slate-100">Modul anfragen</a>
+            <ul class="space-y-3 mb-8 text-sm text-slate-600">
+              <li class="flex items-start gap-2"><span class="text-action font-bold">✓</span> OCR für technische Zeichnungen</li>
+              <li class="flex items-start gap-2"><span class="text-action font-bold">✓</span> Extraktion von ISO-Toleranzen</li>
+              <li class="flex items-start gap-2"><span class="text-action font-bold">✓</span> ERP-Schnittstelle (Ready-to-use)</li>
+            </ul>
           </div>
 
-          <!-- Module 2 -->
-          <div class="bg-slate-50 rounded-2xl p-8 shadow-soft border border-slate-100 flex flex-col gap-4 fade-up" style="transition-delay:80ms;">
-            <div class="w-14 h-14 rounded-xl flex items-center justify-center" style="background:rgba(255,87,34,0.06)">
-              <!-- Shield / Paragraph -->
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy)">
-                <path d="M12 2l7 3v5c0 5.25-3.75 9.5-7 12-3.25-2.5-7-6.75-7-12V5l7-3z"></path>
-                <path d="M10.5 9.5h3M10 13h4"></path>
-              </svg>
+          <div class="bg-slate-50 rounded p-8 border border-slate-200 flex flex-col fade-up hover:border-action transition duration-300 group" style="transition-delay: 100ms;">
+            <div class="w-14 h-14 bg-white text-navy-900 border border-slate-200 rounded flex items-center justify-center mb-6 shadow-sm">
+               <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.956 11.956 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             </div>
-            <h3 class="text-xl font-semibold" style="color:var(--navy)">Regulatory Copilot</h3>
-            <p class="text-slate-600 flex-grow">
-              Keine Angst vor der EU-Maschinenverordnung 2023/1230. Der Copilot prüft Ihre Risikobeurteilung automatisch auf fehlende Cybersecurity-Aspekte.
+            <h3 class="text-xl font-bold text-navy-900 mb-3">Regulatory Copilot</h3>
+            <p class="text-slate-600 mb-6 flex-grow text-sm leading-relaxed">
+              Keine Angst vor der EU-Maschinenverordnung 2023/1230. Der Copilot prüft Ihre Risikobeurteilung automatisch auf fehlende Cybersecurity-Aspekte und Normen-Updates.
             </p>
-            <a href="#contact" class="mt-4 inline-block py-3 px-4 rounded-md border border-slate-200 text-sm font-medium hover:bg-slate-100">Mehr erfahren</a>
+            <ul class="space-y-3 mb-8 text-sm text-slate-600">
+              <li class="flex items-start gap-2"><span class="text-action font-bold">✓</span> Normen-Check (DIN/ISO)</li>
+              <li class="flex items-start gap-2"><span class="text-action font-bold">✓</span> Autom. Risikobeurteilung</li>
+              <li class="flex items-start gap-2"><span class="text-action font-bold">✓</span> CE-Konformitätshilfe</li>
+            </ul>
           </div>
 
-          <!-- Module 3 -->
-          <div class="bg-slate-50 rounded-2xl p-8 shadow-soft border border-slate-100 flex flex-col gap-4 fade-up" style="transition-delay:160ms;">
-            <div class="w-14 h-14 rounded-xl flex items-center justify-center" style="background:rgba(10,25,47,0.06)">
-              <!-- Wrench / Chat -->
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy)">
-                <path d="M21 13v7a1 1 0 0 1-1 1h-7"></path>
-                <path d="M3 11l7-7 4 4-7 7-4-4z"></path>
-                <path d="M14 7l3 3"></path>
-              </svg>
+          <div class="bg-slate-50 rounded p-8 border border-slate-200 flex flex-col fade-up hover:border-action transition duration-300 group" style="transition-delay: 200ms;">
+             <div class="w-14 h-14 bg-white text-navy-900 border border-slate-200 rounded flex items-center justify-center mb-6 shadow-sm">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
             </div>
-            <h3 class="text-xl font-semibold" style="color:var(--navy)">Service Intelligence</h3>
-            <p class="text-slate-600 flex-grow">
+            <h3 class="text-xl font-bold text-navy-900 mb-3">Service Intelligence</h3>
+            <p class="text-slate-600 mb-6 flex-grow text-sm leading-relaxed">
               Das Wissen Ihrer Altmeister digitalisiert. Ein Chatbot, der in Millisekunden Lösungen aus 20 Jahren Service-Berichten und Handbüchern findet.
             </p>
-            <a href="#contact" class="mt-4 inline-block py-3 px-4 rounded-md border border-slate-200 text-sm font-medium hover:bg-slate-100">Service prüfen</a>
+             <ul class="space-y-3 mb-8 text-sm text-slate-600">
+              <li class="flex items-start gap-2"><span class="text-action font-bold">✓</span> Indexiert alte PDFs & Word</li>
+              <li class="flex items-start gap-2"><span class="text-action font-bold">✓</span> Assistenz für Außendienst</li>
+              <li class="flex items-start gap-2"><span class="text-action font-bold">✓</span> Reduziert Rückfragen im Innendienst</li>
+             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="py-20 bg-slate-50">
-      <div class="max-w-6xl mx-auto px-6">
-        <div class="lg:flex gap-10 items-start">
+    <section id="about" class="py-24 bg-slate-50 relative overflow-hidden border-t border-slate-200">
+      <div class="max-w-5xl mx-auto px-6 relative z-10">
+        <div class="lg:flex gap-12 items-start">
           <div class="lg:w-1/2 fade-up">
-            <h2 class="text-2xl font-bold" style="color:var(--navy)">KI trifft Maschinenbau-Praxis</h2>
-            <div class="h-1 w-20 bg-navy-600 rounded-full mt-4 mb-6" style="background:var(--navy)"></div>
-            <p class="text-slate-600 leading-relaxed">
-              FormFlow Studio verbindet technisches Verständnis aus dem Maschinenbau mit präziser Automatisierung. Unsere Lösungen sind bewusst pragmatisch: schnell implementierbar, datenschutzkonform und messbar im Betrieb.
+            <h2 class="text-3xl font-bold text-navy-900 mb-6">
+              Engineering First. KI Second.
+            </h2>
+            <div class="h-1 w-20 bg-action rounded mb-8"></div>
+            <p class="text-lg text-slate-700 mb-4 leading-relaxed">
+              FormFlow Studio verbindet klassisches Ingenieurswissen mit State-of-the-Art Softwarearchitektur. Wir verstehen, dass im Maschinenbau Verlässlichkeit wichtiger ist als der nächste Hype.
+            </p>
+            <p class="text-lg text-slate-700 leading-relaxed">
+              Unsere Lösungen laufen in isolierten Containern auf deutschen Servern (Azure Germany West Central), um maximalen Schutz für Ihr IP (Intellectual Property) zu gewährleisten.
             </p>
           </div>
-          <div class="lg:w-1/2 mt-8 lg:mt-0 fade-up" style="transition-delay:130ms;">
-            <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-soft">
-              <h3 class="font-semibold" style="color:var(--navy)">Warum mittelständische Ingenieure uns wählen</h3>
-              <ul class="mt-4 space-y-4 text-slate-600 text-sm">
-                <li>✅ Verständnis für technische Zeichnungen und Normen</li>
-                <li>✅ Keine IT-Großprojekte — Pilotstart in wenigen Wochen</li>
-                <li>✅ Fokus auf Datensicherheit, Hosting in Deutschland</li>
-              </ul>
+          <div class="lg:w-1/2 mt-12 lg:mt-0 fade-up" style="transition-delay: 150ms;">
+            <div class="bg-white rounded p-8 border border-slate-200 shadow-sm">
+              <h3 class="font-bold text-navy-900 mb-4 text-lg">Warum Mittelständler uns vertrauen:</h3>
+              <ul class="space-y-6">
+                <li class="flex gap-4">
+                   <div class="w-8 h-8 rounded bg-navy-900 flex items-center justify-center text-white font-bold text-sm shrink-0">1</div>
+                  <div>
+                    <h4 class="font-semibold text-navy-900">Datenhoheit</h4>
+                    <p class="text-sm text-slate-600">Kein Training von öffentlichen Modellen mit Ihren Konstruktionsdaten.</p>
+                  </div>
+                </li>
+                <li class="flex gap-4">
+                  <div class="w-8 h-8 rounded bg-navy-900 flex items-center justify-center text-white font-bold text-sm shrink-0">2</div>
+                   <div>
+                    <h4 class="font-semibold text-navy-900">Integrationsfähigkeit</h4>
+                    <p class="text-sm text-slate-600">Kompatibel mit gängigen ERP-Systemen (SAP S/4HANA, proALPHA, abas).</p>
+                  </div>
+                </li>
+                <li class="flex gap-4">
+                  <div class="w-8 h-8 rounded bg-navy-900 flex items-center justify-center text-white font-bold text-sm shrink-0">3</div>
+                   <div>
+                    <h4 class="font-semibold text-navy-900">Validierte Ergebnisse</h4>
+                    <p class="text-sm text-slate-600">Human-in-the-Loop Prozesse garantieren 100% korrekte Datensätze.</p>
+                  </div>
+                </li>
+               </ul>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT / QUALIFICATION FORM -->
-    <section id="contact" class="py-20">
+    <section id="contact" class="py-24 bg-white">
       <div class="max-w-4xl mx-auto px-6">
-        <div class="bg-white rounded-2xl shadow-card overflow-hidden border border-slate-100 grid md:grid-cols-2">
-          <div class="bg-navy-600 text-white p-8 flex flex-col justify-between">
-            <div>
-              <h3 class="text-2xl font-bold">Potenzialanalyse anfragen</h3>
-              <p class="mt-4 text-slate-200 leading-relaxed">Kurzfragebogen zur Vorqualifizierung — so bereiten wir das Gespräch effizient vor.</p>
+        <div class="bg-white rounded shadow-card overflow-hidden border border-slate-200 flex flex-col md:flex-row">
+          
+          <div class="bg-navy-900 text-white p-10 md:w-2/5 flex flex-col justify-between">
+           <div>
+              <h3 class="text-2xl font-bold mb-4">Kontakt</h3>
+              <p class="text-slate-300 mb-8 leading-relaxed">
+                Prüfen Sie, ob FormFlow zu Ihrer IT-Infrastruktur passt.
+              </p>
+              <ul class="space-y-4 text-slate-300">
+                <li class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-action" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                   <span>engineering@formflow.de</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-action" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                  <span>Wolfsburg, DE</span>
+                </li>
+              </ul>
             </div>
-            <div class="text-sm text-slate-200 mt-8">
-              FormFlow Studio<br>KI-Automationen für Maschinenbau
-            </div>
+            <div class="mt-12 border-t border-navy-800 pt-6">
+              <p class="text-sm text-slate-400">FormFlow Studio <br>Industrial AI Solutions</p>
+             </div>
           </div>
 
-          <div class="p-8">
-            <div id="ok" class="hidden bg-green-50 text-green-800 p-3 rounded mb-4 border border-green-100">✅ Danke! Wir melden uns zeitnah.</div>
-
-            <form action="https://formspree.io/f/xgvppbvb" method="POST" class="grid gap-4">
+          <div class="p-10 md:w-3/5 bg-slate-50">
+             <div id="ok" class="hidden bg-green-100 text-green-800 p-4 rounded mb-6 border border-green-200 text-sm font-medium">
+                ✅ Anfrage empfangen. Wir senden Ihnen das technische Whitepaper zu.
+             </div>
+             
+             <form action="https://formspree.io/f/xgvppbvb" method="POST" class="grid gap-5">
               <input type="text" name="_gotcha" style="display:none">
-              <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Name</label>
-                <input name="name" required placeholder="Ihr Name" class="w-full border border-slate-200 rounded px-3 py-2 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-navy-600" />
+              
+              <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wide">Name</label>
+                    <input class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-1 focus:ring-action focus:border-action outline-none transition" name="name" required placeholder="Max Mustermann">
+                  </div>
+                   <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wide">Firma</label>
+                    <input class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-1 focus:ring-action focus:border-action outline-none transition" name="firma" placeholder="Muster GmbH">
+                  </div>
               </div>
 
               <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">E-Mail</label>
-                <input name="email" type="email" required placeholder="name@firma.de" class="w-full border border-slate-200 rounded px-3 py-2 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-navy-600" />
+                <label class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wide">Geschäftliche E-Mail</label>
+                <input class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-1 focus:ring-action focus:border-action outline-none transition" type="email" name="email" required placeholder="name@firma.de">
               </div>
 
               <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Firma / Werk</label>
-                <input name="company" placeholder="Muster GmbH" class="w-full border border-slate-200 rounded px-3 py-2 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-navy-600" />
+                <label class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wide">Welches ERP-System nutzen Sie?</label>
+                <select class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-1 focus:ring-action focus:border-action outline-none transition text-slate-700" name="erp_system">
+                  <option value="" disabled selected>Bitte wählen...</option>
+                  <option value="SAP">SAP S/4HANA / ERP</option>
+                  <option value="Datev">Datev</option>
+                  <option value="Abas">Abas ERP</option>
+                  <option value="proALPHA">proALPHA</option>
+                  <option value="Infor">Infor</option>
+                  <option value="Microsoft">MS Dynamics 365</option>
+                  <option value="Sonstige">Sonstige / Eigenentwicklung</option>
+                </select>
               </div>
-
-              <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Welches ERP-System nutzen Sie?</label>
-                <select name="erp_system" required class="w-full border border-slate-200 rounded px-3 py-2 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-navy-600">
-                  <option value="" disabled selected>Bitte auswählen</option>
-                  <option>SAP</option>
-                  <option>Datev</option>
-                  <option>Abas</option>
-                  <option>proALPHA</option>
-                  <option>Sonstige</option>
+            
+               <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wide">Interesse an Modul</label>
+                <select class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-1 focus:ring-action focus:border-action outline-none transition text-slate-700" name="thema">
+                  <option>BOM Automation (Stücklisten)</option>
+                  <option>Regulatory Copilot (Normen)</option>
+                  <option>Service Intelligence</option>
+                  <option>Allgemeine Anfrage</option>
                 </select>
               </div>
 
               <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Worum geht es?</label>
-                <select name="topic" class="w-full border border-slate-200 rounded px-3 py-2 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-navy-600">
-                  <option>Potenzialanalyse / Erstgespräch</option>
-                  <option>Pilot starten</option>
-                  <option>Technische Integration</option>
-                  <option>Anderes</option>
-                </select>
+                <label class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wide">Nachricht</label>
+                <textarea class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-1 focus:ring-action focus:border-action outline-none transition" name="nachricht" rows="3" placeholder="Wie können wir Ihren Prozess unterstützen?"></textarea>
               </div>
 
-              <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Kurzbeschreibung (optional)</label>
-                <textarea name="message" rows="3" placeholder="Kurze Info zu Ihrem Prozess..." class="w-full border border-slate-200 rounded px-3 py-2 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-navy-600"></textarea>
+              <div class="flex items-start gap-3 mt-2">
+                <input type="checkbox" required id="privacy" class="mt-1 w-4 h-4 text-action rounded border-slate-300 focus:ring-action">
+                <label for="privacy" class="text-xs text-slate-500">Ich stimme der Speicherung meiner Daten zur Kontaktaufnahme zu. <a href="/datenschutz.html" class="underline hover:text-navy-900">Datenschutz</a>.</label>
               </div>
 
-              <div class="flex items-start gap-3 mt-1">
-                <input id="privacy" type="checkbox" required class="mt-1 w-4 h-4 text-navy-600 rounded border-slate-300 focus:ring-navy-500" />
-                <label for="privacy" class="text-sm text-slate-600">Ich stimme zu, dass meine Angaben zur Kontaktaufnahme gespeichert werden. Mehr in der <a href="/datenschutz.html" class="underline" style="color:var(--navy)">Datenschutzerklärung</a>.</label>
-              </div>
-
-              <button type="submit" class="mt-2 w-full py-3 rounded-md font-semibold text-white" style="background:var(--accent)">Anfrage absenden</button>
+              <button class="mt-4 w-full bg-action text-white font-bold py-4 rounded hover:bg-action-hover transition shadow-lg shadow-orange-500/20 uppercase tracking-wide text-sm" type="submit">
+                Anfrage absenden
+              </button>
             </form>
           </div>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-white border-t border-slate-100 py-8">
+
+  <footer class="bg-white border-t border-slate-200 py-12">
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
       <div class="flex items-center gap-3">
-        <img src="LOGO.jpg" alt="FormFlow Studio" class="h-8 object-contain rounded-sm">
-        <div>
-          <div class="text-sm font-semibold" style="color:var(--navy)">FormFlow Studio</div>
-          <div class="text-xs text-slate-500">© <span id="year">2025</span></div>
-        </div>
+        <div class="h-8 w-8 bg-navy-900 rounded flex items-center justify-center text-white font-bold text-sm">FF</div>
+        <span class="text-navy-900 font-semibold">FormFlow Studio</span>
+        <span class="text-slate-400 text-sm ml-2">© <span id="year">2025</span></span>
       </div>
-
-      <div class="flex gap-6 text-sm text-slate-600">
-        <a href="/impressum.html" class="hover:underline">Impressum</a>
-        <a href="/datenschutz.html" class="hover:underline">Datenschutz</a>
+      <div class="flex gap-8 text-sm text-slate-500 font-medium">
+        <a href="/impressum.html" class="hover:text-action">Impressum</a>
+        <a href="/datenschutz.html" class="hover:text-action">Datenschutz</a>
+        <a href="#" class="hover:text-action">AGB</a>
       </div>
     </div>
   </footer>
 
+  <button id="ffOpen" class="ff-chat-launcher group bg-navy-900 text-white flex items-center gap-3 px-5 py-3 rounded-full shadow-2xl hover:bg-action transition-colors">
+    <div class="relative">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+      <span class="absolute -top-1 -right-1 flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-action opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-action"></span>
+      </span>
+    </div>
+    <span class="font-medium pr-1">Service Bot</span>
+  </button>
+
+  <div id="ffPanel" class="ff-chat-panel fixed hidden z-50 bg-white rounded shadow-2xl overflow-hidden border border-slate-300 flex flex-col h-[600px] max-h-[80vh]">
+    <div class="bg-navy-900 p-4 flex justify-between items-center">
+      <span class="font-bold text-white flex items-center gap-2">
+       <span class="w-2 h-2 rounded-full bg-green-500"></span> FormFlow Assistant
+      </span>
+      <button id="ffClose" class="text-slate-400 hover:text-white bg-navy-800 p-1 rounded-full">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div class="flex-grow relative bg-white">
+      <div id="ffConsent" class="absolute inset-0 z-10 bg-white p-8 flex flex-col justify-center items-center text-center">
+        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-navy-900 mb-4">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        </div>
+        <h3 class="font-bold text-navy-900 mb-2">Externes Chat-Modul laden?</h3>
+        <p class="text-sm text-slate-500 mb-6">Wir nutzen Hugging Face Spaces für die Demo. Dabei werden technisch notwendige Daten (IP) übertragen.</p>
+        <button id="ffAgree" class="bg-action text-white px-6 py-2 rounded font-medium hover:bg-action-hover transition w-full mb-3">Verbindung herstellen</button>
+        <button id="ffCancel" class="text-slate-400 text-sm hover:text-slate-600 underline">Abbrechen</button>
+      </div>
+      <iframe id="ffFrame" class="w-full h-full border-0" title="Chatbot"></iframe>
+    </div>
+  </div>
+
   <script>
-    // mobile menu
+    // 1. Mobile Menu
     const btn = document.getElementById('mobileMenuBtn');
     const menu = document.getElementById('mobileMenu');
-    btn?.addEventListener('click', () => {
+    btn.addEventListener('click', () => {
       menu.classList.toggle('hidden');
+      menu.classList.toggle('flex');
     });
-
-    // reveal
+    
+    // 2. Scroll Reveal Animation
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.12 });
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // year
+    // 3. Year
     document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    
+    // 4. Chatbot Logic (DSGVO Safe)
+    const SPACE_URL = "https://nihru-formflow-assistant.hf.space/?__theme=light";
+    const els = {
+      open: document.getElementById('ffOpen'),
+      close: document.getElementById('ffClose'),
+      panel: document.getElementById('ffPanel'),
+      frame: document.getElementById('ffFrame'),
+      consent: document.getElementById('ffConsent'),
+      agree: document.getElementById('ffAgree'),
+      cancel: document.getElementById('ffCancel')
+    };
+    const hasConsented = () => sessionStorage.getItem('ff_consent') === 'true';
 
+    els.open.addEventListener('click', () => {
+      els.panel.classList.remove('hidden');
+      if (hasConsented()) {
+        els.consent.classList.add('hidden');
+        if (!els.frame.src) els.frame.src = SPACE_URL;
+      }
+    });
+    els.close.addEventListener('click', () => els.panel.classList.add('hidden'));
+
+    els.agree.addEventListener('click', () => {
+      sessionStorage.setItem('ff_consent', 'true');
+      els.consent.classList.add('hidden');
+      els.frame.src = SPACE_URL;
+    });
+    els.cancel.addEventListener('click', () => els.panel.classList.add('hidden'));
+  </script>
 </body>
 </html>
-
