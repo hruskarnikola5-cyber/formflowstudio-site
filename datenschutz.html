@@ -4,32 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Datenschutzerklärung – FormFlow Studio</title>
-  <meta name="robots" content="noindex">
+  <meta name="robots" content="noindex, follow">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
-
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: { sans: ['Inter', 'sans-serif'] },
-          colors: {
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              600: '#4f46e5',
-              700: '#4338ca',
-              800: '#3730a3',
-              900: '#312e81',
-            }
-          },
-          boxShadow: {
-            'card': '0 10px 40px -10px rgba(0, 0, 0, 0.08)'
-          }
+          colors: { brand: { 600: '#4f46e5', 700: '#4338ca' } }
         }
       }
     }
@@ -37,132 +23,98 @@
 </head>
 <body class="text-slate-800 antialiased bg-slate-50 flex flex-col min-h-screen">
 
-  <header class="fixed w-full top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100" id="navbar">
+  <header class="fixed w-full top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2 group">
-        <div class="h-9 w-9 bg-brand-600 rounded-lg flex items-center justify-center text-white shadow-md group-hover:bg-brand-700 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-          </svg>
-        </div>
+      <a href="/" class="flex items-center gap-3 group">
+        <img src="LOGO.jpg" alt="Logo" class="h-10 w-auto object-contain rounded-md" onerror="this.style.display='none'">
         <span class="text-xl font-bold tracking-tight text-slate-900">FormFlow Studio</span>
       </a>
-
-      <a href="/" class="text-sm font-medium text-slate-500 hover:text-brand-600 flex items-center gap-1 transition">
-        <span>Zur Startseite</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+      <a href="/" class="text-sm font-medium text-slate-500 hover:text-brand-600 transition flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+        Zurück zur Startseite
       </a>
     </div>
   </header>
 
   <main class="flex-grow pt-32 pb-20 px-6">
     <div class="max-w-3xl mx-auto">
-
-      <a href="/" class="md:hidden inline-flex items-center text-sm text-slate-500 mb-6 hover:text-brand-600">
-        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-        Zurück zur Startseite
-      </a>
-
-      <div class="bg-white rounded-2xl shadow-card border border-slate-100 p-8 md:p-12">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-12">
         <h1 class="text-3xl font-bold text-slate-900 mb-2">Datenschutzerklärung</h1>
         <div class="h-1 w-20 bg-brand-600 rounded-full mb-8"></div>
 
-        <div class="space-y-8 text-slate-600 leading-relaxed text-[15px] md:text-base">
+        <div class="space-y-8 text-slate-600 text-[15px] leading-relaxed">
 
           <section>
-            <h2 class="text-lg font-bold text-slate-900 mb-2">1. Verantwortlicher</h2>
+            <h2 class="text-lg font-bold text-slate-900 mb-2">1. Datenschutz auf einen Blick</h2>
             <p>
-              FormFlow Studio – Inhaber: Nikola Hruskar<br>
-              An den Rohwiesen 11, 38446 Wolfsburg, Deutschland<br>
-              E-Mail: <a class="text-brand-600 hover:underline" href="mailto:kontakt@formflowstudio.de">kontakt@formflowstudio.de</a>
+              <strong>Allgemeine Hinweise:</strong> Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie unsere Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.
             </p>
-          </section>
-
-          <section>
-            <h2 class="text-lg font-bold text-slate-900 mb-2">2. Allgemeines zur Datenverarbeitung</h2>
-            <p>
-              Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung einer funktionsfähigen Website und unserer Inhalte und Leistungen erforderlich ist. Rechtsgrundlagen ergeben sich aus Art. 6 Abs. 1 lit. a (Einwilligung), b (Vertrag/Vorvertrag) und f (berechtigtes Interesse) DSGVO.
+            <p class="mt-2">
+              <strong>Verantwortlicher:</strong><br>
+              Nikola Hruskar (FormFlow Studio)<br>
+              An den Rohwiesen 11, 38446 Wolfsburg<br>
+              E-Mail: <a href="mailto:kontakt@formflowstudio.de" class="text-brand-600 hover:underline">kontakt@formflowstudio.de</a>
             </p>
           </section>
 
           <section>
-            <h2 class="text-lg font-bold text-slate-900 mb-2">3. Hosting und Domain-Bereitstellung</h2>
-            <p class="mb-3">
-              Unsere Website wird über <strong>GitHub Pages</strong> (GitHub Inc., San Francisco, USA) gehostet. Dabei werden technisch notwendige Daten wie IP-Adresse, Datum/Uhrzeit und Browsertyp verarbeitet, um die Sicherheit zu gewährleisten (Art. 6 Abs. 1 lit. f DSGVO). GitHub überträgt Daten ggf. in die USA auf Basis von Standardvertragsklauseln.
-              <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener" class="text-brand-600 hover:underline">GitHub Privacy Statement</a>.
-            </p>
+            <h2 class="text-lg font-bold text-slate-900 mb-2">2. Hosting & Content Delivery Networks (CDN)</h2>
+            <h3 class="font-semibold text-slate-800 mt-2">GitHub Pages</h3>
             <p>
-              Die Domain (formflowstudio.de) wird über <strong>IONOS SE</strong> (Montabaur) verwaltet. Hierbei werden zur technischen Bereitstellung (DNS) ebenfalls Verkehrsdaten verarbeitet.
+              Wir hosten unsere Website bei <strong>GitHub Inc.</strong> (88 Colin P Kelly Jr St, San Francisco, CA 94107, USA).<br>
+              Beim Besuch unserer Website erfasst GitHub automatisch Logfiles (u.a. Ihre IP-Adresse), die zur Sicherheit und Fehleranalyse notwendig sind.
+              Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Berechtigtes Interesse an einem sicheren Betrieb).<br>
+              GitHub ist zertifiziert nach dem EU-US Data Privacy Framework (DPF) oder verwendet Standardvertragsklauseln.
+            </p>
+            
+            <h3 class="font-semibold text-slate-800 mt-3">Tailwind CSS (CDN)</h3>
+            <p>
+              Zur korrekten Darstellung nutzen wir ein Content Delivery Network (CDN) für das CSS-Framework "Tailwind". Hierbei wird Ihre IP-Adresse an den CDN-Betreiber übermittelt, um die Dateien auszuliefern. Dies ist technisch notwendig (Art. 6 Abs. 1 lit. f DSGVO).
             </p>
           </section>
 
           <section>
-            <h2 class="text-lg font-bold text-slate-900 mb-2">4. Kontaktformular (Formspree)</h2>
+            <h2 class="text-lg font-bold text-slate-900 mb-2">3. Datenerfassung auf dieser Website</h2>
+            
+            <h3 class="font-semibold text-slate-800 mt-2">Kontaktformular (Formspree)</h3>
             <p>
-              Für unser Kontaktformular nutzen wir den Dienst <strong>Formspree Inc.</strong> (USA). Die eingegebenen Daten (Name, E-Mail, Firma, Nachricht) werden zur Bearbeitung Ihrer Anfrage verarbeitet (Art. 6 Abs. 1 lit. b DSGVO). Formspree fungiert als Auftragsverarbeiter.
-              <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener" class="text-brand-600 hover:underline">Datenschutz bei Formspree</a>.
+              Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Antragsformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.
+            </p>
+            <p class="mt-2">
+              Wir nutzen hierfür den Dienstleister <strong>Formspree Inc.</strong> (USA).<br>
+              Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung).
+              Ihre Daten werden an Formspree in die USA übermittelt. Wir haben mit Formspree einen Vertrag zur Auftragsverarbeitung abgeschlossen.
             </p>
           </section>
 
-          <section class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-            <h2 class="text-lg font-bold text-slate-900 mb-2">5. Eingebetteter KI-Chatbot (Hugging Face)</h2>
-            <p class="mb-3">
-              Wir verwenden einen interaktiven Demo-Chatbot, bereitgestellt über <strong>Hugging Face Spaces</strong> (USA). 
-            </p>
-            <p class="mb-3">
-              <strong>Wichtig:</strong> Der Chat wird erst geladen, wenn Sie aktiv auf den Chat-Button klicken und zustimmen (Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO). Erst dann werden technische Daten (IP-Adresse, Chat-Inhalte) an Hugging Face übermittelt.
-            </p>
+          <section class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+            <h2 class="text-lg font-bold text-slate-900 mb-2">4. KI-Chatbot (Hugging Face)</h2>
             <p>
-              Bitte geben Sie im Chat keine sensiblen persönlichen Daten ein. <a href="https://huggingface.co/privacy" target="_blank" rel="noopener" class="text-brand-600 hover:underline">Datenschutz bei Hugging Face</a>.
+              Auf unserer Website ist ein KI-Chatbot als Demo eingebunden. Dieser wird technisch von <strong>Hugging Face, Inc.</strong> (20 Jay St, Suite 620, Brooklyn, NY 11201, USA) bereitgestellt.
             </p>
-          </section>
-
-          <section>
-            <h2 class="text-lg font-bold text-slate-900 mb-2">6. Verwendung von Google Fonts</h2>
-            <p>
-              Zur einheitlichen Darstellung nutzen wir <strong>Google Fonts</strong>. Beim Laden der Schriften kann eine Verbindung zu Servern von Google hergestellt werden (Art. 6 Abs. 1 lit. f DSGVO).
-            </p>
-          </section>
-
-          <section>
-            <h2 class="text-lg font-bold text-slate-900 mb-2">7. Server-Logfiles</h2>
-            <p>
-              Beim Aufruf der Website werden automatisch technische Informationen (IP-Adresse, Datum, Uhrzeit, Browsertyp, Betriebssystem) erfasst. Diese dienen der Sicherheit und Fehlerbehebung.
-            </p>
+            <ul class="list-disc list-inside mt-2 space-y-1">
+              <li><strong>Funktionsweise:</strong> Der Chatbot wird über ein iFrame geladen. Um Ihre Privatsphäre zu schützen, wird dieses iFrame erst geladen, wenn Sie aktiv auf den Button "Chat starten" klicken.</li>
+              <li><strong>Datenübertragung:</strong> Erst mit Ihrem Klick (Einwilligung gem. Art. 6 Abs. 1 lit. a DSGVO) wird eine Verbindung zu den Servern von Hugging Face aufgebaut. Dabei wird Ihre IP-Adresse in die USA übertragen.</li>
+              <li><strong>Inhalte:</strong> Bitte geben Sie im Chat keine sensiblen persönlichen Daten ein. Die Chat-Verläufe werden zur Bereitstellung der Antwort durch das KI-Modell verarbeitet.</li>
+            </ul>
           </section>
 
           <section>
-            <h2 class="text-lg font-bold text-slate-900 mb-2">8. Ihre Rechte & Kontakt</h2>
+            <h2 class="text-lg font-bold text-slate-900 mb-2">5. Ihre Rechte</h2>
             <p>
-              Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung Ihrer Daten. Einwilligungen können Sie jederzeit widerrufen. Wenden Sie sich hierzu an: <a href="mailto:kontakt@formflowstudio.de" class="text-brand-600 hover:underline">kontakt@formflowstudio.de</a>.
+              Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen.
             </p>
           </section>
-
-          <p class="text-sm text-slate-400 border-t border-slate-100 pt-6">
-            Stand: <script>document.write(new Date().toLocaleDateString('de-DE'))</script>
-          </p>
 
         </div>
       </div>
     </div>
   </main>
 
-  <footer class="bg-white border-t border-slate-100 py-12 mt-auto">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="flex items-center gap-2">
-        <div class="h-6 w-6 bg-slate-900 rounded flex items-center justify-center text-white text-xs">F</div>
-        <span class="text-slate-900 font-semibold">FormFlow Studio</span>
-        <span class="text-slate-400 text-sm ml-2">© <span id="year">2025</span></span>
-      </div>
-      <div class="flex gap-8 text-sm text-slate-500 font-medium">
-        <a href="/impressum.html" class="hover:text-brand-600">Impressum</a>
-        <a href="/datenschutz.html" class="text-brand-600">Datenschutz</a>
-      </div>
+  <footer class="bg-white border-t border-slate-100 py-8 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 text-center text-sm text-slate-500">
+      &copy; <script>document.write(new Date().getFullYear())</script> FormFlow Studio.
     </div>
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
