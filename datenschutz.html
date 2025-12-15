@@ -5,55 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Datenschutzerklärung – FormFlow Studio</title>
   <meta name="robots" content="noindex">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22[http://www.w3.org/2000/svg%22](http://www.w3.org/2000/svg%22) viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
-  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-  <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap)" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: { sans: ['Inter', 'sans-serif'] },
           colors: {
-            navy: {
-              800: '#112240',
-              900: '#0A192F',
-            },
-            safety: {
-              500: '#FF5722',
-            },
+            navy: { 900: '#0A192F', 800: '#112240', 700: '#233554' },
+            safety: { 500: '#FF5722', 600: '#F4511E' },
+            slate: { 50: '#F5F7FA', 100: '#E4E7EB', 900: '#0F172A' }
+          },
+          boxShadow: {
+            'card': '0 10px 40px -10px rgba(10, 25, 47, 0.08)'
           }
         }
       }
     }
   </script>
 </head>
-<body class="text-slate-700 antialiased bg-[#F5F7FA] flex flex-col min-h-screen">
+<body class="text-navy-900 antialiased bg-slate-50 flex flex-col min-h-screen">
 
-  <header class="fixed w-full top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200">
+  <header class="fixed w-full top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200" id="navbar">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <div class="h-8 w-8 bg-navy-900 rounded flex items-center justify-center text-white text-xs font-bold">FS</div>
-        <span class="text-lg font-bold text-navy-900">FormFlow Studio</span>
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="h-9 w-9 bg-navy-900 rounded-md flex items-center justify-center text-white font-bold shadow-md">F</div>
+        <span class="text-xl font-bold tracking-tight text-navy-900">FormFlow Studio</span>
       </a>
-      <a href="/" class="text-sm font-medium text-slate-500 hover:text-navy-900 flex items-center gap-1 transition">
-        <span>Zurück zur Startseite</span>
+      <a href="/" class="text-sm font-medium text-slate-500 hover:text-safety-500 flex items-center gap-1 transition">
+        <span>Zur Startseite</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
       </a>
     </div>
   </header>
 
   <main class="flex-grow pt-32 pb-20 px-6">
     <div class="max-w-3xl mx-auto">
-      <div class="bg-white rounded border border-gray-200 shadow-sm p-8 md:p-12">
-        <h1 class="text-2xl font-bold text-navy-900 mb-2">Datenschutzerklärung</h1>
-        <div class="h-1 w-16 bg-safety-500 rounded-full mb-8"></div>
+      <div class="bg-white rounded-lg shadow-card border border-slate-200 p-8 md:p-12">
+        <h1 class="text-3xl font-bold text-navy-900 mb-2">Datenschutzerklärung</h1>
+        <div class="h-1 w-20 bg-safety-500 mb-8"></div>
 
-        <div class="space-y-8 text-sm leading-relaxed text-slate-600">
-
+        <div class="space-y-8 text-slate-600 leading-relaxed text-[15px] md:text-base">
           <section>
-            <h2 class="text-base font-bold text-navy-900 mb-2 uppercase tracking-wide">1. Verantwortlicher</h2>
+            <h2 class="text-lg font-bold text-navy-900 mb-2">1. Verantwortlicher</h2>
             <p>
               FormFlow Studio – Inhaber: Nikola Hruskar<br>
               An den Rohwiesen 11, 38446 Wolfsburg, Deutschland<br>
@@ -62,53 +61,61 @@
           </section>
 
           <section>
-            <h2 class="text-base font-bold text-navy-900 mb-2 uppercase tracking-wide">2. Hosting & Sicherheit</h2>
+            <h2 class="text-lg font-bold text-navy-900 mb-2">2. Allgemeines zur Datenverarbeitung</h2>
+            <p>
+              Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung einer funktionsfähigen Website und unserer Leistungen erforderlich ist. 
+              Rechtsgrundlagen ergeben sich aus Art. 6 Abs. 1 DSGVO.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-lg font-bold text-navy-900 mb-2">3. Hosting und Domain</h2>
             <p class="mb-3">
-              Diese Website wird als statische Seite über <strong>GitHub Pages</strong> (GitHub Inc., USA) gehostet. 
-              Beim Aufruf der Seite werden durch GitHub technisch notwendige Daten (IP-Adresse, Browser-Informationen) zur Gewährleistung der Sicherheit und Verfügbarkeit verarbeitet (Art. 6 Abs. 1 lit. f DSGVO).
-            </p>
-            <p>
-              Wir setzen <strong>SSL/TLS-Verschlüsselung</strong> ein, um die Übertragung Ihrer Daten zu schützen.
+              Unsere Website wird über <strong>GitHub Pages</strong> (GitHub Inc., USA) gehostet. GitHub verarbeitet technisch notwendige Daten (IP, Browser) zur Sicherheit.
             </p>
           </section>
 
           <section>
-            <h2 class="text-base font-bold text-navy-900 mb-2 uppercase tracking-wide">3. Kontaktanfragen & Formulare</h2>
+            <h2 class="text-lg font-bold text-navy-900 mb-2">4. Kontaktformular</h2>
             <p>
-              Wenn Sie uns per Kontaktformular Anfragen zukommen lassen (inkl. Angaben zum ERP-System), werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.
+              Daten aus dem Kontaktformular werden via <strong>Formspree Inc.</strong> (USA) verarbeitet. Die Eingaben (Name, ERP-System, E-Mail) dienen ausschließlich der Angebotserstellung und Kontaktaufnahme.
             </p>
-            <p class="mt-2">
-              Die Verarbeitung erfolgt durch den Dienstleister <strong>Formspree Inc.</strong> (USA). Wir haben mit dem Anbieter einen Vertrag zur Auftragsverarbeitung abgeschlossen.
+          </section>
+
+          <section class="bg-slate-50 p-4 rounded border border-slate-200">
+            <h2 class="text-lg font-bold text-navy-900 mb-2">5. KI-Chatbot (Hugging Face)</h2>
+            <p class="mb-3 text-sm">
+              Der Chatbot lädt Inhalte von <strong>Hugging Face</strong>. Dies geschieht erst nach Ihrer aktiven Zustimmung (Klick auf "Chat starten"). 
+              Es werden keine sensitiven Konstruktionsdaten im Chatbot-Demo-Modus gespeichert.
             </p>
           </section>
 
           <section>
-            <h2 class="text-base font-bold text-navy-900 mb-2 uppercase tracking-wide">4. Externe Dienste (Fonts)</h2>
+            <h2 class="text-lg font-bold text-navy-900 mb-2">6. Ihre Rechte</h2>
             <p>
-              Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten <strong>Google Fonts</strong>. 
-              Beim Aufruf der Seite lädt Ihr Browser die benötigten Web Fonts in ihren Browsercache. Zu diesem Zweck muss der von Ihnen verwendete Browser Verbindung zu den Servern von Google aufnehmen. Hierdurch erlangt Google Kenntnis darüber, dass über Ihre IP-Adresse diese Website aufgerufen wurde.
+              Sie haben jederzeit das Recht auf Auskunft, Löschung und Widerruf. Kontaktieren Sie uns unter der oben genannten E-Mail.
             </p>
           </section>
-
-          <section>
-            <h2 class="text-base font-bold text-navy-900 mb-2 uppercase tracking-wide">5. Betroffenenrechte</h2>
-            <p>
-              Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung oder Löschung dieser Daten.
-            </p>
-          </section>
-
-          <p class="text-xs text-slate-400 border-t border-slate-100 pt-6 mt-8">
+          
+          <p class="text-sm text-slate-400 border-t border-slate-100 pt-6">
             Stand: <script>document.write(new Date().toLocaleDateString('de-DE'))</script>
           </p>
-
         </div>
       </div>
     </div>
   </main>
 
-  <footer class="bg-white border-t border-gray-200 py-8 mt-auto text-center">
-    <div class="max-w-7xl mx-auto px-6 text-xs text-slate-400">
-      &copy; <span id="year">2025</span> FormFlow Studio. Alle Rechte vorbehalten.
+  <footer class="bg-white border-t border-slate-200 py-12 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-2">
+        <div class="h-6 w-6 bg-navy-900 rounded flex items-center justify-center text-white text-xs font-bold">F</div>
+        <span class="text-navy-900 font-semibold">FormFlow Studio</span>
+        <span class="text-slate-400 text-sm ml-2">© <span id="year">2025</span></span>
+      </div>
+      <div class="flex gap-8 text-sm text-slate-500 font-medium">
+        <a href="/impressum.html" class="hover:text-navy-900">Impressum</a>
+        <a href="/datenschutz.html" class="text-safety-500">Datenschutz</a>
+      </div>
     </div>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
