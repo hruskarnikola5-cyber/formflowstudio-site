@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>FormFlow Studio – Stücklisten-Automatisierung für den Maschinenbau</title>
-  <meta name="description" content="KI-Lösung für den deutschen Maschinenbau: Stücklisten aus PDF-Zeichnungen extrahieren, EU-Maschinenverordnung Compliance und Service-Intelligence.">
-  <meta name="robots" content="index, follow">
+  <title>FormFlow Studio – KI-Automatisierung für den Maschinenbau</title>
+  <meta name="description" content="Stücklisten automatisch ins ERP. FormFlow extrahiert Bauteile, Normen und Maße aus PDF-Zeichnungen. Hosted in Germany.">
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,22 +19,21 @@
           fontFamily: { sans: ['Inter', 'sans-serif'] },
           colors: {
             // Industrial Color Scheme
-            brand: {
-              50:  '#F0F4F8',
-              100: '#D9E2EC',
-              700: '#334E68',
-              800: '#243B53',
-              900: '#0A192F', // Primary: Deep Navy Blue
+            navy: {
+              800: '#112240',
+              900: '#0A192F', // Primary Dark
             },
-            accent: {
-              DEFAULT: '#FF5722', // Accent: Safety Orange
-              hover:   '#E64A19',
+            safety: {
+              500: '#FF5722', // Safety Orange for Actions
+              600: '#F4511E',
             },
-            surface: '#F5F7FA', // Background: Clean White / Light Grey
+            slate: {
+              50: '#F5F7FA', // Clean Technical Background
+            }
           },
           boxShadow: {
-            'industrial': '0 4px 6px -1px rgba(10, 25, 47, 0.1), 0 2px 4px -1px rgba(10, 25, 47, 0.06)',
-            'card': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)'
+            'soft': '0 4px 20px -2px rgba(10, 25, 47, 0.05)',
+            'card': '0 10px 40px -10px rgba(10, 25, 47, 0.08)'
           }
         }
       }
@@ -43,286 +41,304 @@
   </script>
 
   <style>
-    /* Fein-Typografie für optimale Lesbarkeit */
     body { font-feature-settings: "cv11", "ss01"; }
     
-    /* Dezentes technisches Raster im Hintergrund */
-   .tech-bg {
+    /* Technical Grid Background instead of soft gradient */
+    .hero-bg {
       background-color: #F5F7FA;
       background-image: linear-gradient(#E2E8F0 1px, transparent 1px), linear-gradient(90deg, #E2E8F0 1px, transparent 1px);
       background-size: 40px 40px;
     }
     
-    /* Animation Utilities */
-   .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-   .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    
+    /* Chat Widget Styling Update */
+    .ff-chat-launcher {
+      position: fixed; right: 24px; bottom: 24px; z-index: 50;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    .ff-chat-launcher:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -5px rgba(0,0,0,0.3); }
+    
+    .ff-chat-panel {
+      width: min(420px, calc(100vw - 32px)); right: 16px; bottom: 90px;
+    }
+    @media(min-width: 640px) {
+      .ff-chat-panel { right: 24px; bottom: 100px; }
+    }
   </style>
 </head>
-<body class="text-slate-700 antialiased bg-surface flex flex-col min-h-screen selection:bg-brand-900 selection:text-white">
+<body class="text-slate-800 antialiased bg-slate-50 selection:bg-safety-500 selection:text-white flex flex-col min-h-screen">
 
-  <header class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm" id="navbar">
+  <header class="fixed w-full top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 transition-all duration-300" id="navbar">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="/" class="flex items-center gap-3 group">
-        <div class="h-10 w-10 bg-brand-900 text-white rounded flex items-center justify-center shadow-lg group-hover:bg-brand-800 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543-.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
+        <div class="h-10 w-10 bg-navy-900 rounded-md flex items-center justify-center text-white font-bold text-xl shadow-sm">
+          F
         </div>
-        <span class="text-xl font-bold tracking-tight text-brand-900">FormFlow <span class="font-light">Engineering</span></span>
+        <span class="text-lg font-bold tracking-tight text-navy-900 uppercase">FormFlow<span class="text-safety-500">.Studio</span></span>
       </a>
 
       <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
-        <a href="#features" class="hover:text-brand-900 transition">Lösungen</a>
-        <a href="#proof" class="hover:text-brand-900 transition">Ergebnisse</a>
-        <a href="#about" class="hover:text-brand-900 transition">Über uns</a>
-        <a href="#contact" class="px-5 py-2.5 rounded bg-brand-900 text-white hover:bg-brand-800 transition shadow-industrial font-semibold">
-          Potenzialanalyse starten
+        <a href="#solutions" class="hover:text-navy-900 transition">Lösungen</a>
+        <a href="#proof" class="hover:text-navy-900 transition">Ergebnisse</a>
+        <a href="#about" class="hover:text-navy-900 transition">Über uns</a>
+        <a href="#contact" class="px-5 py-2.5 rounded-md bg-navy-900 text-white hover:bg-navy-800 transition shadow-lg shadow-navy-900/10 font-semibold">
+          Erstgespräch buchen
         </a>
       </nav>
 
-      <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-600">
+      <button id="mobileMenuBtn" class="md:hidden p-2 text-navy-900">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
       </button>
     </div>
 
-    <div id="mobileMenu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-slate-100 p-6 flex-col gap-4 shadow-xl">
-      <a href="#features" class="text-lg font-medium text-slate-800 border-b border-slate-50 pb-2">Lösungen</a>
-      <a href="#proof" class="text-lg font-medium text-slate-800 border-b border-slate-50 pb-2">Ergebnisse</a>
-      <a href="#about" class="text-lg font-medium text-slate-800 border-b border-slate-50 pb-2">Über uns</a>
-      <a href="#contact" class="mt-2 block w-full text-center py-3 bg-accent text-white rounded font-bold">Kontakt aufnehmen</a>
+    <div id="mobileMenu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-slate-200 p-6 flex-col gap-4 shadow-xl">
+      <a href="#solutions" class="text-lg font-medium text-slate-800">Lösungen</a>
+      <a href="#proof" class="text-lg font-medium text-slate-800">Ergebnisse</a>
+      <a href="#about" class="text-lg font-medium text-slate-800">Über uns</a>
+      <a href="#contact" class="mt-2 block w-full text-center py-3 bg-safety-500 text-white rounded-md font-semibold">Kontakt aufnehmen</a>
     </div>
   </header>
 
   <main>
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 tech-bg overflow-hidden border-b border-slate-200">
-      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-        
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 hero-bg overflow-hidden border-b border-slate-200">
+      <div class="absolute inset-0 bg-white/60 pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
         <div class="max-w-2xl fade-up">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-brand-50 text-brand-900 text-xs font-bold uppercase tracking-wide mb-6 border border-brand-100 shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-            Neu: KI-Modul für EU-Maschinenverordnung 2023/1230
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-navy-900 text-white text-xs font-bold uppercase tracking-wider mb-6">
+            <span class="w-2 h-2 rounded-full bg-safety-500 animate-pulse"></span>
+            Neu: Regulatory Copilot
           </div>
           
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 leading-[1.1] mb-6 tracking-tight">
-            Stücklisten automatisch ins ERP. <br>
-            <span class="text-accent">In Sekunden statt Stunden.</span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-navy-900 leading-[1.1] mb-6">
+            Stücklisten automatisch ins ERP.<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-safety-500 to-orange-600">In Sekunden statt Stunden.</span>
           </h1>
           
-          <p class="text-lg sm:text-xl text-slate-600 leading-relaxed mb-10 max-w-lg">
+          <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-lg">
             Schluss mit manuellem Abtippen von PDF-Zeichnungen. FormFlow extrahiert Bauteile, Normen und Maße vollautomatisch. 
-            Für Arbeitsvorbereitung, die liefert.
+            <strong class="text-navy-900">Für Arbeitsvorbereitung, die liefert.</strong>
           </p>
           
           <div class="flex flex-col sm:flex-row gap-4 mb-8">
-            <a href="#contact" class="inline-flex justify-center items-center px-8 py-4 rounded bg-accent text-white font-bold hover:bg-accent-hover transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200">
+            <a href="#contact" class="inline-flex justify-center items-center px-8 py-4 rounded-md bg-safety-500 text-white font-bold hover:bg-safety-600 transition shadow-lg shadow-safety-500/20">
               Potenzialanalyse starten
             </a>
-            <a href="#features" class="inline-flex justify-center items-center px-8 py-4 rounded bg-white text-brand-900 border border-slate-300 font-semibold hover:bg-slate-50 transition">
-              Funktionsweise ansehen
+            <a href="#solutions" class="inline-flex justify-center items-center px-8 py-4 rounded-md bg-white text-navy-900 border border-slate-300 font-semibold hover:bg-slate-50 transition">
+              Lösungen ansehen
             </a>
           </div>
 
-          <div class="flex items-center gap-3 text-sm text-slate-500 font-medium border-t border-slate-200 pt-6 max-w-md">
-            <svg class="w-5 h-5 text-brand-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-            <span class="flex items-center gap-2">
-              🔒 Hosted in Germany (Azure Frankfurt) <span class="text-slate-300">|</span> DSGVO-Konform
-            </span>
+          <div class="flex items-center gap-4 text-sm font-medium text-slate-500 border-t border-slate-200 pt-6 w-fit">
+            <div class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              <span>Hosted in Germany (Azure Frankfurt)</span>
+            </div>
+            <span class="text-slate-300">|</span>
+            <div class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-navy-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <span>DSGVO-Konform</span>
+            </div>
           </div>
         </div>
 
-        <div class="relative fade-up hidden lg:block" style="transition-delay: 150ms;">
-          <div class="absolute -top-10 -right-10 w-96 h-96 bg-brand-100 rounded-full blur-3xl opacity-50"></div>
-          
-          <div class="relative rounded overflow-hidden shadow-2xl border border-slate-300 bg-white">
-            <div class="bg-brand-900 h-9 flex items-center px-4 gap-2">
-              <div class="w-2.5 h-2.5 rounded-full bg-slate-500"></div>
-              <div class="w-2.5 h-2.5 rounded-full bg-slate-500"></div>
-              <div class="w-2.5 h-2.5 rounded-full bg-slate-500"></div>
-              <div class="ml-4 text-[10px] text-slate-400 font-mono tracking-widest uppercase">FormFlow Eng. Suite v2.4</div>
-            </div>
-            
-            <div class="p-6 bg-slate-50">
-              <div class="flex justify-between items-end mb-6">
-                <div>
-                  <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Aktuelles Projekt</div>
-                  <div class="text-xl font-bold text-brand-900 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    Welle_Antrieb_V2.pdf
-                  </div>
+        <div class="relative fade-up" style="transition-delay: 150ms;">
+            <div class="absolute -top-6 -right-6 w-64 h-64 bg-safety-500/10 rounded-full blur-3xl"></div>
+            <div class="relative rounded-lg overflow-hidden shadow-2xl border border-slate-300 bg-white">
+              <div class="bg-navy-900 h-10 flex items-center px-4 justify-between">
+                <span class="text-xs text-white/70 font-mono">BOM_Automation_Engine_v2.4.exe</span>
+                <div class="flex gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-slate-500"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-slate-500"></div>
                 </div>
-                <div class="px-3 py-1 bg-green-100 text-green-800 text-xs font-bold rounded border border-green-200 flex items-center gap-1">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                  Scan komplett
-                </div>
-              </div>
-
-              <div class="bg-white border border-slate-200 rounded overflow-hidden shadow-sm">
-                <table class="w-full text-left text-xs">
-                  <thead class="bg-slate-100 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wide">
-                    <tr>
-                      <th class="px-4 py-2 w-12">Pos.</th>
-                      <th class="px-4 py-2">Bauteil</th>
-                      <th class="px-4 py-2">Werkstoff</th>
-                      <th class="px-4 py-2">Maße</th>
-                      <th class="px-4 py-2 text-right">Menge</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-slate-700 font-medium">
-                    <tr class="border-b border-slate-50 hover:bg-brand-50 transition cursor-default">
-                      <td class="px-4 py-2 font-mono text-slate-400">010</td>
-                      <td class="px-4 py-2 font-bold text-brand-900">Antriebswelle</td>
-                      <td class="px-4 py-2"><span class="bg-brand-50 text-brand-700 px-1.5 py-0.5 rounded border border-brand-100">42CrMo4</span></td>
-                      <td class="px-4 py-2 font-mono">Ø40 x 320</td>
-                      <td class="px-4 py-2 text-right">50</td>
-                    </tr>
-                    <tr class="border-b border-slate-50 bg-accent/5 hover:bg-accent/10 transition cursor-pointer relative">
-                      <td class="px-4 py-2 font-mono text-slate-400">020</td>
-                      <td class="px-4 py-2 font-bold text-brand-900">Passfeder</td>
-                      <td class="px-4 py-2"><span class="bg-brand-50 text-brand-700 px-1.5 py-0.5 rounded border border-brand-100">C45</span></td>
-                      <td class="px-4 py-2 font-mono">DIN 6885 A</td>
-                      <td class="px-4 py-2 text-right">50</td>
-                      <div class="absolute right-2 top-2 w-2 h-2 bg-accent rounded-full animate-ping"></div>
-                    </tr>
-                    <tr class="hover:bg-brand-50 transition cursor-default">
-                      <td class="px-4 py-2 font-mono text-slate-400">030</td>
-                      <td class="px-4 py-2 font-bold text-brand-900">Sicherungsring</td>
-                      <td class="px-4 py-2"><span class="bg-brand-50 text-brand-700 px-1.5 py-0.5 rounded border border-brand-100">Federstahl</span></td>
-                      <td class="px-4 py-2 font-mono">DIN 471</td>
-                      <td class="px-4 py-2 text-right">100</td>
-                    </tr>
-                  </tbody>
-                </table>
               </div>
               
-              <div class="mt-4 flex justify-end gap-3">
-                <button class="text-xs text-slate-500 hover:text-brand-900 font-medium px-3 py-2">Abbrechen</button>
-                <button class="bg-brand-900 hover:bg-brand-800 text-white text-xs px-4 py-2 rounded shadow flex items-center gap-2 font-bold transition">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                  Export an proALPHA
-                </button>
+              <div class="p-6 bg-slate-50 min-h-[320px] flex flex-col gap-6">
+                <div class="flex gap-4 items-start opacity-50">
+                    <div class="w-8 h-8 rounded bg-white border border-slate-300 flex items-center justify-center text-slate-400 shrink-0">1</div>
+                    <div class="bg-white border border-slate-200 p-3 rounded text-sm w-full font-mono text-slate-500 flex justify-between">
+                        <span>Zeichnung_Getriebewelle.pdf</span>
+                        <span class="text-xs uppercase border border-slate-200 px-1 rounded">PDF</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 items-start">
+                    <div class="w-8 h-8 rounded bg-safety-500 flex items-center justify-center text-white font-bold shrink-0 shadow-lg shadow-safety-500/30">2</div>
+                    <div class="w-full space-y-3">
+                        <div class="bg-white border-l-4 border-safety-500 shadow-sm p-4 rounded-r text-sm">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-navy-900">KI Analyse läuft...</span>
+                                <span class="text-xs font-mono text-green-600 bg-green-50 px-2 py-0.5 rounded">Confidence: 99.8%</span>
+                            </div>
+                            <table class="w-full text-xs text-left">
+                                <tr class="border-b border-slate-100 text-slate-500">
+                                    <th class="pb-1 font-medium">Pos.</th>
+                                    <th class="pb-1 font-medium">Bezeichnung</th>
+                                    <th class="pb-1 font-medium">Material</th>
+                                    <th class="pb-1 font-medium">Menge</th>
+                                </tr>
+                                <tr class="text-slate-800">
+                                    <td class="py-1">01</td>
+                                    <td class="py-1 font-bold">Antriebswelle</td>
+                                    <td class="py-1 bg-yellow-50 text-yellow-800 px-1">ST37-2 (S235JR)</td>
+                                    <td class="py-1">50 Stk</td>
+                                </tr>
+                                <tr class="text-slate-800">
+                                    <td class="py-1">02</td>
+                                    <td class="py-1">Passfeder DIN 6885</td>
+                                    <td class="py-1">C45+C</td>
+                                    <td class="py-1">50 Stk</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 items-start">
+                    <div class="w-8 h-8 rounded bg-white border-2 border-dashed border-slate-300 flex items-center justify-center text-slate-300 shrink-0">3</div>
+                    <div class="bg-slate-100 border border-slate-200 border-dashed p-3 rounded text-sm w-full text-slate-400 flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                        Export zu ERP (SAP/Abas) bereit
+                    </div>
+                </div>
               </div>
             </div>
+            
+            <div class="absolute -bottom-5 -left-5 bg-navy-900 text-white p-4 rounded-lg shadow-xl flex items-center gap-3 z-20">
+               <div>
+                 <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Ersparnis</p>
+                 <p class="text-lg font-bold">~ 15 Min / Zeichnung</p>
+               </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proof" class="bg-navy-900 py-20 text-white border-t border-navy-800">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16 fade-up">
+          <h2 class="text-3xl font-bold mb-4">Zahlen, die die Geschäftsführung überzeugen</h2>
+          <p class="text-slate-400 text-lg">Kein Marketing-BlaBla. Wir messen Erfolg in harter Währung: Zeit und Qualität.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+          <div class="p-8 rounded-lg bg-navy-800 border border-navy-800 hover:border-safety-500 transition duration-300 fade-up">
+            <div class="text-5xl font-bold text-safety-500 mb-2">−60%</div>
+            <div class="text-xl font-semibold mb-2">Aufwand Arbeitsvorbereitung</div>
+            <p class="text-sm text-slate-400 leading-relaxed">Weniger Zeit mit Datenpflege, mehr Zeit für Fertigungsstrategien und Optimierung.</p>
+          </div>
+          <div class="p-8 rounded-lg bg-navy-800 border border-navy-800 hover:border-safety-500 transition duration-300 fade-up" style="transition-delay: 100ms;">
+            <div class="text-5xl font-bold text-safety-500 mb-2">0</div>
+            <div class="text-xl font-semibold mb-2">Tippfehler bei Materialien</div>
+            <p class="text-sm text-slate-400 leading-relaxed">Direkte Datenübernahme eliminiert menschliche Fehler. Keine falsche Bestellung von Rohmaterial mehr.</p>
+          </div>
+          <div class="p-8 rounded-lg bg-navy-800 border border-navy-800 hover:border-safety-500 transition duration-300 fade-up" style="transition-delay: 200ms;">
+            <div class="text-5xl font-bold text-safety-500 mb-2">&lt; 3 Mo.</div>
+            <div class="text-xl font-semibold mb-2">Return on Invest</div>
+            <p class="text-sm text-slate-400 leading-relaxed">Unsere Lösungen sind keine Großprojekte. Schnelle Implementierung, sofortiger Nutzen.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="proof" class="bg-brand-900 py-16 text-white border-y border-brand-800">
+    <section id="solutions" class="py-24 bg-white">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="grid md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-brand-800">
-          
-          <div class="fade-up">
-            <div class="text-4xl md:text-5xl font-bold text-accent mb-2">-60%</div>
-            <p class="text-brand-100 font-medium">Zeitaufwand in der <br>Arbeitsvorbereitung</p>
-          </div>
-          
-          <div class="fade-up pt-8 md:pt-0" style="transition-delay: 100ms;">
-            <div class="text-4xl md:text-5xl font-bold text-accent mb-2">0</div>
-            <p class="text-brand-100 font-medium">Tippfehler bei <br>Materialnummern</p>
-          </div>
-          
-          <div class="fade-up pt-8 md:pt-0" style="transition-delay: 200ms;">
-            <div class="text-4xl md:text-5xl font-bold text-accent mb-2">&lt; 3 Mo.</div>
-            <p class="text-brand-100 font-medium">ROI (Return on Invest) <br>im Durchschnitt</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <section id="features" class="py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center max-w-3xl mx-auto mb-20 fade-up">
-          <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mb-6">Drei Module für den modernen Maschinenbau</h2>
-          <p class="text-slate-500 text-lg">Pragmatische Lösungen, die echte Engpässe in AV und Compliance lösen. Nahtlos integriert.</p>
+        <div class="text-center max-w-3xl mx-auto mb-16 fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-4">Drei Module gegen den täglichen Engpass</h2>
+          <p class="text-slate-600 text-lg">Wählen Sie das Werkzeug, das Ihr aktuell dringendstes Problem löst.</p>
         </div>
 
         <div class="grid lg:grid-cols-3 gap-8">
-          
-          <div class="bg-surface rounded-lg border border-slate-200 p-8 hover:shadow-card transition duration-300 group fade-up relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition"></div>
-            <div class="w-16 h-16 bg-white border border-slate-200 rounded-lg flex items-center justify-center mb-6 shadow-sm group-hover:border-accent group-hover:text-accent transition">
-              <svg class="w-9 h-9 text-brand-900 group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543-.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" class="opacity-30" />
-              </svg>
+           <div class="bg-slate-50 rounded-lg p-8 shadow-sm border border-slate-200 flex flex-col fade-up hover:shadow-lg transition duration-300 group">
+            <div class="w-14 h-14 bg-white border border-slate-200 text-safety-500 rounded-lg flex items-center justify-center mb-6 group-hover:scale-105 transition shadow-sm">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-brand-900 mb-3">BOM Automation Engine</h3>
-            <p class="text-slate-600 leading-relaxed text-sm">
+            <h3 class="text-xl font-bold text-navy-900 mb-3">BOM Automation Engine</h3>
+            <p class="text-slate-600 mb-6 flex-grow leading-relaxed">
               Laden Sie PDF-Zeichnungen hoch. Unsere KI erkennt Stücklisten (BOM), Material (z.B. ST37) und Toleranzen und exportiert sie direkt als CSV für Ihr ERP.
             </p>
+            <ul class="space-y-3 mb-8 text-sm text-slate-600 border-t border-slate-200 pt-4">
+              <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> Ersetzt manuelles Abtippen</li>
+              <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> Erkennt Normen (DIN/ISO)</li>
+              <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> CSV / Excel / XML Export</li>
+            </ul>
+            <a href="#contact" class="text-center py-3 rounded border border-slate-300 text-navy-900 font-semibold hover:bg-white hover:border-navy-900 transition">Pilot anfragen</a>
           </div>
 
-          <div class="bg-surface rounded-lg border border-slate-200 p-8 hover:shadow-card transition duration-300 group fade-up relative overflow-hidden" style="transition-delay: 100ms;">
-            <div class="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition"></div>
-            <div class="w-16 h-16 bg-white border border-slate-200 rounded-lg flex items-center justify-center mb-6 shadow-sm group-hover:border-accent group-hover:text-accent transition">
-              <svg class="w-9 h-9 text-brand-900 group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
+          <div class="bg-slate-50 rounded-lg p-8 shadow-sm border border-slate-200 flex flex-col fade-up hover:shadow-lg transition duration-300 group" style="transition-delay: 100ms;">
+            <div class="w-14 h-14 bg-white border border-slate-200 text-safety-500 rounded-lg flex items-center justify-center mb-6 group-hover:scale-105 transition shadow-sm">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-brand-900 mb-3">Regulatory Copilot</h3>
-            <p class="text-slate-600 leading-relaxed text-sm">
+            <h3 class="text-xl font-bold text-navy-900 mb-3">Regulatory Copilot</h3>
+            <p class="text-slate-600 mb-6 flex-grow leading-relaxed">
               Keine Angst vor der EU-Maschinenverordnung 2023/1230. Der Copilot prüft Ihre Risikobeurteilung automatisch auf fehlende Cybersecurity-Aspekte.
             </p>
+             <ul class="space-y-3 mb-8 text-sm text-slate-600 border-t border-slate-200 pt-4">
+              <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> Check gegen aktuelle Normen</li>
+              <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> Textvorschläge für Doku</li>
+              <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> Reduziert Haftungsrisiko</li>
+            </ul>
+            <a href="#contact" class="text-center py-3 rounded border border-slate-300 text-navy-900 font-semibold hover:bg-white hover:border-navy-900 transition">Demo ansehen</a>
           </div>
 
-          <div class="bg-surface rounded-lg border border-slate-200 p-8 hover:shadow-card transition duration-300 group fade-up relative overflow-hidden" style="transition-delay: 200ms;">
-            <div class="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition"></div>
-            <div class="w-16 h-16 bg-white border border-slate-200 rounded-lg flex items-center justify-center mb-6 shadow-sm group-hover:border-accent group-hover:text-accent transition">
-              <svg class="w-9 h-9 text-brand-900 group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543-.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" class="opacity-30" transform="translate(8, 8) scale(0.7)" />
-              </svg>
+          <div class="bg-slate-50 rounded-lg p-8 shadow-sm border border-slate-200 flex flex-col fade-up hover:shadow-lg transition duration-300 group" style="transition-delay: 200ms;">
+             <div class="w-14 h-14 bg-white border border-slate-200 text-safety-500 rounded-lg flex items-center justify-center mb-6 group-hover:scale-105 transition shadow-sm">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-brand-900 mb-3">Service Intelligence</h3>
-            <p class="text-slate-600 leading-relaxed text-sm">
+            <h3 class="text-xl font-bold text-navy-900 mb-3">Service Intelligence</h3>
+            <p class="text-slate-600 mb-6 flex-grow leading-relaxed">
               Das Wissen Ihrer Altmeister digitalisiert. Ein Chatbot, der in Millisekunden Lösungen aus 20 Jahren Service-Berichten und Handbüchern findet.
             </p>
+             <ul class="space-y-3 mb-8 text-sm text-slate-600 border-t border-slate-200 pt-4">
+              <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> "Wie repariere ich X?"</li>
+              <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> Durchsucht PDF, Docx, XLS</li>
+              <li class="flex items-start gap-2"><span class="text-green-600 font-bold">✓</span> Sichert Unternehmenswissen</li>
+            </ul>
+            <a href="#contact" class="text-center py-3 rounded border border-slate-300 text-navy-900 font-semibold hover:bg-white hover:border-navy-900 transition">Details anfragen</a>
           </div>
-
         </div>
       </div>
     </section>
 
-    <section id="about" class="py-24 bg-surface border-y border-slate-200">
-      <div class="max-w-5xl mx-auto px-6">
-        <div class="lg:flex gap-16 items-start">
+    <section id="about" class="py-24 bg-slate-50 relative overflow-hidden border-t border-slate-200">
+      <div class="max-w-5xl mx-auto px-6 relative z-10">
+        <div class="lg:flex gap-12 items-start">
           <div class="lg:w-1/2 fade-up">
-            <h2 class="text-3xl font-bold text-brand-900 mb-6">
-              Aus der Praxis. Für die Praxis.
+            <h2 class="text-3xl font-bold text-navy-900 mb-6">
+              KI trifft Maschinenbau-Praxis.
             </h2>
-            <div class="h-1 w-24 bg-accent rounded-full mb-8"></div>
-            <p class="text-lg text-slate-600 mb-6 leading-relaxed">
-              FormFlow Engineering wurde nicht im Silicon Valley entwickelt, sondern in direktem Austausch mit deutschen Fertigungsbetrieben. Wir verstehen den Unterschied zwischen einer H7-Passung und einem Grobmaß.
+            <div class="h-1 w-20 bg-safety-500 mb-8"></div>
+            <p class="text-lg text-slate-700 mb-4 leading-relaxed font-medium">
+              Wir sind keine IT-Consultants im Anzug, die noch nie eine Drehmaschine gesehen haben.
             </p>
-            <p class="text-lg text-slate-600 leading-relaxed">
-              Unsere Mission ist die „Digitalisierung mit Augenmaß“. Keine monatelangen IT-Großprojekte, sondern Werkzeuge, die ab Tag 1 Zeit sparen und Fehlerquellen eliminieren.
+            <p class="text-slate-600 leading-relaxed">
+              FormFlow Studio wurde von Digital Engineers entwickelt, die den Unterschied zwischen einer H7-Passung und einem Grobmaß kennen. Wir verbinden modernes Software-Engineering (Azure AI, Python) mit den harten Anforderungen der deutschen Industrie.
             </p>
           </div>
           <div class="lg:w-1/2 mt-12 lg:mt-0 fade-up" style="transition-delay: 150ms;">
-            <div class="bg-white rounded-lg p-8 border border-slate-200 shadow-card">
-              <h3 class="font-bold text-brand-900 mb-6 text-lg border-b border-slate-100 pb-4">Unser Qualitätsversprechen</h3>
-              <ul class="space-y-6">
+            <div class="bg-white rounded-lg p-8 border border-slate-200 shadow-sm">
+              <h3 class="font-bold text-navy-900 mb-4 text-lg">Unser Versprechen:</h3>
+              <ul class="space-y-4">
                 <li class="flex gap-4">
-                  <div class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center border border-brand-100 text-brand-700 font-bold shrink-0 text-sm">1</div>
+                  <div class="w-8 h-8 rounded bg-navy-50 flex items-center justify-center text-navy-900 font-bold shrink-0 text-sm">1</div>
                   <div>
-                    <h4 class="font-bold text-brand-900 text-sm">Datensicherheit „Made in Germany“</h4>
-                    <p class="text-sm text-slate-500 mt-1">Hosting ausschließlich in Frankfurt (Microsoft Azure Germany). Vollständige Transparenz bei der Datenverarbeitung.</p>
+                    <h4 class="font-semibold text-navy-900">Datensouveränität</h4>
+                    <p class="text-sm text-slate-500">Ihre Daten bleiben in der deutschen Azure Cloud (Frankfurt). Kein Training öffentlicher Modelle.</p>
                   </div>
                 </li>
                 <li class="flex gap-4">
-                  <div class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center border border-brand-100 text-brand-700 font-bold shrink-0 text-sm">2</div>
+                  <div class="w-8 h-8 rounded bg-navy-50 flex items-center justify-center text-navy-900 font-bold shrink-0 text-sm">2</div>
                   <div>
-                    <h4 class="font-bold text-brand-900 text-sm">Kein „IT-Großprojekt“</h4>
-                    <p class="text-sm text-slate-500 mt-1">Startfähig in 2–4 Wochen. Kompatibel mit bestehenden Systemen (CSV/API) ohne teure Schnittstellen-Programmierung.</p>
+                    <h4 class="font-semibold text-navy-900">Kein IT-Großprojekt</h4>
+                    <p class="text-sm text-slate-500">Start in 2–4 Wochen als Pilot. Keine teuren Berater-Tage, sondern fertige Module.</p>
                   </div>
                 </li>
                 <li class="flex gap-4">
-                  <div class="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center border border-brand-100 text-brand-700 font-bold shrink-0 text-sm">3</div>
+                  <div class="w-8 h-8 rounded bg-navy-50 flex items-center justify-center text-navy-900 font-bold shrink-0 text-sm">3</div>
                   <div>
-                    <h4 class="font-bold text-brand-900 text-sm">Fokus auf ROI</h4>
-                    <p class="text-sm text-slate-500 mt-1">Wir bauen nur, was Zeit spart oder Umsatz bringt. Keine Spielereien.</p>
+                    <h4 class="font-semibold text-navy-900">Fokus auf ROI</h4>
+                    <p class="text-sm text-slate-500">Wir bauen nur, was Zeit spart oder Risiken minimiert.</p>
                   </div>
                 </li>
               </ul>
@@ -334,76 +350,96 @@
 
     <section id="contact" class="py-24 bg-white">
       <div class="max-w-4xl mx-auto px-6">
-        <div class="bg-surface rounded-lg shadow-industrial overflow-hidden border border-slate-200 flex flex-col md:flex-row">
+        <div class="bg-white rounded-lg shadow-2xl overflow-hidden border border-slate-200 flex flex-col md:flex-row">
           
-          <div class="bg-brand-900 text-white p-10 md:w-2/5 flex flex-col justify-between relative overflow-hidden">
-            <div class="absolute inset-0 bg- opacity-20"></div>
-            
-            <div class="relative z-10">
+          <div class="bg-navy-900 text-white p-10 md:w-2/5 flex flex-col justify-between">
+            <div>
               <h3 class="text-2xl font-bold mb-4">Kontakt</h3>
-              <p class="text-brand-100 mb-8 text-sm leading-relaxed">
-                Sprechen wir über Ihre Prozesse. Vereinbaren Sie eine unverbindliche Potenzialanalyse für Ihr Werk.
-              </p>
-              <ul class="space-y-4 text-brand-100 text-sm">
+              <p class="text-slate-300 mb-8 leading-relaxed">Sprechen wir über Ihre Prozesse. Vereinbaren Sie ein unverbindliches Erstgespräch oder starten Sie die Potenzialanalyse.</p>
+              <ul class="space-y-4 text-slate-300">
                 <li class="flex items-center gap-3">
-                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                  <span>engineering@formflow.de</span>
+                  <svg class="w-5 h-5 text-safety-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                  <span>kontakt@formflowstudio.de</span>
                 </li>
                 <li class="flex items-center gap-3">
-                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                  <svg class="w-5 h-5 text-safety-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                   <span>Wolfsburg, Deutschland</span>
                 </li>
               </ul>
             </div>
-            <div class="relative z-10 mt-12">
-              <p class="text-xs text-slate-400 font-medium">FormFlow Engineering <br>Automatisierungslösungen GmbH</p>
+            <div class="mt-12 border-t border-navy-800 pt-6">
+              <p class="text-sm text-slate-400 font-mono">FormFlow Studio <br>Engineering Intelligence</p>
             </div>
           </div>
 
-          <div class="p-10 md:w-3/5 bg-white">
-             <form action="https://formspree.io/f/xgvppbvb" method="POST" class="grid gap-6">
+          <div class="p-10 md:w-3/5 bg-slate-50">
+             <div id="ok" class="hidden bg-green-50 text-green-700 p-4 rounded-md mb-6 border border-green-200 text-sm font-medium">
+                ✅ Danke für Ihre Anfrage. Wir melden uns innerhalb von 24h.
+             </div>
+             <form action="https://formspree.io/f/xgvppbvb" method="POST" class="grid gap-5">
               <input type="text" name="_gotcha" style="display:none">
               
-              <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Name</label>
-                <input class="w-full bg-slate-50 border border-slate-300 rounded px-4 py-3 focus:bg-white focus:ring-2 focus:ring-brand-700 focus:border-brand-700 outline-none transition text-slate-900 placeholder-slate-400 font-medium" name="name" required placeholder="Vorname Nachname">
-              </div>
-              
-              <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">E-Mail geschäftlich</label>
-                <input class="w-full bg-slate-50 border border-slate-300 rounded px-4 py-3 focus:bg-white focus:ring-2 focus:ring-brand-700 focus:border-brand-700 outline-none transition text-slate-900 placeholder-slate-400 font-medium" type="email" name="email" required placeholder="name@firma.de">
+              <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Name</label>
+                    <input class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-2 focus:ring-navy-900 focus:border-transparent outline-none transition text-sm" name="name" required placeholder="Max Mustermann">
+                  </div>
+                   <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Firma</label>
+                    <input class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-2 focus:ring-navy-900 focus:border-transparent outline-none transition text-sm" name="firma" placeholder="Muster GmbH">
+                  </div>
               </div>
 
               <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Welches ERP-System nutzen Sie?</label>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">E-Mail Adresse</label>
+                <input class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-2 focus:ring-navy-900 focus:border-transparent outline-none transition text-sm" type="email" name="email" required placeholder="name@firma.de">
+              </div>
+            
+              <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Welches ERP-System nutzen Sie?</label>
                 <div class="relative">
-                  <select class="w-full bg-slate-50 border border-slate-300 rounded px-4 py-3 focus:bg-white focus:ring-2 focus:ring-brand-700 focus:border-brand-700 outline-none transition text-slate-900 appearance-none font-medium cursor-pointer" name="erp_system" required>
-                    <option value="" disabled selected class="text-slate-400">Bitte wählen...</option>
-                    <option value="SAP">SAP</option>
-                    <option value="proALPHA">proALPHA</option>
-                    <option value="Abas">Abas ERP</option>
-                    <option value="Datev">Datev</option>
-                    <option value="Sonstige">Sonstige / Eigenentwicklung</option>
-                  </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                  </div>
+                    <select class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-2 focus:ring-navy-900 focus:border-transparent outline-none transition text-sm appearance-none" name="erp_system">
+                      <option value="" disabled selected>Bitte wählen...</option>
+                      <option value="SAP">SAP</option>
+                      <option value="Datev">Datev</option>
+                      <option value="Abas">Abas</option>
+                      <option value="proALPHA">proALPHA</option>
+                      <option value="Microsoft Dynamics">Microsoft Dynamics</option>
+                      <option value="Sonstige">Sonstige / Eigenentwicklung</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
                 </div>
               </div>
 
               <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Nachricht (Optional)</label>
-                <textarea class="w-full bg-slate-50 border border-slate-300 rounded px-4 py-3 focus:bg-white focus:ring-2 focus:ring-brand-700 focus:border-brand-700 outline-none transition text-slate-900 placeholder-slate-400 font-medium" name="nachricht" rows="3" placeholder="Kurze Info zu Ihrem Prozess-Engpass..."></textarea>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Interesse an</label>
+                <div class="relative">
+                    <select class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-2 focus:ring-navy-900 focus:border-transparent outline-none transition text-sm appearance-none" name="thema">
+                      <option>Erstgespräch vereinbaren</option>
+                      <option>BOM Automation (Stücklisten)</option>
+                      <option>Regulatory Copilot (Maschinenverordnung)</option>
+                      <option>Service Intelligence (Wissensmanagement)</option>
+                    </select>
+                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
               </div>
 
-              <div class="flex items-start gap-3 mt-1">
-                <input type="checkbox" required id="privacy" class="mt-1 w-4 h-4 text-brand-700 rounded border-slate-300 focus:ring-brand-700 cursor-pointer">
-                <label for="privacy" class="text-xs text-slate-500 cursor-pointer">Ich stimme der Speicherung meiner Daten zur Kontaktaufnahme zu. Weitere Infos in der <a href="/datenschutz.html" class="underline hover:text-brand-900 font-semibold">Datenschutzerklärung</a>.</label>
+              <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Nachricht (Optional)</label>
+                <textarea class="w-full bg-white border border-slate-300 rounded px-4 py-3 focus:ring-2 focus:ring-navy-900 focus:border-transparent outline-none transition text-sm" name="nachricht" rows="2" placeholder="Kurze Info zu Ihrem Prozess..."></textarea>
               </div>
 
-              <button class="mt-4 w-full bg-accent text-white font-bold py-4 rounded hover:bg-accent-hover transition shadow-lg flex justify-center items-center gap-2 group" type="submit">
-                <span>Anfrage absenden</span>
-                <svg class="w-4 h-4 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              <div class="flex items-start gap-3 mt-2">
+                <input type="checkbox" required id="privacy" class="mt-1 w-4 h-4 text-navy-900 rounded border-slate-300 focus:ring-navy-900">
+                <label for="privacy" class="text-xs text-slate-500 leading-tight">Ich stimme zu, dass meine Angaben zur Kontaktaufnahme gespeichert werden. Mehr in der <a href="/datenschutz.html" class="underline text-navy-900 hover:text-safety-500">Datenschutzerklärung</a>.</label>
+              </div>
+
+              <button class="mt-2 w-full bg-safety-500 text-white font-bold py-4 rounded hover:bg-safety-600 transition shadow-lg shadow-safety-500/20 uppercase tracking-wide text-sm" type="submit">
+                Anfrage absenden
               </button>
             </form>
           </div>
@@ -415,28 +451,60 @@
   <footer class="bg-white border-t border-slate-200 py-12">
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
       <div class="flex items-center gap-2">
-        <div class="h-6 w-6 bg-brand-900 rounded flex items-center justify-center text-white text-[10px] font-bold">F</div>
-        <span class="text-brand-900 font-bold tracking-tight">FormFlow Engineering</span>
+        <div class="h-6 w-6 bg-navy-900 rounded-sm flex items-center justify-center text-white text-xs font-bold">F</div>
+        <span class="text-navy-900 font-bold">FormFlow Studio</span>
         <span class="text-slate-400 text-sm ml-2">© <span id="year">2025</span></span>
       </div>
       <div class="flex gap-8 text-sm text-slate-500 font-medium">
-        <a href="/impressum.html" class="hover:text-brand-900 transition">Impressum</a>
-        <a href="/datenschutz.html" class="hover:text-brand-900 transition">Datenschutz</a>
-        <a href="#" class="hover:text-brand-900 transition">AGB</a>
+        <a href="/impressum.html" class="hover:text-navy-900">Impressum</a>
+        <a href="/datenschutz.html" class="hover:text-navy-900">Datenschutz</a>
       </div>
     </div>
   </footer>
 
+  <button id="ffOpen" class="ff-chat-launcher group bg-navy-900 text-white flex items-center gap-3 px-5 py-3 rounded-full shadow-2xl hover:bg-navy-800">
+    <div class="relative">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+      <span class="absolute -top-1 -right-1 flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+      </span>
+    </div>
+    <span class="font-medium pr-1">Service Intelligence Demo</span>
+  </button>
+
+  <div id="ffPanel" class="ff-chat-panel fixed hidden z-50 bg-white rounded-lg shadow-2xl overflow-hidden border border-slate-200 flex flex-col h-[600px] max-h-[80vh]">
+    <div class="bg-slate-50 p-4 border-b border-slate-200 flex justify-between items-center">
+      <span class="font-bold text-navy-900 flex items-center gap-2">
+       <span class="w-2 h-2 rounded-full bg-green-500"></span> AI Assistant
+      </span>
+      <button id="ffClose" class="text-slate-400 hover:text-navy-900 bg-white p-1 rounded border border-slate-200">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div class="flex-grow relative bg-white">
+      <div id="ffConsent" class="absolute inset-0 z-10 bg-white p-8 flex flex-col justify-center items-center text-center">
+        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-navy-900 mb-4">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        </div>
+        <h3 class="font-bold text-navy-900 mb-2">Demo laden?</h3>
+        <p class="text-sm text-slate-500 mb-6">Wir nutzen Hugging Face Spaces für diese Demo. Dabei werden Daten (IP) übertragen.</p>
+        <button id="ffAgree" class="bg-navy-900 text-white px-6 py-2 rounded font-medium hover:bg-navy-800 transition w-full mb-3">Verbinden</button>
+        <button id="ffCancel" class="text-slate-400 text-sm hover:text-slate-600 underline">Abbrechen</button>
+      </div>
+      <iframe id="ffFrame" class="w-full h-full border-0" title="Chatbot"></iframe>
+    </div>
+  </div>
+
   <script>
-    // Mobile Menu Toggle
+    // 1. Mobile Menu
     const btn = document.getElementById('mobileMenuBtn');
     const menu = document.getElementById('mobileMenu');
     btn.addEventListener('click', () => {
       menu.classList.toggle('hidden');
       menu.classList.toggle('flex');
     });
-
-    // Intersection Observer for Fade-Up Animations
+    // 2. Scroll Reveal Animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -446,9 +514,37 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // Dynamic Year
+    // 3. Year
     document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // 4. Chatbot Logic (DSGVO Safe)
+    const SPACE_URL = "https://nihru-formflow-assistant.hf.space/?__theme=light";
+    const els = {
+      open: document.getElementById('ffOpen'),
+      close: document.getElementById('ffClose'),
+      panel: document.getElementById('ffPanel'),
+      frame: document.getElementById('ffFrame'),
+      consent: document.getElementById('ffConsent'),
+      agree: document.getElementById('ffAgree'),
+      cancel: document.getElementById('ffCancel')
+    };
+    const hasConsented = () => sessionStorage.getItem('ff_consent') === 'true';
+
+    els.open.addEventListener('click', () => {
+      els.panel.classList.remove('hidden');
+      if (hasConsented()) {
+        els.consent.classList.add('hidden');
+        if (!els.frame.src) els.frame.src = SPACE_URL;
+      }
+    });
+    els.close.addEventListener('click', () => els.panel.classList.add('hidden'));
+
+    els.agree.addEventListener('click', () => {
+      sessionStorage.setItem('ff_consent', 'true');
+      els.consent.classList.add('hidden');
+      els.frame.src = SPACE_URL;
+    });
+    els.cancel.addEventListener('click', () => els.panel.classList.add('hidden'));
   </script>
 </body>
 </html>
-
