@@ -18,18 +18,17 @@
         extend: {
           fontFamily: { sans: ['Inter', 'sans-serif'] },
           colors: {
-            // Industrial Color Scheme
             navy: {
-              900: '#0A192F', // Deep Navy (Primary Background/Text) - Seriosität
-              800: '#112240', // Lighter Navy (Cards)
-              700: '#233554', // Stroke/Border
+              900: '#0A192F',
+              800: '#112240',
+              700: '#233554',
             },
             safety: {
-              500: '#FF5722', // Safety Orange (Call to Action) - Wie Warnwesten/Industrie
-              600: '#F4511E', // Hover State
+              500: '#FF5722',
+              600: '#F4511E',
             },
             slate: {
-              50: '#F5F7FA', // Technical Light Grey
+              50: '#F5F7FA',
               100: '#E4E7EB',
               200: '#CBD5E1',
               300: '#94A3B8',
@@ -47,27 +46,19 @@
   </script>
 
   <style>
-    /* Typografie Feinheiten */
     body { font-feature-settings: "cv11", "ss01"; }
-    
-    /* Technical Grid Background */
     .hero-bg {
       background-color: #F5F7FA;
       background-image: linear-gradient(#E4E7EB 1px, transparent 1px), linear-gradient(90deg, #E4E7EB 1px, transparent 1px);
       background-size: 40px 40px;
     }
-    
-    /* Animation Utilities */
     .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
-    
-    /* Chat Widget Styles */
     .ff-chat-launcher {
       position: fixed; right: 24px; bottom: 24px; z-index: 50;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     .ff-chat-launcher:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -10px rgba(10, 25, 47, 0.4); }
-    
     .ff-chat-panel { width: min(420px, calc(100vw - 32px)); right: 16px; bottom: 90px; }
     @media(min-width: 640px) { .ff-chat-panel { right: 24px; bottom: 100px; } }
   </style>
@@ -80,21 +71,16 @@
         <img src="LOGO.jpg" alt="FormFlow Studio Logo" class="h-10 w-auto rounded shadow-sm group-hover:opacity-90 transition object-contain">
         <span class="text-xl font-bold tracking-tight text-navy-900">FormFlow Studio</span>
       </a>
-
       <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
         <a href="#services" class="hover:text-safety-500 transition">Lösungen</a>
         <a href="#proof" class="hover:text-safety-500 transition">Ergebnisse</a>
         <a href="#about" class="hover:text-safety-500 transition">Über uns</a>
-        <a href="#contact" class="px-5 py-2.5 rounded bg-navy-900 text-white hover:bg-navy-800 transition shadow-lg shadow-navy-900/10 border border-transparent">
-          Erstgespräch buchen
-        </a>
+        <a href="#contact" class="px-5 py-2.5 rounded bg-navy-900 text-white hover:bg-navy-800 transition shadow-lg shadow-navy-900/10 border border-transparent">Erstgespräch buchen</a>
       </nav>
-
       <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-600 hover:text-navy-900">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
       </button>
     </div>
-
     <div id="mobileMenu" class="hidden absolute top-20 left-0 w-full bg-white border-b border-slate-200 p-6 flex-col gap-4 shadow-xl">
       <a href="#services" class="text-lg font-medium text-navy-900">Lösungen</a>
       <a href="#proof" class="text-lg font-medium text-navy-900">Ergebnisse</a>
@@ -107,13 +93,11 @@
     
     <section class="relative pt-32 pb-16 lg:pt-44 lg:pb-28 hero-bg overflow-hidden border-b border-slate-200">
       <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-        
         <div class="max-w-2xl fade-up">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-navy-900 text-white text-xs font-bold uppercase tracking-wide mb-6">
             <span class="w-2 h-2 rounded-full bg-safety-500 animate-pulse"></span>
             Neu: BOM Automation V2 Live
           </div>
-          
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-navy-900 leading-[1.1] mb-6 tracking-tight">
             KI-Automation für Maschinenbau. <br>
             <span class="text-safety-500">Vom PDF direkt ins ERP.</span>
@@ -122,14 +106,9 @@
             Schluss mit manuellem Abtippen von PDF-Zeichnungen. FormFlow extrahiert Bauteile, Normen und Maße vollautomatisch. Für Arbeitsvorbereitung, die liefert.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 mb-8">
-            <a href="#contact" class="inline-flex justify-center items-center px-8 py-4 rounded bg-safety-500 text-white font-semibold hover:bg-safety-600 transition shadow-lg shadow-safety-500/20">
-              Potenzialanalyse starten
-            </a>
-            <a href="#services" class="inline-flex justify-center items-center px-8 py-4 rounded bg-white text-navy-900 border border-slate-300 font-semibold hover:bg-slate-50 transition">
-              Die Engine ansehen
-            </a>
+            <a href="#contact" class="inline-flex justify-center items-center px-8 py-4 rounded bg-safety-500 text-white font-semibold hover:bg-safety-600 transition shadow-lg shadow-safety-500/20">Potenzialanalyse starten</a>
+            <a href="#services" class="inline-flex justify-center items-center px-8 py-4 rounded bg-white text-navy-900 border border-slate-300 font-semibold hover:bg-slate-50 transition">Die Engine ansehen</a>
           </div>
-          
           <div class="flex items-center gap-3 text-sm text-slate-500 font-medium border-l-4 border-slate-300 pl-4">
              <svg class="w-5 h-5 text-navy-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
              <span>Hosted in Germany (Azure Frankfurt) | DSGVO-Konform</span>
@@ -139,7 +118,6 @@
         <div class="relative fade-up" style="transition-delay: 150ms;">
           <div class="absolute -top-10 -right-10 w-72 h-72 bg-slate-300 rounded-full blur-3xl opacity-40"></div>
           <div class="relative rounded overflow-hidden shadow-2xl border border-slate-400 bg-white">
-            
             <div class="bg-slate-800 h-9 flex items-center justify-between px-4 border-b border-slate-700">
               <div class="flex items-center gap-2">
                 <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
@@ -168,7 +146,6 @@
                         <span class="text-xs font-bold text-navy-900">Erkannte Stückliste (Preview)</span>
                         <span class="text-[10px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded">Confidence: 99.8%</span>
                      </div>
-                     
                      <table class="w-full text-xs text-left border-collapse">
                         <thead>
                             <tr class="text-slate-500 border-b border-slate-200 bg-slate-50">
@@ -180,25 +157,16 @@
                         </thead>
                         <tbody class="text-navy-900 font-mono text-[11px]">
                             <tr class="border-b border-slate-100 hover:bg-slate-50">
-                                <td class="py-2 pl-2">001</td>
-                                <td class="py-2">Welle_Haupt</td>
-                                <td class="py-2"><span class="bg-yellow-100 px-1 rounded">ST37-2</span></td> <td class="py-2">50</td>
+                                <td class="py-2 pl-2">001</td><td class="py-2">Welle_Haupt</td><td class="py-2"><span class="bg-yellow-100 px-1 rounded">ST37-2</span></td> <td class="py-2">50</td>
                             </tr>
                              <tr class="border-b border-slate-100 hover:bg-slate-50">
-                                <td class="py-2 pl-2">002</td>
-                                <td class="py-2">Flansch_D40</td>
-                                <td class="py-2">1.4301 (V2A)</td>
-                                <td class="py-2">100</td>
+                                <td class="py-2 pl-2">002</td><td class="py-2">Flansch_D40</td><td class="py-2">1.4301 (V2A)</td><td class="py-2">100</td>
                             </tr>
                             <tr class="border-b border-slate-100 hover:bg-slate-50">
-                                <td class="py-2 pl-2">003</td>
-                                <td class="py-2">DIN 912 M8x20</td>
-                                <td class="py-2">8.8 verz.</td>
-                                <td class="py-2">200</td>
+                                <td class="py-2 pl-2">003</td><td class="py-2">DIN 912 M8x20</td><td class="py-2">8.8 verz.</td><td class="py-2">200</td>
                             </tr>
                         </tbody>
                      </table>
-                     
                      <div class="mt-8 p-3 bg-navy-50 rounded border border-navy-100">
                         <div class="flex justify-between items-center">
                             <span class="text-xs text-navy-700">Export Ziel:</span>
@@ -219,24 +187,20 @@
       <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <span class="text-xs font-bold text-slate-400 uppercase tracking-widest whitespace-nowrap">Technologie & Standards:</span>
         <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition duration-500">
-          
           <div class="flex items-center gap-2 group cursor-default">
             <svg class="h-6 w-6 text-[#0078D4]" fill="currentColor" viewBox="0 0 24 24"><path d="M5.4 14h-5L11 4h5z M4 17l6.6 3l-2.6-6h-6z M11 17l4.3 2l6.7-14h-5z"/></svg>
             <span class="text-sm font-bold text-slate-700 group-hover:text-[#0078D4] transition">Azure Germany</span>
           </div>
-
           <div class="flex items-center gap-2 group cursor-default">
             <div class="h-6 w-6 rounded-full border-2 border-slate-400 group-hover:border-navy-900 flex items-center justify-center transition">
                 <svg class="w-3 h-3 text-slate-500 group-hover:text-navy-900" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
             </div>
             <span class="text-sm font-bold text-slate-700 group-hover:text-navy-900 transition">DSGVO Konform</span>
           </div>
-
           <div class="flex items-center gap-2 group cursor-default">
             <svg class="h-6 w-6 text-slate-600 group-hover:text-navy-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
             <span class="text-sm font-bold text-slate-700 group-hover:text-navy-900 transition">ISO / DXF Support</span>
           </div>
-
         </div>
       </div>
     </div>
@@ -251,23 +215,17 @@
           <div class="p-8 rounded bg-navy-800 border border-navy-700 fade-up hover:border-safety-500 transition duration-300">
             <div class="text-5xl font-bold text-safety-500 mb-2">&lt; 10s</div>
             <div class="text-xl font-semibold mb-2">Prozesszeit</div>
-            <p class="text-sm text-slate-400 leading-relaxed">
-                Statt minutenlangem Abtippen generiert das System die fertige Tabelle für Dutzende Zeichnungen in Sekunden.
-            </p>
+            <p class="text-sm text-slate-400 leading-relaxed">Statt minutenlangem Abtippen generiert das System die fertige Tabelle für Dutzende Zeichnungen in Sekunden.</p>
           </div>
           <div class="p-8 rounded bg-navy-800 border border-navy-700 fade-up hover:border-safety-500 transition duration-300" style="transition-delay: 100ms;">
             <div class="text-5xl font-bold text-safety-500 mb-2">0</div>
             <div class="text-xl font-semibold mb-2">Tippfehler</div>
-            <p class="text-sm text-slate-400 leading-relaxed">
-                Keine Zahlendreher mehr (z.B. 0,60 kg statt 6,00 kg). 100% Datenintegrität eliminiert menschliche Fehler komplett.
-            </p>
+            <p class="text-sm text-slate-400 leading-relaxed">Keine Zahlendreher mehr. 100% Datenintegrität eliminiert menschliche Übertragungsfehler komplett.</p>
           </div>
           <div class="p-8 rounded bg-navy-800 border border-navy-700 fade-up hover:border-safety-500 transition duration-300" style="transition-delay: 200ms;">
             <div class="text-5xl font-bold text-safety-500 mb-2">Proaktiv</div>
             <div class="text-xl font-semibold mb-2">Mitdenkendes System</div>
-            <p class="text-sm text-slate-400 leading-relaxed">
-                Die Engine analysiert und warnt. So stehen Sie in der Montage nie wieder unerwartet ohne Schrauben oder Stifte da.
-            </p>
+            <p class="text-sm text-slate-400 leading-relaxed">Die Engine analysiert und warnt. So stehen Sie in der Montage nie wieder unerwartet ohne Standardbauteile da.</p>
           </div>
         </div>
       </div>
@@ -276,78 +234,71 @@
     <section id="services" class="py-24 bg-white">
       <div class="max-w-7xl mx-auto px-6">
         
-        <div class="bg-navy-900 rounded-2xl p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden mb-24 border border-navy-700 fade-up">
+        <div class="bg-navy-900 rounded-2xl p-8 lg:p-14 text-white shadow-2xl relative overflow-hidden mb-24 border border-navy-700 fade-up min-h-[80vh] flex flex-col justify-center">
            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-safety-500/10 rounded-full blur-3xl pointer-events-none"></div>
            
            <div class="relative z-10">
               <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-safety-500 text-white text-xs font-bold uppercase tracking-wide mb-6">
                 Einsatzbereit & Live
               </div>
-              <h2 class="text-3xl md:text-4xl font-bold mb-4">Die BOM Automation Engine</h2>
+              <h2 class="text-3xl md:text-5xl font-bold mb-4">Die BOM Automation Engine</h2>
               <p class="text-slate-300 text-lg max-w-3xl mb-12">
-                Eine vollautomatisierte Pipeline zur Stücklisten-Generierung. Wandelt analoge/unstrukturierte technische Zeichnungen komplett ohne menschliches Eingreifen in digitale, maschinenlesbare Excel-Tabellen (CSV) um.
+                Eine vollautomatisierte Pipeline zur Stücklisten-Generierung. Wandelt unstrukturierte technische Zeichnungen durch semantische KI-Analyse komplett ohne menschliches Eingreifen in strukturierte ERP-Datensätze (CSV/XML) um.
               </p>
               
-              <div class="grid md:grid-cols-2 gap-12 lg:gap-16">
+              <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <svg class="w-6 h-6 text-safety-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                Prozess-Architektur
+              </h3>
+              <div class="grid md:grid-cols-3 gap-6 lg:gap-8 mb-16 relative">
+                 <div class="hidden md:block absolute top-1/2 left-10 right-10 h-0.5 bg-navy-700 -z-10 -translate-y-1/2"></div>
                  
-                 <div>
-                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                      <svg class="w-6 h-6 text-safety-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                      Der automatische Ablauf
-                    </h3>
-                    <ul class="space-y-6">
-                       <li class="bg-navy-800 p-4 rounded border border-navy-700">
-                          <strong class="text-safety-500 block mb-1">1. Der Trigger</strong>
-                          <span class="text-sm text-slate-300">Sobald eine E-Mail mit PDF-Zeichnungen im Postfach landet, wacht der Roboter auf und entpackt die Dateien.</span>
-                       </li>
-                       <li class="bg-navy-800 p-4 rounded border border-navy-700">
-                          <strong class="text-safety-500 block mb-1">2. Die KI-Schnittstelle</strong>
-                          <span class="text-sm text-slate-300">Die PDFs werden über eine API an Microsoft Azure gesendet. Die KI liest wie ein Mensch den Text und die Tabellenstrukturen aus.</span>
-                       </li>
-                       <li class="bg-navy-800 p-4 rounded border border-navy-700">
-                          <strong class="text-safety-500 block mb-1">3. Das Gehirn (Master-Code)</strong>
-                          <span class="text-sm text-slate-300">Ein spezieller Algorithmus analysiert den Textsalat. Er extrahiert gezielt Bauteilnamen, Gewichte, Materialien und Baugruppen.</span>
-                       </li>
-                       <li class="bg-navy-800 p-4 rounded border border-navy-700">
-                          <strong class="text-safety-500 block mb-1">4. Das Ergebnis</strong>
-                          <span class="text-sm text-slate-300">Der Code generiert die fertige Tabelle und schickt sie Ihnen innerhalb von Sekunden als E-Mail-Anhang (CSV) zurück.</span>
-                       </li>
-                    </ul>
+                 <div class="bg-navy-800 p-6 rounded-xl border border-navy-700 relative z-10 shadow-lg">
+                    <div class="text-safety-500 font-bold mb-2">1. Dateneingang</div>
+                    <p class="text-sm text-slate-300 leading-relaxed">Sobald eine E-Mail mit PDF-Zeichnungen im Postfach landet, wird die Datei automatisch entpackt und an die Pipeline übergeben.</p>
                  </div>
+                 <div class="bg-navy-800 p-6 rounded-xl border border-navy-700 relative z-10 shadow-lg">
+                    <div class="text-safety-500 font-bold mb-2">2. KI-Extraktion</div>
+                    <p class="text-sm text-slate-300 leading-relaxed">Verarbeitung über Microsoft Azure Document Intelligence. Algorithmen extrahieren gezielt Bauteilnamen, Maße und Materialien.</p>
+                 </div>
+                 <div class="bg-navy-800 p-6 rounded-xl border border-navy-700 relative z-10 shadow-lg border-b-4 border-b-safety-500">
+                    <div class="text-safety-500 font-bold mb-2">3. ERP-Export</div>
+                    <p class="text-sm text-slate-300 leading-relaxed">Das System generiert eine validierte Stückliste (BOM) und übersendet diese im Zielformat direkt an den Arbeitsvorbereiter.</p>
+                 </div>
+              </div>
 
+              <div class="grid lg:grid-cols-2 gap-12 items-center">
                  <div>
-                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
                       <svg class="w-6 h-6 text-safety-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                       Ein System, das fachlich mitdenkt
                     </h3>
-                    <div class="bg-navy-800/50 p-6 rounded border border-navy-700 mb-6">
-                       <p class="text-slate-300 text-sm mb-4 leading-relaxed">
-                         Der Clou: Wir lassen die KI nicht nur stumpf Text kopieren. Oft sind Zeichnungen unvollständig. Wir haben eine Kombination aus KI und einem <strong>regelbasierten Expertensystem</strong> gebaut, dem maschinenbauliches Fachwissen einprogrammiert wurde.
-                       </p>
-                       <ul class="space-y-4 text-sm text-white">
-                         <li class="flex items-start gap-3">
-                           <span class="bg-safety-500 text-white rounded-full w-5 h-5 flex items-center justify-center shrink-0 mt-0.5">✓</span>
-                           <span>Wenn der Code <strong>"M6"</strong> liest, ergänzt er automatisch Zylinderschrauben auf der Einkaufsliste.</span>
-                         </li>
-                         <li class="flex items-start gap-3">
-                           <span class="bg-safety-500 text-white rounded-full w-5 h-5 flex items-center justify-center shrink-0 mt-0.5">✓</span>
-                           <span>Wenn er <strong>"gerieben"</strong> liest, weiß er sofort, dass Passstifte benötigt werden.</span>
-                         </li>
-                         <li class="flex items-start gap-3">
-                           <span class="bg-safety-500 text-white rounded-full w-5 h-5 flex items-center justify-center shrink-0 mt-0.5">✓</span>
-                           <span>Er weist Sie aktiv auf fehlende Parameter (wie z.B. die Schraubenlänge) hin.</span>
-                         </li>
-                       </ul>
-                    </div>
-                    
-                    <div class="mt-8">
-                       <a href="#contact" class="inline-flex justify-center items-center w-full sm:w-auto px-8 py-4 rounded bg-white text-navy-900 font-bold hover:bg-slate-100 transition shadow-lg">
-                          Erstgespräch zur BOM Engine vereinbaren
-                       </a>
-                    </div>
+                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                      Wir lassen die KI nicht nur Rohtexte kopieren. Unser regelbasiertes Expertensystem reichert diese mit maschinenbaulichem Fachwissen an und validiert die Ergebnisse proaktiv vor der ERP-Übergabe:
+                    </p>
+                    <ul class="space-y-4 text-sm text-white">
+                      <li class="flex items-start gap-3">
+                        <span class="bg-safety-500/20 text-safety-500 rounded p-1 shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></span>
+                        <span><strong>Norm-Erkennung:</strong> Übersetzt Einträge wie "M6" automatisch in die benötigte Zylinderschraube für die Einkaufsliste.</span>
+                      </li>
+                      <li class="flex items-start gap-3">
+                        <span class="bg-safety-500/20 text-safety-500 rounded p-1 shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></span>
+                        <span><strong>Fertigungswissen:</strong> Erkennt Begriffe wie "gerieben" und fügt der Stückliste selbstständig erforderliche Passstifte hinzu.</span>
+                      </li>
+                      <li class="flex items-start gap-3">
+                        <span class="bg-safety-500/20 text-safety-500 rounded p-1 shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></span>
+                        <span><strong>Qualitätssicherung:</strong> Weist aktiv auf unvollständige Parameter (z. B. fehlende Schraubenlängen) auf der Zeichnung hin.</span>
+                      </li>
+                    </ul>
                  </div>
                  
+                 <div class="flex justify-center lg:justify-end">
+                    <a href="#contact" class="inline-flex justify-center items-center w-full sm:w-auto px-8 py-4 rounded bg-white text-navy-900 font-bold hover:bg-slate-100 transition shadow-lg border border-transparent hover:border-slate-300">
+                       Erstgespräch zur BOM Engine vereinbaren
+                    </a>
+                 </div>
               </div>
+              
            </div>
         </div>
 
@@ -356,7 +307,6 @@
            <p class="text-center text-slate-500 mb-12 max-w-2xl mx-auto">Zukünftige Bausteine, die Ihre bestehenden Systeme intelligenter machen – bald verfügbar.</p>
            
            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              
               <div class="bg-slate-50 rounded p-8 border border-slate-200 flex flex-col group relative opacity-80 hover:opacity-100 transition duration-300">
                 <div class="absolute top-4 right-4 bg-slate-200 text-slate-600 text-[10px] font-bold uppercase px-2 py-1 rounded">Beta-Phase</div>
                 <div class="w-12 h-12 bg-white text-navy-900 border border-slate-200 rounded flex items-center justify-center mb-6 shadow-sm">
@@ -380,7 +330,6 @@
                 </p>
                  <span class="text-slate-400 font-medium text-sm cursor-not-allowed">Derzeit in Entwicklung</span>
               </div>
-
            </div>
         </div>
 
@@ -391,18 +340,11 @@
       <div class="max-w-5xl mx-auto px-6 relative z-10">
         <div class="lg:flex gap-12 items-start">
           <div class="lg:w-1/2 fade-up">
-            <h2 class="text-3xl font-bold text-navy-900 mb-6">
-              Wir automatisieren das, worauf Ihre Ingenieure keine Lust haben.
-            </h2>
+            <h2 class="text-3xl font-bold text-navy-900 mb-6">Wir automatisieren das, worauf Ihre Ingenieure keine Lust haben.</h2>
             <div class="h-1 w-20 bg-safety-500 mb-8"></div>
-            <p class="text-lg text-slate-600 mb-4 leading-relaxed">
-              Jede Minute, die ein Konstrukteur damit verbringt, eine PDF-Stückliste ins ERP abzutippen, ist verbranntes Kapital. Es ist fehleranfällig, demotivierend und teuer.
-            </p>
-            <p class="text-lg text-slate-600 leading-relaxed">
-              FormFlow wurde nicht von Consultants entwickelt, sondern aus der Praxis heraus. Wir wissen, dass Zeichnungsdaten oft unsauber sind. Wir wissen, dass Stammdatenpflege lästig ist. Deshalb haben wir eine KI gebaut, die robust genug für die Realität im deutschen Mittelstand ist.
-            </p>
+            <p class="text-lg text-slate-600 mb-4 leading-relaxed">Jede Minute, die ein Konstrukteur damit verbringt, eine PDF-Stückliste ins ERP abzutippen, ist verbranntes Kapital. Es ist fehleranfällig, demotivierend und teuer.</p>
+            <p class="text-lg text-slate-600 leading-relaxed">FormFlow wurde nicht von Consultants entwickelt, sondern aus der Praxis heraus. Wir wissen, dass Zeichnungsdaten oft unsauber sind. Wir wissen, dass Stammdatenpflege lästig ist. Deshalb haben wir eine KI gebaut, die robust genug für die Realität im deutschen Mittelstand ist.</p>
           </div>
-          
           <div class="lg:w-1/2 mt-12 lg:mt-0 fade-up" style="transition-delay: 150ms;">
             <div class="bg-white rounded p-8 border border-slate-200 shadow-sm">
               <h3 class="font-bold text-navy-900 mb-6 text-lg">Unser Versprechen:</h3>
@@ -438,13 +380,10 @@
     <section id="contact" class="py-24 bg-white border-t border-slate-200">
       <div class="max-w-4xl mx-auto px-6">
         <div class="bg-white rounded shadow-card overflow-hidden border border-slate-200 flex flex-col md:flex-row">
-          
           <div class="bg-navy-900 text-white p-10 md:w-2/5 flex flex-col justify-between">
             <div>
               <h3 class="text-2xl font-bold mb-6">Kontakt</h3>
-              <p class="text-slate-300 mb-8 text-sm leading-relaxed">
-                Lassen Sie uns prüfen, ob sich Ihre Prozesse automatisieren lassen. Vereinbaren Sie ein unverbindliches technisches Erstgespräch.
-              </p>
+              <p class="text-slate-300 mb-8 text-sm leading-relaxed">Lassen Sie uns prüfen, ob sich Ihre Prozesse automatisieren lassen. Vereinbaren Sie ein unverbindliches technisches Erstgespräch.</p>
               <ul class="space-y-4 text-slate-300 text-sm">
                 <li class="flex items-center gap-3">
                   <svg class="w-5 h-5 text-safety-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
@@ -467,7 +406,6 @@
              </div>
              <form action="https://formspree.io/f/xgvppbvb" method="POST" class="grid gap-5">
               <input type="text" name="_gotcha" style="display:none">
-              
               <div class="grid grid-cols-2 gap-4">
                   <div>
                     <label class="block text-xs font-bold text-navy-900 uppercase mb-1">Name</label>
@@ -478,12 +416,10 @@
                     <input class="w-full bg-white border border-slate-300 rounded px-4 py-2 text-sm focus:ring-2 focus:ring-navy-900 focus:border-transparent outline-none transition" name="firma" required placeholder="Firmenname">
                   </div>
               </div>
-
               <div>
                 <label class="block text-xs font-bold text-navy-900 uppercase mb-1">E-Mail Adresse</label>
                 <input class="w-full bg-white border border-slate-300 rounded px-4 py-2 text-sm focus:ring-2 focus:ring-navy-900 focus:border-transparent outline-none transition" type="email" name="email" required placeholder="name@firma.de">
               </div>
-              
               <div>
                 <label class="block text-xs font-bold text-navy-900 uppercase mb-1">Welches ERP-System nutzen Sie?</label>
                 <select class="w-full bg-white border border-slate-300 rounded px-4 py-2 text-sm focus:ring-2 focus:ring-navy-900 focus:border-transparent outline-none transition appearance-none" name="erp_system">
@@ -496,7 +432,6 @@
                   <option value="Sonstige">Sonstige / Eigenentwicklung</option>
                 </select>
               </div>
-
               <div>
                 <label class="block text-xs font-bold text-navy-900 uppercase mb-1">Interesse an</label>
                 <select class="w-full bg-white border border-slate-300 rounded px-4 py-2 text-sm focus:ring-2 focus:ring-navy-900 focus:border-transparent outline-none transition appearance-none" name="thema">
@@ -506,27 +441,19 @@
                   <option value="Service">Service Intelligence</option>
                 </select>
               </div>
-
               <div>
                 <label class="block text-xs font-bold text-navy-900 uppercase mb-1">Nachricht (Optional)</label>
                 <textarea class="w-full bg-white border border-slate-300 rounded px-4 py-2 text-sm focus:ring-2 focus:ring-navy-900 focus:border-transparent outline-none transition" name="nachricht" rows="2" placeholder="Kurze Info zur aktuellen Herausforderung..."></textarea>
               </div>
-
               <div class="flex items-start gap-3 mt-2">
                 <input type="checkbox" required id="privacy" class="mt-1 w-4 h-4 text-navy-900 rounded border-slate-300 focus:ring-navy-900 cursor-pointer">
                 <label for="privacy" class="text-xs text-slate-500 cursor-pointer">Ich stimme zu, dass meine Angaben zur Kontaktaufnahme gespeichert werden. <a href="/datenschutz.html" class="underline hover:text-navy-900">Datenschutzerklärung</a>.</label>
               </div>
-
-              <button class="mt-2 w-full bg-safety-500 text-white font-bold py-3 rounded hover:bg-safety-600 transition shadow-md" type="submit">
-                Anfrage absenden
-              </button>
+              <button class="mt-2 w-full bg-safety-500 text-white font-bold py-3 rounded hover:bg-safety-600 transition shadow-md" type="submit">Anfrage absenden</button>
             </form>
           </div>
         </div>
-        
-        <p class="text-center text-xs text-slate-400 mt-6">
-            100% Unverbindlich. Rückmeldung innerhalb von 24h. Ihre Daten bleiben in Deutschland.
-        </p>
+        <p class="text-center text-xs text-slate-400 mt-6">100% Unverbindlich. Rückmeldung innerhalb von 24h. Ihre Daten bleiben in Deutschland.</p>
       </div>
     </section>
   </main>
@@ -534,20 +461,15 @@
   <footer class="bg-white border-t border-slate-200 pt-16 pb-8">
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
       <div class="col-span-1 md:col-span-1">
-        
         <div class="flex items-center gap-2 mb-4">
           <img src="LOGO.jpg" alt="Logo" class="h-8 w-auto rounded object-contain">
           <span class="text-navy-900 font-bold text-lg">FormFlow Studio</span>
         </div>
-        
-        <p class="text-slate-500 text-sm leading-relaxed mb-4">
-          Automatisierungslösungen für den deutschen Mittelstand. Entwickelt in Wolfsburg.
-        </p>
+        <p class="text-slate-500 text-sm leading-relaxed mb-4">Automatisierungslösungen für den deutschen Mittelstand. Entwickelt in Wolfsburg.</p>
         <div class="flex gap-4">
             <a href="#" class="text-slate-400 hover:text-navy-900 transition"><span class="sr-only">LinkedIn</span><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
         </div>
       </div>
-
       <div>
         <h4 class="font-bold text-navy-900 mb-4 text-sm uppercase tracking-wider">Lösungen</h4>
         <ul class="space-y-3 text-sm text-slate-600">
@@ -556,7 +478,6 @@
           <li><a href="#" class="hover:text-safety-500 transition">Service Intelligence (In Planung)</a></li>
         </ul>
       </div>
-
       <div>
         <h4 class="font-bold text-navy-900 mb-4 text-sm uppercase tracking-wider">Rechtliches</h4>
         <ul class="space-y-3 text-sm text-slate-600">
@@ -565,7 +486,6 @@
           <li><a href="#" class="hover:text-safety-500 transition">AGB</a></li>
         </ul>
       </div>
-
       <div>
         <h4 class="font-bold text-navy-900 mb-4 text-sm uppercase tracking-wider">Kontakt</h4>
         <ul class="space-y-3 text-sm text-slate-600">
@@ -580,7 +500,6 @@
         </ul>
       </div>
     </div>
-    
     <div class="max-w-7xl mx-auto px-6 border-t border-slate-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
       <span>© <span id="year">2025</span> FormFlow Studio. Alle Rechte vorbehalten.</span>
       <div class="flex items-center gap-2">
@@ -625,7 +544,6 @@
   </div>
 
   <script>
-    // 1. Mobile Menu Toggle
     const btn = document.getElementById('mobileMenuBtn');
     const menu = document.getElementById('mobileMenu');
     btn.addEventListener('click', () => {
@@ -633,7 +551,6 @@
       menu.classList.toggle('flex');
     });
 
-    // 2. Scroll Reveal Animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -643,10 +560,8 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // 3. Dynamic Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 4. Chatbot Logic (DSGVO Safe)
     const SPACE_URL = "https://nihru-formflow-assistant.hf.space/?__theme=light";
     const els = {
       open: document.getElementById('ffOpen'),
